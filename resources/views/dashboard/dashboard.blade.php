@@ -65,7 +65,7 @@
             <th>date_created</th>
             <th>complete</th>
         </tr>
-        @foreach($alldata as $items)
+        @foreach($ticket as $items)
                 <tr>
                     <td style="text-align: center"><p><b>{{$items->name}}</b></p></td>
                     {{--priority--}}
@@ -88,7 +88,7 @@
                         <td style="text-align: center">Closed</td>
                     @endif
 
-                    <td style="text-align: center">{{$items->user_id}}</td>
+                    <td style="text-align: center">{{$items->find($items->id)->user->name}}</td>
                     <td style="text-align: center">{{$items->remark}}</td>
 
                     {{--type--}}

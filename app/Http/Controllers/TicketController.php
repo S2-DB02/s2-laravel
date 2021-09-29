@@ -15,6 +15,11 @@ class TicketController extends Controller
     public function index()
     {
         //
+        $ticket = ticket::all();
+        $user = ticket::find(1)->user->name;
+
+
+        return view('dashboard.dashboard', ['ticket' => $ticket, 'user' => $user]);
     }
 
     /**

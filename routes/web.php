@@ -11,11 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// use App\Http\Controllers\TicketController;
 
-Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test');
-Route::get('/sanderdashboard', [App\Http\Controllers\TestController::class, 'index'])->name('test');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+// Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test');
+// Route::get('/sanderdashboard', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 
+Route::resource('/ticket',  TicketController::class);
