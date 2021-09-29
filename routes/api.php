@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Resources\TicketResource;
+use App\ticket;
 use Illuminate\Http\Request;
 
 /*
@@ -16,4 +18,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('/ticket',  TicketController::class);
+Route::get('/ticket', function(){
+    return TicketResource::collection(ticket::all());
+});
