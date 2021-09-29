@@ -21,3 +21,7 @@
 // Route::get('/sanderdashboard', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 
 Route::resource('/ticket',  TicketController::class);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
