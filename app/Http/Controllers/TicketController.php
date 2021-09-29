@@ -19,7 +19,7 @@ class TicketController extends Controller
         
 
 
-        return view('dashboard.dashboard', ['ticket' => $ticket, 'user' => $user]);
+        return view('dashboard.dashboard', ['ticket' => $ticket]);
     }
 
     /**
