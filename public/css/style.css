@@ -8,7 +8,7 @@ table {
     margin: 0 auto;
     font-family: Arial, sans-serif;
     border-collapse: collapse;
-    width: 50%;
+    /*width: 50%;*/
 }
 .td{
     text-align: center;

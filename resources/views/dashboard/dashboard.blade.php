@@ -56,18 +56,50 @@
         <tr>
 
             <th>ticket</th>
-            <th>Naam</th>
-            <th></th>
-            <th>Beschrijving</th>
-            <th>Verwijderen</th>
+            <th>Priority</th>
+            <th>Status</th>
+
+            <th>Developer</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>date_created</th>
+            <th>complete</th>
         </tr>
         @foreach($alldata as $items)
                 <tr>
                     <td style="text-align: center"><p><b>{{$items->name}}</b></p></td>
-                    <td style="text-align: center">{{$items->status}}</td>
+                    {{--priority--}}
+
+                    @if($items->priority == 1 )
+                        <td style="text-align: center">Low</td>
+                    @elseif($items->priority == 2)
+                        <td style="text-align: center">Medium</td>
+                    @elseif($items->priority == 3)
+                        <td style="text-align: center">High</td>
+                    @endif
+
+                    {{--status--}}
+
+                    @if($items->status == 1 )
+                        <td style="text-align: center">Not assigned</td>
+                    @elseif($items->status == 2)
+                        <td style="text-align: center">Active</td>
+                    @elseif($items->status == 3)
+                        <td style="text-align: center">Closed</td>
+                    @endif
+
                     <td style="text-align: center">{{$items->user_id}}</td>
                     <td style="text-align: center">{{$items->remark}}</td>
-                    <td style="max-width: 10px">{{$items->type}}</td>
+
+                    {{--type--}}
+
+                    @if($items->type == 1 )
+                        <td style="text-align: center">Bug</td>
+                    @elseif($items->type == 2)
+                        <td style="text-align: center">Task</td>
+                    @elseif($items->type == 3)
+                        <td style="text-align: center">Improvement</td>
+                    @endif
                     <td style="text-align: center">{{$items->created_at}}</td>
                     {{--<td class="edit_button"><a href="{{url('/task/'.$items->id.'/delete')}}">Geserveerd</a></td>--}}
                     <td style="text-align: center"> <a href="{{url('/task/'.$items->id.'/delete')}}"><button class="btn btn-primary">Afronden</button></a></td>
