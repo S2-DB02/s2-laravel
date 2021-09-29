@@ -2,13 +2,14 @@ body{
     margin: 0 auto;
 }
 html{
-    height: 100vh;
+
 }
 table {
     margin: 0 auto;
     font-family: Arial, sans-serif;
     border-collapse: collapse;
-    /*width: 50%;*/
+    min-width: 50%;
+    max-width: 50%;
 }
 .td{
     text-align: center;
@@ -42,7 +43,7 @@ table {
     box-sizing:border-box;
     left:50%;
     padding:10vmin;
-    position:fixed;
+    position:absolute;
     text-align:center;
     top:50%;
     transform:translate(-50%, -50%);
