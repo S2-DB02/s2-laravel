@@ -1,0 +1,122 @@
+body{
+    margin: 0 auto;
+}
+html{
+    height: 100vh;
+}
+table {
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+.td{
+    text-align: center;
+}
+
+.bg {
+    animation:slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+}
+
+.bg2 {
+    animation-direction:alternate-reverse;
+    animation-duration:4s;
+}
+
+.bg3 {
+    animation-duration:5s;
+}
+
+.content {
+    background-color:rgba(255,255,255,.8);
+    border-radius:.25em;
+    box-shadow:0 0 .25em rgba(0,0,0,.25);
+    box-sizing:border-box;
+    left:50%;
+    padding:10vmin;
+    position:fixed;
+    text-align:center;
+    top:50%;
+    transform:translate(-50%, -50%);
+}
+
+h1 {
+    font-family:monospace;
+    font-size: 4em;
+}
+
+@keyframes slide {
+    0% {
+        transform:translateX(-25%);
+    }
+    100% {
+        transform:translateX(25%);
+    }
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+a{
+    color: blue;
+}
+.editbutton{
+    background-color: cornflowerblue;
+    padding: 6px;
+    font-family: Arial;
+    color: white;
+    border-radius: 20%;
+
+}
+.deletebutton{
+    background-color: firebrick;
+    padding: 6px;
+    text-decoration: none;
+    font-family: Arial;
+    color: white;
+    border-radius: 20%;
+}
+header{
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    /* margin-right: 500px; */
+    margin-bottom: 53px;
+    text-align: center;
+    width: 70vw;
+}
+h1{
+    text-align: center;
+}
+.mooieform{
+    margin: 0 auto;
+    width: 50px;
+
+
+}
+.mooieform input{
+    text-align: center;
+    margin:0 auto;
+    border-radius: 5%;
+    width: 150px;
+    height: 25px;
+
+}
+
+.mooieform{
+
+}
