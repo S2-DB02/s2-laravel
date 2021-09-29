@@ -17,10 +17,10 @@ class CreateTicketsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('priority');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->unsignedBigInteger('user_id');
-            $table->longText('remark');
-            $table->string('photo');
+            $table->longText('remark')->nullable();
+            $table->string('photo')->nullable();
             $table->integer('type');
             $table->timestamps();
 
