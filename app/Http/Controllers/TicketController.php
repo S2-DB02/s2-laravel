@@ -42,7 +42,7 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return ticket::create($request->all());
     }
 
     /**
@@ -53,7 +53,7 @@ class TicketController extends Controller
      */
     public function show(ticket $ticket)
     {
-        //
+        return $ticket;
     }
 
     /**

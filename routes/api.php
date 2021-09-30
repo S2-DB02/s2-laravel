@@ -21,3 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/ticket', function(){
     return TicketResource::collection(ticket::all());
 });
+
+Route::get('/ticket/{ticket}', 'TicketController@show');
+
+
+Route::post('/ticket', 'TicketController@store');
+
+    
