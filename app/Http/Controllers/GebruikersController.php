@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\gebruikers;
+use App\User;
+use Auth\RegisterController;
 use Illuminate\Http\Request;
 
 class GebruikersController extends Controller
@@ -15,6 +16,9 @@ class GebruikersController extends Controller
     public function index()
     {
         //
+        $users = User::All();
+
+        return view('', ['users' => $users]);
     }
 
     /**
@@ -35,7 +39,12 @@ class GebruikersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (RegisterController::validator($request)) {
+            RegisterController::create($request);
+        }else {
+            //error pages
+            return false;
+        }
     }
 
     /**
@@ -44,9 +53,11 @@ class GebruikersController extends Controller
      * @param  \App\gebruikers  $gebruikers
      * @return \Illuminate\Http\Response
      */
-    public function show(gebruikers $gebruikers)
+    public function show(User $users)
     {
         //
+        $user = $users::find($users->id);
+        return view('', ['user' => $user]);
     }
 
     /**
@@ -55,9 +66,11 @@ class GebruikersController extends Controller
      * @param  \App\gebruikers  $gebruikers
      * @return \Illuminate\Http\Response
      */
-    public function edit(gebruikers $gebruikers)
+    public function edit(User $users)
     {
         //
+        $user = User::find($users->id);
+        return view('', ['User' => $user]);
     }
 
     /**
@@ -67,9 +80,13 @@ class GebruikersController extends Controller
      * @param  \App\gebruikers  $gebruikers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, gebruikers $gebruikers)
+    public function update(Request $request, User $users)
     {
         //
+        $user = User::find($users->id);
+        $user = $request;
+        $user->save();
+        return view();
     }
 
     /**
@@ -78,8 +95,9 @@ class GebruikersController extends Controller
      * @param  \App\gebruikers  $gebruikers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(gebruikers $gebruikers)
+    public function destroy(User $users)
     {
-        //
+        $user = User::destroy($users->id);
+        return view();
     }
 }
