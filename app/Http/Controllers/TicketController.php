@@ -32,6 +32,7 @@ class TicketController extends Controller
     public function create()
     {
         //
+        return view();
     }
 
     /**
@@ -65,6 +66,7 @@ class TicketController extends Controller
     public function edit(ticket $ticket)
     {
         //
+        return view('', ['ticket' => $ticket]);
     }
 
     /**
@@ -77,6 +79,10 @@ class TicketController extends Controller
     public function update(Request $request, ticket $ticket)
     {
         //
+        $ticket = ticket::find($ticket->id);
+        $ticket = $request;
+        $ticket->save();
+        return view();
     }
 
     /**
@@ -88,5 +94,6 @@ class TicketController extends Controller
     public function destroy(ticket $ticket)
     {
         //
+        $ticket::destroy($ticket->id);
     }
 }
