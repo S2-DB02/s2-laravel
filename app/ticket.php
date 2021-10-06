@@ -10,7 +10,7 @@ class ticket extends Model
     protected $table = 'tickets';
 
     //TODO: name of fillable columns in db
-    protected $fillable = ['name', 'photo', 'remark', 'status', 'type', 'user_id'];
+    protected $fillable = ['name','URL', 'photo', 'remark', 'status', 'type', 'user_id'];
 
     public function user()
     {
