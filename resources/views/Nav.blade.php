@@ -24,7 +24,7 @@
 
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg  navbar-dark" style="background-color: #1c3f94;">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,7 +55,13 @@
 
 <!-- footer -->
 <footer>
-    <p>Made by: S2DB02</p>
+    <p id="date"></p>
+    <script>
+        n =  new Date();
+        y = n.getFullYear();
+        document.getElementById("date").innerHTML = "© Basstrucks " + y;
+    </script>
+
 </footer>
 <!-- footer -->
 

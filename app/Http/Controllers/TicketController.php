@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TicketResource;
 use App\ticket;
 use Illuminate\Http\Request;
 
@@ -16,10 +17,11 @@ class TicketController extends Controller
     {
         //
         $ticket = ticket::all();
-        
-
-
-        return view('dashboard.dashboard', ['ticket' => $ticket]);
+        if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+            // return new TicketResource::collection(ticket::all());
+        }else {
+            return view('dashboard.dashboard', ['ticket' => $ticket]);
+        }
     }
 
     /**
