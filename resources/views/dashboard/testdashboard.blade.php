@@ -111,6 +111,8 @@
 
         @endforeach
     </table>
+    {{ $ticket->links() }}
+
 </div>
 <script>
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Auth\RegisterController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 
 class GebruikersController extends Controller
@@ -29,6 +29,7 @@ class GebruikersController extends Controller
     public function create()
     {
         //
+        return view('auth.register');
     }
 
     /**
@@ -39,8 +40,8 @@ class GebruikersController extends Controller
      */
     public function store(Request $request)
     {
-        if (RegisterController::validator($request)) {
-            RegisterController::create($request);
+        if (RegisterController::validator($request->all())) {
+            RegisterController::create($request->all());
         }else {
             //error pages
             return false;
