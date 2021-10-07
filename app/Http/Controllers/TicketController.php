@@ -22,7 +22,7 @@ class TicketController extends Controller
         if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
             // return new TicketResource::collection(ticket::all());
         }else {
-            return view('dashboard.testdashboard', ['ticket' => $ticket]);
+            return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
     }
     /**

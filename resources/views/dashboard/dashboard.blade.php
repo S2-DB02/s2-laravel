@@ -26,109 +26,89 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reserveringen</title>
+    <title>BasWorld Bugreporter | Tickets</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('css/teststyle.css') }}">
+    
+    <link rel="stylesheet" href="{{ asset('css/teststyles.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body style="font-family: Arial">
-<div class="bg"></div>
-<div class="bg bg2"></div>
-<div class="bg bg3"></div>
-<div class="content">
-    <header>
-        {{--<a href="/history"> <h2>Laatste bestellingen</h2></a>--}}
-        {{--<a href="{{url('create')}}"> <h2>Add Task</h2></a>--}}
-        <h1>Open tickets</h1>
-    </header>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Orders Table-->
+        <div class="col-lg-8 pb-5">
+            <div class="d-flex justify-content-end pb-3">
+                <div class="form-inline">
+                    <label class="text-muted mr-3" for="order-sort">Sort Orders</label>
+                    <select class="form-control" id="order-sort">
+                        <option>Tickets</option>
+                        <option>Priority - Ascending</option>
+                        <option>Status</option>
+                        <option>Delayed</option>
+                        <option>Canceled</option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                {{ $ticket->links() }}
 
+            </div>
 
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                    <tr>
+                        <th>Ticket</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Prioriteit</th>
+                        <th>Datum aangemaakt</th>
 
-    {{--<table>--}}
-    {{--<tr>--}}
-    {{--@foreach($tasks as $task)--}}
-    {{--<a style="text-decoration: none" href="{{ route('task', $task->id) }}">{{$task->task}}</a>: {{$task->date}}--}}
-    {{--@endforeach--}}
-    {{--</tr>--}}
-    {{--</table>--}}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($ticket as $items)
+                    <tr>
 
-    <table>
-        <tr>
+                        <td><a class="navi-link" href="{{url('/ticket/'.$items->id)}}" data-toggle="modal">{{$items->name}}</a></td>
+                        @if($items->type == 1 )
+                            <td style="text-align: center">Media</td>
+                        @elseif($items->type == 2)
+                            <td style="text-align: center">Layout</td>
+                        @elseif($items->type == 3)
+                            <td style="text-align: center">Translation</td>
+                        @elseif($items->type == 4)
+                            <td style="text-align: center">Markup</td>
+                        @elseif($items->type == 5)
+                            <td style="text-align: center">Other</td>
+                        @endif
+                        @if($items->status == 1 )
+                            <td style="text-align: center"><span class="badge badge-light m-0">Not Assigned</span></td>
+                        @elseif($items->status == 2)
+                            <td style="text-align: center"><span class="badge badge-primary m-0">Active</span></td>
+                        @elseif($items->status == 3)
+                            <td style="text-align: center"><span class="badge badge-dark m-0">Closed</span></td>
+                        @endif
 
-            <th>ticket</th>
-            <th>Priority</th>
-            <th>Status</th>
+                        @if($items->priority == 1 )
+                            <td><span class="badge badge-success m-0">Low</span></td>
+                        @elseif($items->priority == 2)
+                            <td><span class="badge badge-warning m-0">Medium</span></td>
+                        @elseif($items->priority == 3)
+                            <td><span class="badge badge-danger m-0">High</span></td>
+                        @endif
+                        <td><span>{{$items->created_at}}</span></td>
 
-            <th>Developer</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>date_created</th>
-            <th>complete</th>
-        </tr>
-        @foreach($ticket as $items)
-            <tr>
-                <td style="text-align: center"><p><b>{{$items->name}}</b></p></td>
-                {{--priority--}}
-
-                @if($items->priority == 1 )
-                    <td style="text-align: center">Low</td>
-                @elseif($items->priority == 2)
-                    <td style="text-align: center">Medium</td>
-                @elseif($items->priority == 3)
-                    <td style="text-align: center">High</td>
-                @endif
-
-                {{--status--}}
-
-                @if($items->status == 1 )
-                    <td style="text-align: center">Not assigned</td>
-                @elseif($items->status == 2)
-                    <td style="text-align: center">Active</td>
-                @elseif($items->status == 3)
-                    <td style="text-align: center">Closed</td>
-                @endif
-
-                <td style="text-align: center">{{$items->find($items->id)->user->name}}</td>
-                <td style="text-align: center">{{$items->remark}}</td>
-
-                {{--type--}}
-
-                @if($items->type == 1 )
-                    <td style="text-align: center">Bug</td>
-                @elseif($items->type == 2)
-                    <td style="text-align: center">Task</td>
-                @elseif($items->type == 3)
-                    <td style="text-align: center">Improvement</td>
-                @elseif($items->type == 4)
-                    <td style="text-align: center">Media</td>
-                @elseif($items->type == 5)
-                    <td style="text-align: center">Other</td>
-                @endif
-                <td style="text-align: center">{{$items->created_at}}</td>
-                {{--<td class="edit_button"><a href="{{url('/task/'.$items->id.'/delete')}}">Geserveerd</a></td>--}}
-                <td style="text-align: center"> <a href="{{url('/ticket/'.$items->id)}}"><button class="btn btn-primary">Afronden</button></a></td>
-            </tr>
-
-        @endforeach
-    </table>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center">
+                    {{ $ticket->links() }}
+    
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<script>
-
-    var RootUrl = '@Url.Content("~/")';
-    function fetchdata(){
-        $.ajax({
-            url: 'index',
-            type: 'get',
-            success: function(response){
-                location.reload();
-                // Perform operation on the return value
-            }
-        });
-    }
-
-    $(document).ready(function(){
-        setInterval(fetchdata,10000);
-    });
-</script>
 </body>
 </html>
