@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UserSeeder::class);
+        $this->call(TicketsSeeder::class);
 
 
 //        for($i = 0; $i < 1000; $i++) {

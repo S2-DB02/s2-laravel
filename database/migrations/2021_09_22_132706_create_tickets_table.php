@@ -20,6 +20,7 @@ class CreateTicketsTable extends Migration
             $table->integer('status')->default(1);
             $table->unsignedBigInteger('user_id');
             $table->longText('remark')->nullable();
+            $table->longText('URL');
             $table->string('photo')->nullable();
             $table->integer('type');
             $table->timestamps();
