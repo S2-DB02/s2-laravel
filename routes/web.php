@@ -13,10 +13,6 @@
 
 // use App\Http\Controllers\TicketController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 // Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 // Route::get('/sanderdashboard', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 
@@ -28,3 +24,7 @@ Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get("/Navtest", function(){
+    return View::make("Nav");
+});
