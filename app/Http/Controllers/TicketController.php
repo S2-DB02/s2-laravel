@@ -24,14 +24,6 @@ class TicketController extends Controller
             return view('dashboard.testdashboard', ['ticket' => $ticket]);
         }
     }
-
-    public function detail(Request $id)
-    {
-
-        $ticket = ticket::find($id);
-        return view('dashboard.ticketDetail', ['ticket' => $ticket]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
