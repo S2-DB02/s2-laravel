@@ -25,6 +25,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get("/Navtest", function(){
-    return View::make("Nav");
-});
+
