@@ -27,8 +27,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Reserveringen</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/teststyle.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body style="font-family: Arial">
@@ -66,44 +66,48 @@
             <th>complete</th>
         </tr>
         @foreach($ticket as $items)
-                <tr>
-                    <td style="text-align: center"><p><b>{{$items->name}}</b></p></td>
-                    {{--priority--}}
+            <tr>
+                <td style="text-align: center"><p><b>{{$items->name}}</b></p></td>
+                {{--priority--}}
 
-                    @if($items->priority == 1 )
-                        <td style="text-align: center">Low</td>
-                    @elseif($items->priority == 2)
-                        <td style="text-align: center">Medium</td>
-                    @elseif($items->priority == 3)
-                        <td style="text-align: center">High</td>
-                    @endif
+                @if($items->priority == 1 )
+                    <td style="text-align: center">Low</td>
+                @elseif($items->priority == 2)
+                    <td style="text-align: center">Medium</td>
+                @elseif($items->priority == 3)
+                    <td style="text-align: center">High</td>
+                @endif
 
-                    {{--status--}}
+                {{--status--}}
 
-                    @if($items->status == 1 )
-                        <td style="text-align: center">Not assigned</td>
-                    @elseif($items->status == 2)
-                        <td style="text-align: center">Active</td>
-                    @elseif($items->status == 3)
-                        <td style="text-align: center">Closed</td>
-                    @endif
+                @if($items->status == 1 )
+                    <td style="text-align: center">Not assigned</td>
+                @elseif($items->status == 2)
+                    <td style="text-align: center">Active</td>
+                @elseif($items->status == 3)
+                    <td style="text-align: center">Closed</td>
+                @endif
 
-                    <td style="text-align: center">{{$items->find($items->id)->user->name}}</td>
-                    <td style="text-align: center">{{$items->remark}}</td>
+                <td style="text-align: center">{{$items->find($items->id)->user->name}}</td>
+                <td style="text-align: center">{{$items->remark}}</td>
 
-                    {{--type--}}
+                {{--type--}}
 
-                    @if($items->type == 1 )
-                        <td style="text-align: center">Bug</td>
-                    @elseif($items->type == 2)
-                        <td style="text-align: center">Task</td>
-                    @elseif($items->type == 3)
-                        <td style="text-align: center">Improvement</td>
-                    @endif
-                    <td style="text-align: center">{{$items->created_at}}</td>
-                    {{--<td class="edit_button"><a href="{{url('/task/'.$items->id.'/delete')}}">Geserveerd</a></td>--}}
-                    <td style="text-align: center"> <a href="{{url('/task/'.$items->id.'/delete')}}"><button class="btn btn-primary">Afronden</button></a></td>
-                </tr>
+                @if($items->type == 1 )
+                    <td style="text-align: center">Bug</td>
+                @elseif($items->type == 2)
+                    <td style="text-align: center">Task</td>
+                @elseif($items->type == 3)
+                    <td style="text-align: center">Improvement</td>
+                @elseif($items->type == 4)
+                    <td style="text-align: center">Media</td>
+                @elseif($items->type == 5)
+                    <td style="text-align: center">Other</td>
+                @endif
+                <td style="text-align: center">{{$items->created_at}}</td>
+                {{--<td class="edit_button"><a href="{{url('/task/'.$items->id.'/delete')}}">Geserveerd</a></td>--}}
+                <td style="text-align: center"> <a href="{{url('/ticket/'.$items->id)}}"><button class="btn btn-primary">Afronden</button></a></td>
+            </tr>
 
         @endforeach
     </table>
