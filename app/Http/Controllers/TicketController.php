@@ -17,6 +17,7 @@ class TicketController extends Controller
     public function index()
     {
         //
+        
         $ticket = ticket::all();
         if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
             // return new TicketResource::collection(ticket::all());

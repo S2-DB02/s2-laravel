@@ -33,11 +33,14 @@
 
     <table>
         <tr>
+            <th>ticket nr</th>
 
             <th>ticket</th>
             <th>Priority</th>
             <th>Status</th>
-
+            <th>Picture</th>
+            <th>URL</th>
+            <th>Created by </th>
             <th>Developer</th>
             <th>Description</th>
             <th>Type</th>
@@ -45,6 +48,8 @@
             <th>complete</th>
         </tr>
             <tr>
+                <td style="text-align: center"><p><b>{{$ticket->id}}</b></p></td>
+
                 <td style="text-align: center"><p><b>{{$ticket->name}}</b></p></td>
                 {{--priority--}}
 
@@ -65,8 +70,13 @@
                 @elseif($ticket->status == 3)
                     <td style="text-align: center">Closed</td>
                 @endif
+                <td style="text-align: center">{{$ticket->photo}}</td>
+                <td style="text-align: center">{{$ticket->URL}}</td>
 
-                <td style="text-align: center">{{$ticket->find($ticket->id)->user->name}}</td>
+                <td style="text-align: center">{{$ticket->find($ticket->id)->madeByUser->name}}</td>
+
+                <td style="text-align: center">{{$ticket->find($ticket->id)->developer->name ?? 'NULL'}}</td>
+
                 <td style="text-align: center">{{$ticket->remark}}</td>
 
                 {{--type--}}

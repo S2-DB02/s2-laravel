@@ -38,6 +38,6 @@ class User extends Authenticatable
     ];
     public function tickets()
     {
-        return $this->hasMany(ticket::class);
+        return $this->hasMany(ticket::class, 'madeBy');
     }
 }
