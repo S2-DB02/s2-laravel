@@ -44,51 +44,48 @@
             <th>date_created</th>
             <th>complete</th>
         </tr>
-        @foreach($ticket as $items)
             <tr>
-                <td style="text-align: center"><p><b>{{$items->name}}</b></p></td>
+                <td style="text-align: center"><p><b>{{$ticket->name}}</b></p></td>
                 {{--priority--}}
 
-                @if($items->priority == 1 )
+                @if($ticket->priority == 1 )
                     <td style="text-align: center">Low</td>
-                @elseif($items->priority == 2)
+                @elseif($ticket->priority == 2)
                     <td style="text-align: center">Medium</td>
-                @elseif($items->priority == 3)
+                @elseif($ticket->priority == 3)
                     <td style="text-align: center">High</td>
                 @endif
 
                 {{--status--}}
 
-                @if($items->status == 1 )
+                @if($ticket->status == 1 )
                     <td style="text-align: center">Not assigned</td>
-                @elseif($items->status == 2)
+                @elseif($ticket->status == 2)
                     <td style="text-align: center">Active</td>
-                @elseif($items->status == 3)
+                @elseif($ticket->status == 3)
                     <td style="text-align: center">Closed</td>
                 @endif
 
-                <td style="text-align: center">{{$items->find($items->id)->user->name}}</td>
-                <td style="text-align: center">{{$items->remark}}</td>
+                <td style="text-align: center">{{$ticket->find($ticket->id)->user->name}}</td>
+                <td style="text-align: center">{{$ticket->remark}}</td>
 
                 {{--type--}}
 
-                @if($items->type == 1 )
+                @if($ticket->type == 1 )
                     <td style="text-align: center">Bug</td>
-                @elseif($items->type == 2)
+                @elseif($ticket->type == 2)
                     <td style="text-align: center">Task</td>
-                @elseif($items->type == 3)
+                @elseif($ticket->type == 3)
                     <td style="text-align: center">Improvement</td>
-                @elseif($items->type == 4)
+                @elseif($ticket->type == 4)
                     <td style="text-align: center">Media</td>
-                @elseif($items->type == 5)
+                @elseif($ticket->type == 5)
                     <td style="text-align: center">Other</td>
                 @endif
-                <td style="text-align: center">{{$items->created_at}}</td>
-                {{--<td class="edit_button"><a href="{{url('/task/'.$items->id.'/delete')}}">Geserveerd</a></td>--}}
-                <td style="text-align: center"> <a href="{{url('/task/'.$items->id.'/details')}}"><button class="btn btn-primary">Afronden</button></a></td>
+                <td style="text-align: center">{{$ticket->created_at}}</td>
+                {{--<td class="edit_button"><a href="{{url('/task/'.$ticket->id.'/delete')}}">Geserveerd</a></td>--}}
+                <td style="text-align: center"> <a href="{{url('/task/'.$ticket->id.'/details')}}"><button class="btn btn-primary">Afronden</button></a></td>
             </tr>
-
-        @endforeach
     </table>
 </div>
 <script>

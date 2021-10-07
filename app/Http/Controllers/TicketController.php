@@ -62,6 +62,7 @@ class TicketController extends Controller
      */
     public function show(ticket $ticket)
     {
+        // dd($ticket);
         return view('dashboard.ticketDetail', ['ticket' => $ticket]);
     }
 
