@@ -28,6 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Reserveringen</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
     <link rel="stylesheet" href="{{ asset('css/teststyles.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -69,9 +70,25 @@
                     <tr>
 
                         <td><a class="navi-link" href="{{url('/ticket/'.$items->id)}}" data-toggle="modal">{{$items->name}}</a></td>
-                        <td><span>{{$items->type}}</span></td>
+                        @if($items->type == 1 )
+                            <td style="text-align: center">Bug</td>
+                        @elseif($items->type == 2)
+                            <td style="text-align: center">Task</td>
+                        @elseif($items->type == 3)
+                            <td style="text-align: center">Improvement</td>
+                        @elseif($items->type == 4)
+                            <td style="text-align: center">Media</td>
+                        @elseif($items->type == 5)
+                            <td style="text-align: center">Other</td>
+                        @endif
+                        @if($items->status == 1 )
+                            <td style="text-align: center"><span class="badge badge-light m-0">Not Assigned</span></td>
+                        @elseif($items->status == 2)
+                            <td style="text-align: center"><span class="badge badge-primary m-0">Active</span></td>
+                        @elseif($items->status == 3)
+                            <td style="text-align: center"><span class="badge badge-dark m-0">Closed</span></td>
+                        @endif
 
-                        <td>{{$items->status}}</td>
                         @if($items->priority == 1 )
                             <td><span class="badge badge-success m-0">Low</span></td>
                         @elseif($items->priority == 2)
