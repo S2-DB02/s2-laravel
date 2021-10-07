@@ -10,10 +10,14 @@ class ticket extends Model
     protected $table = 'tickets';
 
     //TODO: name of fillable columns in db
-    protected $fillable = ['name','URL', 'photo', 'remark', 'status', 'type', 'user_id'];
+    protected $fillable = ['name','URL', 'photo', 'remark', 'status', 'type', 'madeBy', 'developer'];
 
-    public function user()
+    public function developerUser()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class , 'developer');
+    }
+    public function madeByUser()
+    {
+        return $this->belongsTo(User::class , 'madeBy');
     }
 }

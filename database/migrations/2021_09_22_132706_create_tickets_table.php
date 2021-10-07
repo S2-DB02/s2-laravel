@@ -18,7 +18,8 @@ class CreateTicketsTable extends Migration
             $table->string('name');
             $table->integer('priority')->default(1);
             $table->integer('status')->default(1);
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('madeBy');
+            $table->unsignedBigInteger('developer')->nullable();
             $table->longText('remark')->nullable();
             $table->longText('URL');
             $table->string('photo')->nullable();
@@ -26,7 +27,8 @@ class CreateTicketsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('madeBy')->references('id')->on('users');
+            $table->foreign('developer')->references('id')->on('users');
         });
     }
 

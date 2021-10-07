@@ -26,5 +26,6 @@ Route::get('/ticket/{ticket}', 'TicketController@show');
 
 
 Route::post('/ticket', 'TicketController@store');
+Route::post('/user', 'GebruikersController@store');
 
     
