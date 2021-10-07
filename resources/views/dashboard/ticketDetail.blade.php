@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reserveringen</title>
+    <title>{{$ticket->name}} | {{$ticket->id}}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/teststyle.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -16,8 +16,7 @@
 <div class="bg bg3"></div>
 <div class="content">
     <header>
-        {{--<a href="/history"> <h2>Laatste bestellingen</h2></a>--}}
-        {{--<a href="{{url('create')}}"> <h2>Add Task</h2></a>--}}
+        </br>
         <h1>Open tickets</h1>
     </header>
 
@@ -31,73 +30,100 @@
     {{--</tr>--}}
     {{--</table>--}}
 
-    <table>
-        <tr>
-            <th>ticket nr</th>
 
-            <th>ticket</th>
-            <th>Priority</th>
-            <th>Status</th>
-            <th>Picture</th>
-            <th>URL</th>
-            <th>Created by </th>
-            <th>Developer</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>date_created</th>
-            <th>complete</th>
-        </tr>
-            <tr>
-                <td style="text-align: center"><p><b>{{$ticket->id}}</b></p></td>
-
-                <td style="text-align: center"><p><b>{{$ticket->name}}</b></p></td>
-                {{--priority--}}
+</br>
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-sm-3">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="card-title font-weight-bold"">{{$ticket->id}} | {{$ticket->name}}</h5>
+            <p class="font-weight-bold"> Priority: {{--priority--}}
 
                 @if($ticket->priority == 1 )
-                    <td style="text-align: center">Low</td>
+                    <a class="font-weight-normal badge badge-pill badge-success">Low</a>
                 @elseif($ticket->priority == 2)
-                    <td style="text-align: center">Medium</td>
+                    <a class="font-weight-normal badge badge-pill badge-warning">Medium</a>
                 @elseif($ticket->priority == 3)
-                    <td style="text-align: center">High</td>
+                    <a class="font-weight-normal badge badge-pill badge-danger">High</a>
                 @endif
-
-                {{--status--}}
+            </p>
+            <p class="font-weight-bold"> Status: {{--status--}}
 
                 @if($ticket->status == 1 )
-                    <td style="text-align: center">Not assigned</td>
+                    <a class="font-weight-normal badge badge-pill badge-secondary">Not assigned</a>
                 @elseif($ticket->status == 2)
-                    <td style="text-align: center">Active</td>
+                    <a class="font-weight-normal badge badge-pill badge-warning">Active</a>
                 @elseif($ticket->status == 3)
-                    <td style="text-align: center">Closed</td>
+                    <a class="font-weight-normal badge badge-pill badge-closed">Closed</a>
                 @endif
-                <td style="text-align: center">{{$ticket->photo}}</td>
-                <td style="text-align: center">{{$ticket->URL}}</td>
+            </p>
+            <p class="font-weight-bold"> Type: {{--type--}}
 
-                <td style="text-align: center">{{$ticket->find($ticket->id)->madeByUser->name}}</td>
-
-                <td style="text-align: center">{{$ticket->find($ticket->id)->developer->name ?? 'NULL'}}</td>
-
-                <td style="text-align: center">{{$ticket->remark}}</td>
-
-                {{--type--}}
-
-                @if($ticket->type == 1 )
-                    <td style="text-align: center">Bug</td>
-                @elseif($ticket->type == 2)
-                    <td style="text-align: center">Task</td>
-                @elseif($ticket->type == 3)
-                    <td style="text-align: center">Improvement</td>
-                @elseif($ticket->type == 4)
-                    <td style="text-align: center">Media</td>
-                @elseif($ticket->type == 5)
-                    <td style="text-align: center">Other</td>
-                @endif
-                <td style="text-align: center">{{$ticket->created_at}}</td>
-                {{--<td class="edit_button"><a href="{{url('/task/'.$ticket->id.'/delete')}}">Geserveerd</a></td>--}}
-                <td style="text-align: center"> <a href="{{url('/task/'.$ticket->id.'/details')}}"><button class="btn btn-primary">Afronden</button></a></td>
-            </tr>
-    </table>
+            @if($ticket->type == 1 )
+                <a class="font-weight-normal">Bug</a>
+            @elseif($ticket->type == 2)
+                <a class="font-weight-normal">Task</a>
+            @elseif($ticket->type == 3)
+                <a class="font-weight-normal">Improvement</a>
+            @elseif($ticket->type == 4)
+                <a class="font-weight-normal">Media</a>
+            @elseif($ticket->type == 5)
+                <a class="font-weight-normal">Other</a>
+            @endif
+            <p class="font-weight-bold">Assigned to: 
+                <a class="font-weight-normal">{{$ticket->find($ticket->id)->developer->name ?? 'Unknown'}}</a>
+            </p>
+            
+        </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="card-title font-weight-bold">Description</h5>
+            <p class="card-text">{{$ticket->remark}}</p>
+        </div>
+        </div>
+    </div>
+    </div>
 </div>
+</br>
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-sm-3">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="card-title font-weight-bold"">Information</h5>
+            <p  class="font-weight-bold">Reported by: 
+                <a class="font-weight-normal" href="mailto:{{$ticket->find($ticket->id)->madeByUser->email}}">{{$ticket->find($ticket->id)->madeByUser->name}}</a>
+            </p>
+            <p  class="font-weight-bold">Created at:
+                <a class="font-weight-normal">{{$ticket->created_at}}</a>
+            </p>
+            <a href="{{$ticket->URL}}" target="_blank" class="btn btn-outline-info btn-sm">Page link</a>
+            
+        </div>
+        </div>
+    </br>
+        <a href="{{url('/task/'.$ticket->id.'/details')}}"><button class="btn btn-primary">Afronden</button></a>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="card-title font-weight-bold">Screenshot</h5>
+            <a href="{{$ticket->URL}}">
+                <img alt="Screenshot Ticket" src="{{$ticket->photo}}">
+             </a>
+        </div>
+        </div>
+    </div>
+    </div>
+    
+</div>
+
+
+
 <script>
 
     var RootUrl = '@Url.Content("~/")';

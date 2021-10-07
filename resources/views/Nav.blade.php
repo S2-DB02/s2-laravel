@@ -19,6 +19,20 @@
             text-align: center;
         }
     </style>
+// Extra small devices (portrait phones, less than 576px)
+// No media query since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
 </head>
 <body>
 
@@ -60,6 +74,11 @@
         n =  new Date();
         y = n.getFullYear();
         document.getElementById("date").innerHTML = "© Basstrucks " + y;
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+            })
     </script>
 
 </footer>

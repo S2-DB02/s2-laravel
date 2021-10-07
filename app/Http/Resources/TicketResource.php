@@ -17,15 +17,16 @@ class TicketResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'priority' => $this->priority,
-            'status' => $this->status,
-            'user_id' => $this->user_id,
+            'madeBy' => $this->madeBy,
             'remark' => $this->remark,
             'photo' => $this->photo,
             'type' => $this->type,
             'URL' => $this->URL,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'priority' => $this->priority,
+            'status' => $this->status,
+
         ];
     }
 }
