@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class GebruikersController extends Controller
 {
@@ -85,7 +86,8 @@ class GebruikersController extends Controller
     {
         //
         $user = User::find($users->id);
-        $user = $request;
+        $hased = Hash::make($request->password);
+        $user->password = $hased;
         $user->save();
         return view();
     }
