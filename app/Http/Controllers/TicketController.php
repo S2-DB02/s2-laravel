@@ -81,10 +81,18 @@ class TicketController extends Controller
     public function update(Request $request, ticket $ticket)
     {
         //
-        $ticket = ticket::find($ticket->id);
-        $ticket = $request;
-        $ticket->save();
-        return view();
+        $newTicket = ticket::find($ticket->id);
+        $newTicket->name = $request->name;
+        $newTicket->priority = $request->priority;
+        $newTicket->status = $request->status;
+        $newTicket->type = $request->type;
+        $newTicket->remark = $request->remark;
+
+        if ($newTicket->save()) {
+            return back()->with('success','Success :)');
+        }else {
+            return back()->with('error','Something went wrong :(');
+        }
     }
 
     /**
