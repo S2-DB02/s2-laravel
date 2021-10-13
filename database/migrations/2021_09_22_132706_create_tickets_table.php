@@ -16,14 +16,14 @@ class CreateTicketsTable extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('priority')->default(1);
-            $table->integer('status')->default(1);
+            $table->tinyInteger('priority')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->unsignedBigInteger('madeBy');
             $table->unsignedBigInteger('developer')->nullable();
             $table->longText('remark')->nullable();
             $table->longText('URL');
             $table->string('photo')->nullable();
-            $table->integer('type');
+            $table->tinyInteger('type');
             $table->timestamps();
             $table->softDeletes();
 
