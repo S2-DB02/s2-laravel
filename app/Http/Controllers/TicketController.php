@@ -20,10 +20,7 @@ class TicketController extends Controller
         $ticket = ticket::paginate(20);
         if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
             // return new TicketResource::collection(ticket::all());
-        }elseif (Route::input('url')) {
-            dd("boom");
-        }
-        
+        }        
         else {
             return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
