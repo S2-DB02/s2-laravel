@@ -23,6 +23,11 @@ Route::get('/ticket', function(){
 });
 
 Route::get('/ticket/{ticket}', 'TicketController@show');
+// Route::get('/ticket/{ticket}', function($ticket)
+// {
+//     dd(ticket::find($ticket));
+//     return TicketResource::collection(ticket::find($ticket));
+// });
 
 
 Route::post('/ticket', 'TicketController@store');

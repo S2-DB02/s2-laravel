@@ -55,8 +55,12 @@ class TicketController extends Controller
      */
     public function show(ticket $ticket)
     {
-        // dd($ticket);
-        return view('dashboard.ticketDetail', ['ticket' => $ticket]);
+        if (url()->current() == "http://127.0.0.1:8000/api/ticket/$ticket->id") {
+            // dd(ticket::find($ticket->id));
+            return new TicketResource($ticket);
+        }else {
+            return view('dashboard.ticketDetail', ['ticket' => $ticket]);
+        }
     }
 
     /**
