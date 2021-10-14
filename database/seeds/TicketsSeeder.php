@@ -25,7 +25,7 @@ class TicketsSeeder extends Seeder
             'type' => $faker->randomElement($array = array (1, 2, 3, 4, 5 )),
             'madeBy' => $faker->randomDigitNotNull,
             // 'developer' => $faker->randomDigit,
-            'URL' => $faker->url
+            'URL' => urlencode(urlencode($faker->url))
             ])->save();
     endfor;
     }

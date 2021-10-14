@@ -14,10 +14,16 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/ticket/url/{URL}', 'TicketController@ticketurl');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::get('/ticket/url?g={url}', function ($url) {
+//     dd($url); // itm:n#_123445
+
+// });
 Route::get('/ticket', function(){
     return TicketResource::collection(ticket::all());
 });
@@ -29,8 +35,5 @@ Route::get('/ticket/{ticket}', 'TicketController@show');
 //     return TicketResource::collection(ticket::find($ticket));
 // });
 
-
 Route::post('/ticket', 'TicketController@store');
 Route::post('/user', 'GebruikersController@store');
-
-    

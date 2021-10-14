@@ -17,11 +17,14 @@ class TicketController extends Controller
     public function index()
     {
         //
-        
         $ticket = ticket::paginate(20);
         if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
             // return new TicketResource::collection(ticket::all());
-        }else {
+        }elseif (Route::input('url')) {
+            dd("boom");
+        }
+        
+        else {
             return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
     }
@@ -55,6 +58,7 @@ class TicketController extends Controller
      */
     public function show(ticket $ticket)
     {
+
         if (url()->current() == "http://127.0.0.1:8000/api/ticket/$ticket->id") {
             // dd(ticket::find($ticket->id));
             return new TicketResource($ticket);
@@ -98,6 +102,21 @@ class TicketController extends Controller
             return back()->with('error','Something went wrong :(');
         }
     }
+
+    public function ticketurl($url)
+    {
+        // $tickets = ticket::where('name', "sequi")->get();
+        $tickets = ticket::where('URL',urlencode($url))->get();
+        $ids = [];
+        foreach ($tickets as $key) {
+            array_push($ids, $key->id);
+        }
+        return TicketResource::collection(ticket::find($ids));
+
+        // return new TicketResource( ticket::where('URL',urlencode($url))->get());
+
+    }
+
 
     /**
      * Remove the specified resource from storage.
