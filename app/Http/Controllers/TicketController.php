@@ -39,6 +39,12 @@ class TicketController extends Controller
         //STATUS
         else if ($request->query("status", "status") === "status" ){
             $ticket = ticket::orderBy("status", "asc")->paginate(20);
+
+        if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+            // return new TicketResource::collection(ticket::all());
+        }        
+        else {
+            $tickets = ticket::orderBy("name")->paginate(20);
             return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
         //TICKETS
