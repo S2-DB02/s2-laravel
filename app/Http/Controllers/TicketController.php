@@ -22,6 +22,8 @@ class TicketController extends Controller
             // return new TicketResource::collection(ticket::all());
         }        
         else {
+            $tickets = ticket::orderBy("name")->paginate(20);
+            dd($tickets);
             return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
     }
