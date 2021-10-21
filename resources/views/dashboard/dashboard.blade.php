@@ -102,8 +102,7 @@
 </div>
 <script>
     function fetchdData($value){
-
-        alert($value);
+        
     if($value === "priorityAsc"){
         location.replace("ticket?priority=asc")
     }
