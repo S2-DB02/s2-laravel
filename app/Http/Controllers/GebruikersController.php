@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Http\Resources\UserResource;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -52,14 +53,22 @@ class GebruikersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\gebruikers  $gebruikers
+     * @param  \App\User  $users
      * @return \Illuminate\Http\Response
      */
     public function show(User $users)
     {
         //
-        $user = $users::find($users->id);
-        return view('', ['user' => $user]);
+        // $user = $users::find($users->id);
+        // return view('', ['user' => $user]);
+
+        if (url()->current() == "http://127.0.0.1:8000/api/user/$users->id") {
+            //dd(User::find($users->id));
+            //return new UserResource($users);
+            return new UserResource(User::find($users->id));
+        }
+        //return new UserResource($user);
+        //return new UserResource(User::find(1));
     }
 
     /**
