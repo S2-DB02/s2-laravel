@@ -46,7 +46,7 @@
     <script>
         n =  new Date();
         y = n.getFullYear();
-        document.getElementById("date").innerHTML = "© Basstrucks " + y;
+        document.getElementById("date").innerHTML = "© BAS Trucks " + y;
     </script>
     <!-- Copyright -->
   </footer>
