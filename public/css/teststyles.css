@@ -10,6 +10,9 @@ body{
 .widget-author {
     margin-bottom: 58px;
 }
+.area{
+    resize: none;
+}
 .author-card {
     position: relative;
     padding-bottom: 48px;

@@ -24,22 +24,6 @@
 <div class="bg bg2"></div>
 <div class="bg bg3"></div>
 <div class="content">
-    <header>
-        </br>
-        <h1>Open tickets</h1>
-    </header>
-
-
-
-    {{--<table>--}}
-    {{--<tr>--}}
-    {{--@foreach($tasks as $task)--}}
-    {{--<a style="text-decoration: none" href="{{ route('task', $task->id) }}">{{$task->task}}</a>: {{$task->date}}--}}
-    {{--@endforeach--}}
-    {{--</tr>--}}
-    {{--</table>--}}
-
-</br>
 <form  action="/ticket/{{$ticket->id}}" method="POST">
     @method('PUT')
     @csrf
@@ -47,10 +31,13 @@
     
 <div class="container-fluid">
     <div class="row">
-    <div class="col-sm-3">
+        <div class="col-12 mt-2">
+            <button type="button" class="btn btn-outline-dark">Back</button>
+        </div>
+    <div class="col-sm-6">
         <div class="card">
         <div class="card-body">
-            <h5 class="card-title font-weight-bold">{{$ticket->id}} | 
+            <h5 class="card-title font-weight-bold">Ticket NR: {{$ticket->id}} 
               <input type="text" class="form-control" name="name" id="name"value="{{$ticket->name}}">
             </h5>
             <div class="form-group">
@@ -110,7 +97,7 @@
         </div>
         </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6 mh-100">
         <div class="card">
         <div class="card-body">
             <div class="form-group">
@@ -122,7 +109,6 @@
     </div>
     </div>
 </div>
-</br>
 <div class="container-fluid">
     <div class="row">
     <div class="col-sm-3">

@@ -1,105 +1,6 @@
 <!DOCTYPE html>
 <!-- Created By CodingNepal - www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
-{{-- <style>*{
-        padding: 0;
-        margin: 0;
-        text-decoration: none;
-        list-style: none;
-        box-sizing: border-box;
-    }
-    body{
-        font-family: montserrat;
-    }
-    nav{
-        background: Black;
-        height: 80px;
-        width: 100%;
-        position: fixed;
-        z-index: 99999;
-    }
-    label.logo{
-        color: white;
-        font-size: 35px;
-        line-height: 80px;
-        padding: 0 100px;
-        font-weight: bold;
-    }
-    nav ul{
-        float: right;
-        margin-right: 20px;
-    }
-    nav ul li{
-        display: inline-block;
-        line-height: 80px;
-        margin: 0 5px;
-    }
-    nav ul li a{
-        color: white;
-        font-size: 17px;
-        padding: 7px 13px;
-        border-radius: 3px;
-        text-transform: uppercase;
-    }
-    a.active,a:hover{
-        background: grey;
-        transition: .5s;
-    }
-    .checkbtn{
-        font-size: 30px;
-        color: white;
-        float: right;
-        line-height: 80px;
-        margin-right: 40px;
-        cursor: pointer;
-        display: none;
-    }
-    #check{
-        display: none;
-    }
-    @media (max-width: 952px){
-        label.logo{
-            font-size: 30px;
-            padding-left: 50px;
-        }
-        nav ul li a{
-            font-size: 16px;
-        }
-    }
-    @media (max-width: 858px){
-        .checkbtn{
-            display: block;
-        }
-        ul{
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            background: Black;
-            top: 80px;
-            left: -100%;
-            text-align: center;
-            transition: all .5s;
-        }
-        nav ul li{
-            display: block;
-            margin: 50px 0;
-            line-height: 30px;
-        }
-        nav ul li a{
-            font-size: 20px;
-        }
-        a:hover,a.active{
-            background: none;
-            color: grey;
-        }
-        #check:checked ~ ul{
-            left: 0;
-        }
-    }
-    section{
-        background-size: cover;
-        height: calc(100vh - 80px);
-    }</style> --}}
 <head>
     <meta charset="utf-8">
     <title>@yield('title')</title>
@@ -131,61 +32,24 @@
           </ul>
         </div>
       </nav>
-    {{-- <script>
-        $('#navId a').click(e => {
-            e.preventDefault();
-            $(this).tab('show');
-        });
-    </script> --}}
-    
-    {{-- <script>
-        $('#navId a').click(e => {
-            e.preventDefault();
-            $(this).tab('show');
-        });
-    </script>            --}}
-{{-- <nav>
-    <input type="checkbox" id="check">
-    <label for="check" class="checkbtn">
-        <i class="fas fa-bars"></i>
-    </label>
-    <label class="logo" ><img class="logo" src="https://www.bastrucks.com/images/logos/BASTrucks.png"></label>
-    <ul>
-        <li><a class="active" href="#">Home</a></li>
-        <li><a href="/ticket">Tickets</a></li>
-        <li><a href="#">Something</a></li>
-        <li><a href="#">Something</a></li>
-        <li><a href="/home">Logout</a></li>
-    </ul>
-</nav> --}}
 <!-- Navigation Bar -->
 
 <!-- footer -->
-<style>
-    footer {
-        background-color: Black;
-        position:fixed;
-        padding: 10px 10px 0px 10px;
-        bottom: 0;
-        width: 100%;
-        height: 40px;
-        color:White;
-        text-align: center;
-        z-index: 99999;">
-    }
-</style>
+
 @yield('content')
 </body>
-
-<footer>
-    <p id="date"></p>
+<footer class="bg-light text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" id="date">
+      
+    </div>
     <script>
         n =  new Date();
         y = n.getFullYear();
         document.getElementById("date").innerHTML = "© Basstrucks " + y;
     </script>
-
-</footer>
+    <!-- Copyright -->
+  </footer>
 <!-- footer -->
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

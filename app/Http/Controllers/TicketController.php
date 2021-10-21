@@ -23,7 +23,7 @@ class TicketController extends Controller
         }        
         else {
             $tickets = ticket::orderBy("name")->paginate(20);
-            dd($tickets);
+            // dd($tickets);
             return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
     }
@@ -62,7 +62,7 @@ class TicketController extends Controller
             // dd(ticket::find($ticket->id));
             return new TicketResource($ticket);
         }else {
-            return view('dashboard.ticketDetail', ['ticket' => $ticket]);
+            return view('dashboard.ticketDetailH', ['ticket' => $ticket]);
         }
     }
 
