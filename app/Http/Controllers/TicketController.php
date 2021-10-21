@@ -23,7 +23,6 @@ class TicketController extends Controller
         }        
         else {
             $tickets = ticket::orderBy("name")->paginate(20);
-            dd($tickets);
             return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
     }

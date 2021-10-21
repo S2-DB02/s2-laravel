@@ -50,8 +50,8 @@
                         <th>Ticket</th>
                         <th>Type</th>
                         <th>Status</th>
-                        <th>Prioriteit</th>
-                        <th>Datum aangemaakt</th>
+                        <th>Priority</th>
+                        <th>Date Created</th>
 
                     </tr>
                     </thead>
@@ -61,22 +61,22 @@
 
                         <td><a class="navi-link" href="{{url('/ticket/'.$items->id)}}" data-toggle="modal">{{$items->name}}</a></td>
                         @if($items->type == 1 )
-                            <td style="text-align: center">Media</td>
+                            <td style="text-align: left">Media</td>
                         @elseif($items->type == 2)
-                            <td style="text-align: center">Layout</td>
+                            <td style="text-align: left">Layout</td>
                         @elseif($items->type == 3)
-                            <td style="text-align: center">Translation</td>
+                            <td style="text-align: left">Translation</td>
                         @elseif($items->type == 4)
-                            <td style="text-align: center">Markup</td>
+                            <td style="text-align: left">Markup</td>
                         @elseif($items->type == 5)
-                            <td style="text-align: center">Other</td>
+                            <td style="text-align: left">Other</td>
                         @endif
                         @if($items->status == 1 )
-                            <td style="text-align: center"><span class="badge badge-light m-0">Not Assigned</span></td>
+                            <td style="text-align: left"><span class="badge badge-light m-0">Not Assigned</span></td>
                         @elseif($items->status == 2)
-                            <td style="text-align: center"><span class="badge badge-primary m-0">Active</span></td>
+                            <td style="text-align: left"><span class="badge badge-primary m-0">Active</span></td>
                         @elseif($items->status == 3)
-                            <td style="text-align: center"><span class="badge badge-dark m-0">Closed</span></td>
+                            <td style="text-align: left"><span class="badge badge-dark m-0">Closed</span></td>
                         @endif
 
                         @if($items->priority == 1 )
