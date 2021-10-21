@@ -22,7 +22,7 @@
 @extends('layouts.master')
 @section('title','Home')
 @section('content')
-<body style="font-family: Arial">
+
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <!-- Orders Table-->
         <div class="col-lg-8 pb-5">
@@ -100,5 +100,4 @@
         </div>
     </div>
 </div>
-</body>
 @endsection

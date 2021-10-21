@@ -1,17 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{$ticket->name}} | {{$ticket->id}}</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('css/teststyle.css') }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body style="font-family: Arial">
-    @if (session('error'))
+
+   @extends('layouts.master')
+   @section('title',"{{$ticket->id}} | {{$ticket->name}}")
+   @section('content')
+   @if (session('error'))
     <div class="col-sm-12">
         <div class="alert  alert-danger alert-dismissible fade show" role="alert">
           {{session('error')}}
@@ -59,7 +50,7 @@
     <div class="col-sm-3">
         <div class="card">
         <div class="card-body">
-            <h5 class="card-title font-weight-bold"">{{$ticket->id}} | 
+            <h5 class="card-title font-weight-bold">{{$ticket->id}} | 
               <input type="text" class="form-control" name="name" id="name"value="{{$ticket->name}}">
             </h5>
             <div class="form-group">
@@ -167,25 +158,4 @@
 </div>
 
 </form>
-
-
-<script>
-
-    var RootUrl = '@Url.Content("~/")';
-    function fetchdata(){
-        $.ajax({
-            url: 'index',
-            type: 'get',
-            success: function(response){
-                location.reload();
-                // Perform operation on the return value
-            }
-        });
-    }
-
-    $(document).ready(function(){
-        setInterval(fetchdata,10000);
-    });
-</script>
-</body>
-</html>
+@endsection
