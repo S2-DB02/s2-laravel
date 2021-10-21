@@ -14,18 +14,46 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $ticket = ticket::paginate(20);
-        if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
-            // return new TicketResource::collection(ticket::all());
-        }        
-        else {
-            $tickets = ticket::orderBy("name")->paginate(20);
-            dd($tickets);
+//        if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+//            // return new TicketResource::collection(ticket::all());
+//            return view('dashboard.dashboard', ['ticket' => $ticket]);
+//        }
+
+
+        //PRIORITY DESC
+        if ($request->query("priority", "desc") === "desc"){
+            $ticket = ticket::orderBy("priority", "desc")->paginate(20);
             return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
+
+        //PRIORITY ASC
+        else if ($request->query("priority", "asc") === "asc" ){
+            $ticket = ticket::orderBy("priority", "asc")->paginate(20);
+            return view('dashboard.dashboard', ['ticket' => $ticket]);
+        }
+
+        //STATUS
+        else if ($request->query("status", "status") === "status" ){
+            $ticket = ticket::orderBy("status", "asc")->paginate(20);
+            return view('dashboard.dashboard', ['ticket' => $ticket]);
+        }
+        //TICKETS
+        else if ($request->query("tickets", "asc") === "tickets" ){
+            $ticket = ticket::orderBy("name", "asc")->paginate(20);
+            return view('dashboard.dashboard', ['ticket' => $ticket]);
+        }
+
+        //TICKETS NAME ASCENDING
+
+
+        //STATUS ASCENDING
+
+
+
     }
     /**
      * Show the form for creating a new resource.
@@ -131,8 +159,7 @@ class TicketController extends Controller
     /**
      * Soort by
      */
-    public function soort()
+    public function sort()
     {
-        
     }
 }

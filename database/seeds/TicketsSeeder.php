@@ -19,6 +19,7 @@ class TicketsSeeder extends Seeder
         for($i=0; $i<=100; $i++):
         ticket::make([
             'name' => $faker->word,
+            'priority' => $faker->numberBetween(1,3),
             'photo' => $faker->imageUrl(640, 480, 'cats'),
             'remark' => $faker->text,
             'status' => $faker->randomElement($array = array ( 1, 2, 3 )),

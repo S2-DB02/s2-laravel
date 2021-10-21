@@ -29,12 +29,12 @@
             <div class="d-flex justify-content-end pb-3">
                 <div class="form-inline">
                     <label class="text-muted mr-3" for="order-sort">Sort Orders</label>
-                    <select class="form-control" id="order-sort">
-                        <option>Tickets</option>
-                        <option>Priority - Ascending</option>
-                        <option>Status</option>
-                        <option>Delayed</option>
-                        <option>Canceled</option>
+                    <select class="form-control" id="order-sort" onchange="fetchdData(this.value)">
+                        <option value="tickets">Tickets</option>
+                        <option value="PriorityDesc">Priority-Descending</option>
+                        <option value="priorityAsc">Priority-Ascending</option>
+                        <option value="status">Status</option>
+                        <option value="test">Test</option>
                     </select>
                 </div>
             </div>
@@ -94,10 +94,29 @@
                 </table>
                 <div class="d-flex justify-content-center">
                     {{ $ticket->links() }}
-    
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function fetchdData($value){
+
+        alert($value);
+    if($value === "priorityAsc"){
+        location.replace("ticket?priority=asc")
+    }
+    if($value === "PriorityDesc"){
+        location.replace("ticket?priority=desc")
+    }
+    if($value === "tickets"){
+        location.replace("ticket?tickets=tickets")
+    }
+    if($value === "status"){
+        location.replace("ticket?status=status")
+    }}
+
+
+</script>
 @endsection
