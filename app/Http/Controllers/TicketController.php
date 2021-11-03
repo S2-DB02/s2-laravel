@@ -22,31 +22,30 @@ class TicketController extends Controller
 //            // return new TicketResource::collection(ticket::all());
 //            return view('dashboard.dashboard', ['ticket' => $ticket]);
 //        }
-
-
         //PRIORITY DESC
-        if ($request->query("priority", "desc") === "desc"){
+        if ($request->query("order") === "priorityasc"){
             $ticket = ticket::orderBy("priority", "desc")->paginate(20);
             return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
 
         //PRIORITY ASC
-        else if ($request->query("priority", "asc") === "asc" ){
+        else if ($request->query("order") === "prioritydesc" ){
             $ticket = ticket::orderBy("priority", "asc")->paginate(20);
             return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
 
-        //STATUS
-        else if ($request->query("status", "status") === "status" ) {
+        else if ($request->query("order") === "status" ) {
             $ticket = ticket::orderBy("status", "asc")->paginate(20);
+            //STATUS
 
         }
 
         //TICKETS
-        else if ($request->query("tickets", "asc") === "tickets" ){
+        else if ($request->query("order") === "tickets" ){
             $ticket = ticket::orderBy("name", "asc")->paginate(20);
-            return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
+        return view('dashboard.dashboard', ['ticket' => $ticket]);
+
 
         //TICKETS NAME ASCENDING
 

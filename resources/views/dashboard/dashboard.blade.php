@@ -30,11 +30,11 @@
                 <div class="form-inline">
                     <label class="text-muted mr-3" for="order-sort">Sort Orders</label>
                     <select class="form-control" id="order-sort" onchange="fetchdData(this.value)">
+                        <option value="tickets" hidden>Filter...</option>
                         <option value="tickets">Tickets</option>
                         <option value="PriorityDesc">Priority-Descending</option>
                         <option value="priorityAsc">Priority-Ascending</option>
                         <option value="status">Status</option>
-                        <option value="test">Test</option>
                     </select>
                 </div>
             </div>
@@ -102,18 +102,19 @@
 </div>
 <script>
     function fetchdData($value){
-        
-    if($value === "priorityAsc"){
-        location.replace("ticket?priority=asc")
+        var url = new URL(location);
+
+        if($value === "priorityAsc"){
+        location.replace("ticket?order=priorityasc&page="+ url.searchParams.getAll('page'))
     }
     if($value === "PriorityDesc"){
-        location.replace("ticket?priority=desc")
+        location.replace("ticket?order=prioritydesc&page="+ url.searchParams.getAll('page'))
     }
     if($value === "tickets"){
-        location.replace("ticket?tickets=tickets")
+        location.replace("ticket?order=tickets&page="+ url.searchParams.getAll('page'))
     }
     if($value === "status"){
-        location.replace("ticket?status=status")
+        location.replace("ticket?order=status&page="+ url.searchParams.getAll('page'))
     }}
 
 
