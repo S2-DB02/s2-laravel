@@ -7,18 +7,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link href='custom.css' rel='stylesheet' type='text/css'>
-    <style>
-        footer {
-            background-color: #1c3f94;
-            position: fixed;
-            padding: 10px 10px 0px 10px;
-            bottom: 0;
-            width: 100%;
-            height: 40px;
-            color:white;
-            text-align: center;
-        }
-    </style>
 // Extra small devices (portrait phones, less than 576px)
 // No media query since this is the default in Bootstrap
 
@@ -55,6 +43,21 @@
     <li class="nav-item">
         <a href="#" class="nav-link disabled">Disabled</a>
     </li>
+    <li>
+        @if (Route::has('login'))
+        <div class="top-right links">
+            @auth
+                <a href="{{ url('/home') }}">Home</a>
+            @else
+                <a href="{{ route('login') }}">Login</a>
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}">Register</a>
+                @endif
+            @endauth
+        </div>
+    @endif
+    </li>
 </ul>
 
 <!-- Tab panes -->
@@ -64,6 +67,7 @@
     <div class="tab-pane fade" id="tab3Id" role="tabpanel"></div>
     <div class="tab-pane fade" id="tab4Id" role="tabpanel"></div>
     <div class="tab-pane fade" id="tab5Id" role="tabpanel"></div>
+    
 </div>
 
 <script>

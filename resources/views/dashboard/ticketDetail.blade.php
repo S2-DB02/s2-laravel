@@ -90,8 +90,13 @@
                 @endif>Other</option>
               </select>
             </div>
-            <p class="font-weight-bold">Assigned to: 
-                <a class="font-weight-normal">{{$ticket->find($ticket->id)->developer->name ?? 'Unknown'}}</a>
+            <p class="font-weight-bold">Assign to:
+                <select name="department" id="department" class="form-control">
+                    <option value=""> -- Select One --</option>
+                    @foreach ($ticket as $department)
+                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                    @endforeach
+                </select>
             </p>
             
         </div>
