@@ -6,6 +6,7 @@ use App\Http\Resources\TicketResource;
 use App\ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreTicket;
 
 class TicketController extends Controller
 {
@@ -70,12 +71,15 @@ class TicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreTicket  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTicket $request)
     {
-        return ticket::create($request->all());
+        $validated = $request->validated();
+
+        //return ticket::create($request->all());
+        return ticket::create($validated);
     }
 
     /**
