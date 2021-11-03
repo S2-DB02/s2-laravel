@@ -1,7 +1,8 @@
-
-   @extends('layouts.master')
-   @section('title',"{{$ticket->id}} | {{$ticket->name}}")
-   @section('content')
+@extends('layouts.master')
+@section('title')
+    {{ $ticket->id }} | {{ $ticket->name }}
+@endsection
+@section('content')
    @if (session('error'))
     <div class="col-sm-12">
         <div class="alert  alert-danger alert-dismissible fade show" role="alert">
@@ -71,7 +72,7 @@
                         </div>
                     </p>
                     <div class="form-group">
-                      <label for="type">type</label>
+                      <label for="type">Type</label>
                       <select class="form-control" name="type" id="type">
                         <option value="1"@if ($ticket->type == 1)
                             selected
