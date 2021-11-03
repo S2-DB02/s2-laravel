@@ -74,6 +74,7 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
+
         return ticket::create($request->all());
     }
 
@@ -86,11 +87,12 @@ class TicketController extends Controller
     public function show(ticket $ticket)
     {
 
+        $user  = DB::table('users')->get();
         if (url()->current() == "http://127.0.0.1:8000/api/ticket/$ticket->id") {
-            // dd(ticket::find($ticket->id));
+            // dd(ticket::find($ticket->id));s
             return new TicketResource($ticket);
         }else {
-            return view('dashboard.ticketDetailH', ['ticket' => $ticket]);
+            return view('dashboard.ticketDetailH', ['ticket' => $ticket, 'users' => $user]);
         }
     }
 
@@ -121,6 +123,7 @@ class TicketController extends Controller
         $newTicket->priority = $request->priority;
         $newTicket->status = $request->status;
         $newTicket->type = $request->type;
+        $newTicket->developer = $request->developer;
         $newTicket->remark = $request->remark;
 
         if ($newTicket->save()) {

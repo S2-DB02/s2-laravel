@@ -28,16 +28,16 @@
     @method('PUT')
     @csrf
 
-    
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 mt-2">
-                <button type="button" class="btn btn-outline-dark">Back</button>
+                <a href="/ticket"><button type="button" class="btn btn-outline-dark">Back</button></a>
             </div>
         <div class="col-md-6 col-xs-12 mt-2">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold">Ticket NR: {{$ticket->id}} 
+                    <h5 class="card-title font-weight-bold">Ticket NR: {{$ticket->id}}
                       <input type="text" class="form-control" name="name" id="name"value="{{$ticket->name}}">
                     </h5>
                     <div class="form-group">
@@ -90,11 +90,16 @@
                         @endif>Other</option>
                       </select>
                     </div>
-                    <p class="font-weight-bold">Assigned to: 
-                        <a class="font-weight-normal">{{$ticket->find($ticket->id)->developer->name ?? 'Unknown'}}</a>
+                    <p class="font-weight-bold">Assign to:
+                        <select name="developer" id="department" class="form-control">
+                            <option value=""> -- Select One --</option>
+                            @foreach ($users as $user)
+                                <option value="{{$user->id}}">{{$user->name}}</option>
+                            @endforeach
+                        </select>
                     </p>
-            </div> 
-            </div>      
+            </div>
+            </div>
         </div>
         <div class="col-md-6 col-xs-12">
             <div class="card h-100">
@@ -110,14 +115,14 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold">Information</h5>
-                    <p  class="font-weight-bold">Reported by: 
+                    <p  class="font-weight-bold">Reported by:
                         <a class="font-weight-normal" href="mailto:{{$ticket->find($ticket->id)->madeByUser->email}}">{{$ticket->find($ticket->id)->madeByUser->name}}</a>
                     </p>
                     <p  class="font-weight-bold">Created at:
                         <a class="font-weight-normal">{{$ticket->created_at}}</a>
                     </p>
                     <a href="{{$ticket->URL}}" target="_blank" class="btn btn-outline-info btn-sm">Page link</a>
-                    
+
                 </div>
             </div>
         </div>
