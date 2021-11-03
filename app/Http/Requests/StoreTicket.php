@@ -24,13 +24,15 @@ class StoreTicket extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required|numeric',
+            'type' => 'required|numeric|min:1|max:5',
             'name' => 'required|max:255',
-            'photo' => 'nullable',
+            'photo' => 'nullable|string|max:255',
             'remark' => 'required|string',
-            'URL' => 'required|string',
-            'madeBy' => 'required|numeric',
+            'URL' => 'sometimes|required|string',
+            'madeBy' => 'sometimes|required|numeric',
             'status' => 'required|numeric',
+            'developer' => 'nullable',
+            'priority' => 'nullable|numeric|min:1|max:3'
         ];
     }
 }
