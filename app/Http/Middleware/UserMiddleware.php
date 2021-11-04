@@ -16,11 +16,13 @@ class UserMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(auth::check() && Auth::user()->user_role == 1){
-            return $next($request);
-         }
+        if(auth::check()){
+            if ( Auth::user()->user_role == 2 || Auth::user()->user_role == 3 ||  Auth::user()->user_role == 1) {
+                return $next($request);
+            }
+        }
          else {
             return redirect()->route('login');
-         }    }
+         }
     }
 }

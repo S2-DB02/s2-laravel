@@ -18,7 +18,7 @@
 
 Route::get('/', 'TicketController@index');
 
-Route::resource('/ticket',  TicketController::class);
+Route::resource('/ticket',  TicketController::class)->middleware(['Developer']);
 
 Auth::routes(['register' => false]);
 Route::resource('/user',  GebruikersController::class)->middleware(['auth','Admin']);
