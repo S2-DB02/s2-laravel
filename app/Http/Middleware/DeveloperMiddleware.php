@@ -21,6 +21,8 @@ class DeveloperMiddleware
                 
             return $next($request);
                 
+            }else {
+                return redirect()->route('login');
             }
          }
          else {
