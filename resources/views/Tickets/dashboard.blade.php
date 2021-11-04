@@ -48,11 +48,11 @@
                     <thead>
                     <tr>
                         <th>Ticket</th>
-                        <th>Priority</th>
-                        <th>                         
+                        <th class="text-center">Priority</th>
+                        <th class="text-center">                         
                             <div class="btn-group">                         
                                 <div class="dropdown">   
-                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Type   </button>   
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Type</button>   
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">     
                                                  <a class="dropdown-item" href="#">Media</a>     
                                                  <a class="dropdown-item" href="#">Layout</a>     
@@ -62,15 +62,18 @@
                                             </div> 
                                         </div> 
                             </th>
-                        <th>
-                            <select name="Status" class="form-control" id="department" onchange="fetchdData(this.value)">
-                                <option value="" hidden>Status</option>
-                                <option value="NotAssigned">Not assigned</option>
-                                <option value="Active">Active</option>
-                                <option value="Closed">Closed</option>
-                            </select>
+                        <th class="text-center">
+                        <div class="btn-group">                         
+                                <div class="dropdown">   
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Status</button>   
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">     
+                                                 <a class="dropdown-item" href="#">Not Assigned</a>     
+                                                 <a class="dropdown-item" href="#">Active</a>     
+                                                 <a class="dropdown-item" href="#">Closed</a>     
+                                            </div> 
+                                        </div> 
                         </th>
-                        <th><button style="border: none;" onclick="fetchdData(this.value)" value="dateCreated">DateCreated</button></th>
+                        <th><button style="border: none;" onclick="fetchdData(this.value)" value="dateCreated">Date Created</button></th>
 
                     </tr>
                     </thead>
@@ -80,29 +83,29 @@
 
                         <td><a href="/ticket/{{$items->id}}">{{$items->id}} || {{$items->name}}</a></td>
                         @if($items->priority == 1 )
-                        <td  class="badge badge-success m-0"><span>Low</span></td>
+                        <td  class="badge badge-success d-flex justify-content-center">Low</td>
                         @elseif($items->priority == 2)
-                            <td class="badge badge-warning m-0"><span >Medium</span></td>
+                            <td class="badge badge-warning d-flex justify-content-center">Medium</td>
                         @elseif($items->priority == 3)
-                            <td class="badge badge-danger m-0"><span >High</span></td>
+                            <td class="badge badge-danger d-flex justify-content-center">High</td>
                         @endif
                         @if($items->type == 1 )
-                            <td style="text-align: left">Media</td>
+                            <td class="text-center">Media</td>
                         @elseif($items->type == 2)
-                            <td style="text-align: left">Layout</td>
+                            <td class="text-center">Layout</td>
                         @elseif($items->type == 3)
-                            <td style="text-align: left">Translation</td>
+                            <td class="text-center">Translation</td>
                         @elseif($items->type == 4)
-                            <td style="text-align: left">Markup</td>
+                            <td class="text-center">Markup</td>
                         @elseif($items->type == 5)
-                            <td style="text-align: left">Other</td>
+                            <td class="text-center">Other</td>
                         @endif
                         @if($items->status == 1 )
-                            <td style="text-align: left" class="badge badge-light m-0"><span >Not Assigned</span></td>
+                            <td class="badge badge-light d-flex justify-content-center">Not Assigned</td>
                         @elseif($items->status == 2)
-                            <td style="text-align: left" class="badge badge-primary m-0"><span >Active</span></td>
+                            <td class="badge badge-primary d-flex justify-content-center">Active</td>
                         @elseif($items->status == 3)
-                            <td style="text-align: left" class="badge badge-dark m-0"><span >Closed</span></td>
+                            <td class="badge badge-dark d-flex justify-content-center">Closed</td>
                         @endif
                         <div></div>
 
