@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Resources\UserResource;
-use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class GebruikersController extends Controller
 {
@@ -43,8 +43,11 @@ class GebruikersController extends Controller
      */
     public function store(Request $data)
     {
-        // if (RegisterController::validator($request->all())) {
-            // RegisterController::create($request->all());
+            $data->validate( [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
             if(User::create([
                 'name' => $data->name,
                 'email' => $data->email,
