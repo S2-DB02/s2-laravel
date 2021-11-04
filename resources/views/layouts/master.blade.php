@@ -50,6 +50,16 @@
                       </li>
                   @endif
               @else
+              {{-- TODO:: User role number change --}}
+                      @if (Auth::user()->user_role() == 3)
+                          
+                      @endif
+                    <li class="nav-item">
+                        <a href="/user">Users dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/user/create">Add users</a>
+                    </li>
                   <li class="nav-item dropdown">
                       <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                           {{ Auth::user()->name }} <span class="caret"></span>
