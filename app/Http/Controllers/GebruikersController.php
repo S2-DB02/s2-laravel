@@ -18,9 +18,9 @@ class GebruikersController extends Controller
     public function index()
     {
         //
-        $users = User::All();
+        $users = User::paginate(20);
 
-        return view('', ['users' => $users]);
+        return view('Users.dashboard', ['users' => $users]);
     }
 
     /**
@@ -93,12 +93,12 @@ class GebruikersController extends Controller
      */
     public function update(Request $request, User $users)
     {
-        //
-        $user = User::find($users->id);
-        $hased = Hash::make($request->password);
-        $user->password = $hased;
+        $user = User::find($request->hidden);
+        // $hased = Hash::make($request->password);
+        // $user->password = $hased;
+        $user->user_role = $request->UserRole;
         $user->save();
-        return view();
+        index();
     }
 
     /**
