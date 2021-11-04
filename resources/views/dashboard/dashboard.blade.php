@@ -56,13 +56,13 @@
                             </select>
                         </th>
                         <th>
-                        <select name="developer" id="department">
-                            <option value="" hidden>Status</option>
-                            <option value="1">Not assigned</option>
-                            <option value="2">Active</option>
-                            <option value="3">Closed</option>
-                        </select>
-                            </th>
+                            <select name="Status" id="department" onchange="fetchdData(this.value)">
+                                <option value="" hidden>Status</option>
+                                <option value="NotAssigned">Not assigned</option>
+                                <option value="Active">Active</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </th>
                         <th>Priority</th>
                         <th>Date Created</th>
 
@@ -128,7 +128,17 @@
     }
     if($value === "status"){
         location.replace("ticket?order=status&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "NotAssigned"){
+            location.replace("ticket?order=NotAssigned&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "Active"){
+        location.replace("ticket?order=Active&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "Closed"){
+        location.replace("ticket?order=Closed&page="+ url.searchParams.getAll('page'))
     }}
+
 
 
 </script>
