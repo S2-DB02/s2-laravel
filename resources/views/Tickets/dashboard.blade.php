@@ -70,7 +70,7 @@
                                 <option value="Closed">Closed</option>
                             </select>
                         </th>
-                        <th>Date Created</th>
+                        <th><button style="border: none;" onclick="fetchdData(this.value)" value="dateCreated">DateCreated</button></th>
 
                     </tr>
                     </thead>
@@ -144,6 +144,9 @@
     }
     if($value === "Closed"){
         location.replace("ticket?order=Closed&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "dateCreated"){
+        location.replace("ticket?order=dateCreated&page="+ url.searchParams.getAll('page'))
     }}
 
 
