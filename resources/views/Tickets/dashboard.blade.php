@@ -48,9 +48,28 @@
                     <thead>
                     <tr>
                         <th>Ticket</th>
-                        <th>Type</th>
-                        <th>Status</th>
                         <th>Priority</th>
+                        <th>                         
+                            <div class="btn-group">                         
+                                <div class="dropdown">   
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Type   </button>   
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">     
+                                                 <a class="dropdown-item" href="#">Media</a>     
+                                                 <a class="dropdown-item" href="#">Layout</a>     
+                                                 <a class="dropdown-item" href="#">Translation</a>     
+                                                 <a class="dropdown-item" href="#">Markup</a>
+                                                <a class="dropdown-item" href="#">Other</a>
+                                            </div> 
+                                        </div> 
+                            </th>
+                        <th>
+                            <select name="Status" class="form-control" id="department" onchange="fetchdData(this.value)">
+                                <option value="" hidden>Status</option>
+                                <option value="NotAssigned">Not assigned</option>
+                                <option value="Active">Active</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </th>
                         <th>Date Created</th>
 
                     </tr>
@@ -60,6 +79,13 @@
                     <tr>
 
                         <td><a href="/ticket/{{$items->id}}">{{$items->id}} || {{$items->name}}</a></td>
+                        @if($items->priority == 1 )
+                        <td  class="badge badge-success m-0"><span>Low</span></td>
+                        @elseif($items->priority == 2)
+                            <td class="badge badge-warning m-0"><span >Medium</span></td>
+                        @elseif($items->priority == 3)
+                            <td class="badge badge-danger m-0"><span >High</span></td>
+                        @endif
                         @if($items->type == 1 )
                             <td style="text-align: left">Media</td>
                         @elseif($items->type == 2)
@@ -72,20 +98,14 @@
                             <td style="text-align: left">Other</td>
                         @endif
                         @if($items->status == 1 )
-                            <td style="text-align: left"><span class="badge badge-light m-0">Not Assigned</span></td>
+                            <td style="text-align: left" class="badge badge-light m-0"><span >Not Assigned</span></td>
                         @elseif($items->status == 2)
-                            <td style="text-align: left"><span class="badge badge-primary m-0">Active</span></td>
+                            <td style="text-align: left" class="badge badge-primary m-0"><span >Active</span></td>
                         @elseif($items->status == 3)
-                            <td style="text-align: left"><span class="badge badge-dark m-0">Closed</span></td>
+                            <td style="text-align: left" class="badge badge-dark m-0"><span >Closed</span></td>
                         @endif
+                        <div></div>
 
-                        @if($items->priority == 1 )
-                            <td><span class="badge badge-success m-0">Low</span></td>
-                        @elseif($items->priority == 2)
-                            <td><span class="badge badge-warning m-0">Medium</span></td>
-                        @elseif($items->priority == 3)
-                            <td><span class="badge badge-danger m-0">High</span></td>
-                        @endif
                         <td><span>{{$items->created_at}}</span></td>
 
                     </tr>
@@ -115,7 +135,17 @@
     }
     if($value === "status"){
         location.replace("ticket?order=status&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "NotAssigned"){
+            location.replace("ticket?order=NotAssigned&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "Active"){
+        location.replace("ticket?order=Active&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "Closed"){
+        location.replace("ticket?order=Closed&page="+ url.searchParams.getAll('page'))
     }}
+
 
 
 </script>

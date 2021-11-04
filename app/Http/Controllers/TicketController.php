@@ -26,13 +26,13 @@ class TicketController extends Controller
         //PRIORITY DESC
         if ($request->query("order") === "priorityasc"){
             $ticket = ticket::orderBy("priority", "desc")->paginate(20);
-            return view('dashboard.dashboard', ['ticket' => $ticket]);
+            return view('Tickets.dashboard', ['ticket' => $ticket]);
         }
 
         //PRIORITY ASC
         else if ($request->query("order") === "prioritydesc" ){
             $ticket = ticket::orderBy("priority", "asc")->paginate(20);
-            return view('dashboard.dashboard', ['ticket' => $ticket]);
+            return view('Tickets.dashboard', ['ticket' => $ticket]);
         }
 
         else if ($request->query("order") === "status" ) {
@@ -40,13 +40,26 @@ class TicketController extends Controller
             //STATUS
 
         }
-
         //TICKETS
-        else if ($request->query("order") === "tickets" ){
+        else if ($request->query("order") === "tickets"){
             $ticket = ticket::orderBy("name", "asc")->paginate(20);
-        }
-        return view('dashboard.dashboard', ['ticket' => $ticket]);
 
+
+        }
+
+        //FILTERS
+
+        //ACTIVE
+        else if ($request->query("order") === "NotAssigned"){
+            $ticket = DB::table('tickets')->where("status", "=", 1)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Active"){
+            $ticket = DB::table('tickets')->where("status", "=", 2)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Closed"){
+            $ticket = DB::table('tickets')->where("status", "=", 3)->orderBy("priority", "desc")->paginate(20);
+        }
+        return view('Tickets.dashboard', ['ticket' => $ticket]);
 
         //TICKETS NAME ASCENDING
 
@@ -94,7 +107,7 @@ class TicketController extends Controller
             // dd(ticket::find($ticket->id));s
             return new TicketResource($ticket);
         }else {
-            return view('dashboard.ticketDetailH', ['ticket' => $ticket, 'users' => $user]);
+            return view('Tickets.ticketDetailH', ['ticket' => $ticket, 'users' => $user]);
         }
     }
 

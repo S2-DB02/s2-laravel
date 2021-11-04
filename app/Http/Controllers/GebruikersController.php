@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class GebruikersController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +19,9 @@ class GebruikersController extends Controller
     public function index()
     {
         //
-        $users = User::All();
+        $users = User::paginate(20);
 
-        return view('', ['users' => $users]);
+        return view('Users.dashboard', ['users' => $users]);
     }
 
     /**
@@ -93,12 +94,12 @@ class GebruikersController extends Controller
      */
     public function update(Request $request, User $users)
     {
-        //
-        $user = User::find($users->id);
-        $hased = Hash::make($request->password);
-        $user->password = $hased;
+        $user = User::find($request->hidden);
+        // $hased = Hash::make($request->password);
+        // $user->password = $hased;
+        $user->user_role = $request->UserRole;
         $user->save();
-        return view();
+        return GebruikersController::index();
     }
 
     /**
@@ -107,9 +108,10 @@ class GebruikersController extends Controller
      * @param  \App\gebruikers  $gebruikers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $users)
+    public function destroy(User $users,Request $request)
     {
-        $user = User::destroy($users->id);
-        return view();
+        $user = User::find($request->id);
+        $user->delete();
+        return GebruikersController::index();
     }
 }
