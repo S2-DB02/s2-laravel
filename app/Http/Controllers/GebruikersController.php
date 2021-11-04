@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class GebruikersController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -98,7 +99,7 @@ class GebruikersController extends Controller
         // $user->password = $hased;
         $user->user_role = $request->UserRole;
         $user->save();
-        index();
+        return GebruikersController::index();
     }
 
     /**
@@ -107,9 +108,10 @@ class GebruikersController extends Controller
      * @param  \App\gebruikers  $gebruikers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $users)
+    public function destroy(User $users,Request $request)
     {
-        $user = User::destroy($users->id);
-        return view();
+        $user = User::find($request->id);
+        $user->delete();
+        return GebruikersController::index();
     }
 }

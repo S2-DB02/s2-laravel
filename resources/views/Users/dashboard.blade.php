@@ -36,9 +36,12 @@
                             </td>
                             <td><input type="submit" class="btn btn-success" value="Edit"></td>
                         </form>
-                        <form action="/user/{{$items->id}}" method="post"></form>
-                        @method('destroy')
-                        <td><button type="submit" class="btn btn-danger">Delete</button></td>
+                        <form action="/user/{{$items->id}}" method="post">
+                            @method('DELETE')
+                            @csrf
+                            <input type="hidden" name="id" value="{{$items->id}}">
+                            <td><input type="submit" class="btn btn-danger" value="Delete"></td>
+                        </form>
                     </tr>
                     @endforeach
                     </tbody>
