@@ -19,7 +19,7 @@
 Route::get('/', 'TicketController@index');
 
 Route::resource('/ticket',  TicketController::class);
-Route::resource('/user',  GebruikersController::class);
+Route::resource('/user',  GebruikersController::class)->middleware(['auth','Admin']);
 
 Auth::routes();
 
