@@ -62,15 +62,18 @@
                                             </div> 
                                         </div> 
                             </th>
-                        <th>
-                            <select name="Status" class="form-control" id="department" onchange="fetchdData(this.value)">
-                                <option value="" hidden>Status</option>
-                                <option value="NotAssigned">Not assigned</option>
-                                <option value="Active">Active</option>
-                                <option value="Closed">Closed</option>
-                            </select>
+                        <th class="text-center">
+                        <div class="btn-group">                         
+                                <div class="dropdown">   
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Status</button>   
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">     
+                                                 <a class="dropdown-item" href="#">Not Assigned</a>     
+                                                 <a class="dropdown-item" href="#">Active</a>     
+                                                 <a class="dropdown-item" href="#">Closed</a>     
+                                            </div> 
+                                        </div> 
                         </th>
-                        <th><button style="border: none;" onclick="fetchdData(this.value)" value="dateCreated">DateCreated</button></th>
+                        <th><button style="border: none;" onclick="fetchdData(this.value)" value="dateCreated">Date Created</button></th>
 
                     </tr>
                     </thead>
