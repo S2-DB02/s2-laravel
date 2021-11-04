@@ -48,8 +48,21 @@
                     <thead>
                     <tr>
                         <th>Ticket</th>
-                        <th>Type</th>
-                        <th>Status</th>
+                            <select name="developer" id="department">
+                                <option value="" hidden> Type</option>
+                                <option value="1">Not assigned</option>
+                                <option value="2">Active</option>
+                                <option value="3">Closed</option>
+                            </select>
+                        </th>
+                        <th>
+                        <select name="developer" id="department">
+                            <option value="" hidden>Status</option>
+                            <option value="1">Not assigned</option>
+                            <option value="2">Active</option>
+                            <option value="3">Closed</option>
+                        </select>
+                            </th>
                         <th>Priority</th>
                         <th>Date Created</th>
 

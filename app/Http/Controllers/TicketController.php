@@ -42,11 +42,13 @@ class TicketController extends Controller
         }
 
         //TICKETS
-        else if ($request->query("order") === "tickets" ){
+        else if ($request->query("order") === "tickets"){
             $ticket = ticket::orderBy("name", "asc")->paginate(20);
+
+
         }
         return view('dashboard.dashboard', ['ticket' => $ticket]);
-
+        $ticket = DB::table('tickets')->where("status", "=", 1)->orderBy("priority", "desc")->paginate(20);
 
         //TICKETS NAME ASCENDING
 
