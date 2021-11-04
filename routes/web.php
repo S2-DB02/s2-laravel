@@ -20,7 +20,7 @@ Route::get('/', 'TicketController@index');
 
 Route::resource('/ticket',  TicketController::class);
 
-Auth::routes();
+Auth::routes(['register' => false]);
 Route::resource('/user',  GebruikersController::class)->middleware(['auth','Admin']);
 // ->except(['store'])
 
