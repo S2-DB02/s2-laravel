@@ -67,6 +67,7 @@
                       </select>
                     </div>
                     <p class="font-weight-bold"> Status: {{--status--}}
+
                         <div class="form-group">
                           <label for="status">Status</label>
                           <select class="form-control" name="status" id="status">
@@ -102,9 +103,15 @@
                         @endif>Other</option>
                       </select>
                     </div>
+                    @if($ticket->developer != null)
+                        <p>Assigned to {{$ticket->find($ticket->id)->developerUser->name}}</p>
+                    @else
+                        <p>Not yet assigned</p>
+                    @endif
                     <p class="font-weight-bold">Assign to:
                         <select name="developer" id="department" class="form-control">
                             <option value=""> -- Select One --</option>
+
                             @foreach ($users as $user)
                                 <option value="{{$user->id}}">{{$user->name}}</option>
                             @endforeach

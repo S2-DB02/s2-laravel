@@ -40,13 +40,26 @@ class TicketController extends Controller
             //STATUS
 
         }
-
         //TICKETS
-        else if ($request->query("order") === "tickets" ){
+        else if ($request->query("order") === "tickets"){
             $ticket = ticket::orderBy("name", "asc")->paginate(20);
+
+
+        }
+
+        //FILTERS
+
+        //ACTIVE
+        else if ($request->query("order") === "NotAssigned"){
+            $ticket = DB::table('tickets')->where("status", "=", 1)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Active"){
+            $ticket = DB::table('tickets')->where("status", "=", 2)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Closed"){
+            $ticket = DB::table('tickets')->where("status", "=", 3)->orderBy("priority", "desc")->paginate(20);
         }
         return view('dashboard.dashboard', ['ticket' => $ticket]);
-
 
         //TICKETS NAME ASCENDING
 
