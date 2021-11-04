@@ -41,14 +41,24 @@ class GebruikersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $data)
     {
-        if (RegisterController::validator($request->all())) {
-            RegisterController::create($request->all());
-        }else {
-            //error pages
-            return false;
-        }
+        // if (RegisterController::validator($request->all())) {
+            // RegisterController::create($request->all());
+            if(User::create([
+                'name' => $data->name,
+                'email' => $data->email,
+                'password' => Hash::make($data->password),
+            ])){
+                return back()->with('success', 'User has been added :)');
+            }else {
+                return back()->with('error', 'Somthing went wrong :(');
+            }
+            
+        // }else {
+        //     //error pages
+        //     return false;
+        // }
     }
 
     /**

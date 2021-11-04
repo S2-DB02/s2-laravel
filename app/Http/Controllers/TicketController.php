@@ -42,9 +42,13 @@ class TicketController extends Controller
         }
         //TICKETS
         else if ($request->query("order") === "tickets"){
-            $ticket = ticket::orderBy("name", "asc")->paginate(20);
+            $ticket = ticket::orderBy("date_created", "desc")->paginate(20);
+        }
 
 
+        //date created
+        else if ($request->query("order") === "dateCreated"){
+            $ticket = ticket::orderBy("created_at", "desc")->paginate(20);
         }
 
         //FILTERS
