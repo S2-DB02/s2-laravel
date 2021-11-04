@@ -16,6 +16,8 @@
 // Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 // Route::get('/sanderdashboard', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 
+Route::get('/', 'TicketController@index');
+
 Route::resource('/ticket',  TicketController::class);
 Route::resource('/user',  GebruikersController::class);
 

@@ -77,7 +77,6 @@ class TicketController extends Controller
     {
         $validated = $request->validated();
 
-        //return ticket::create($request->all());
         return ticket::create($validated);
     }
 
@@ -114,13 +113,12 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreTicket  $request
      * @param  \App\ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ticket $ticket)
+    public function update(StoreTicket $request, ticket $ticket)
     {
-        //
         $newTicket = ticket::find($ticket->id);
         $newTicket->name = $request->name;
         $newTicket->priority = $request->priority;
@@ -131,7 +129,7 @@ class TicketController extends Controller
 
         if ($newTicket->save()) {
             return back()->with('success','Success :)');
-        }else {
+        } else {
             return back()->with('error','Something went wrong :(');
         }
     }

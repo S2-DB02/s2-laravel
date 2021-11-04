@@ -1,7 +1,8 @@
-
-   @extends('layouts.master')
-   @section('title',"{{$ticket->id}} | {{$ticket->name}}")
-   @section('content')
+@extends('layouts.master')
+@section('title')
+    {{ $ticket->id }} | {{ $ticket->name }}
+@endsection
+@section('content')
    @if (session('error'))
     <div class="col-sm-12">
         <div class="alert  alert-danger alert-dismissible fade show" role="alert">
@@ -24,10 +25,21 @@
 <div class="bg bg2"></div>
 <div class="bg bg3"></div>
 <div class="content">
+
+    <!-- In case of validation errors, they appear here -->
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
 <form  action="/ticket/{{$ticket->id}}" method="POST">
     @method('PUT')
     @csrf
-
 
     <div class="container-fluid">
         <div class="row">
@@ -71,20 +83,20 @@
                         </div>
                     </p>
                     <div class="form-group">
-                      <label for="type">type</label>
+                      <label for="type">Type</label>
                       <select class="form-control" name="type" id="type">
                         <option value="1"@if ($ticket->type == 1)
                             selected
-                        @endif>Bug</option>
+                        @endif>Media</option>
                         <option value="2"@if ($ticket->type == 2)
                             selected
-                        @endif>Task</option>
+                        @endif>Lay-out</option>
                         <option value="3"@if ($ticket->type == 3)
                             selected
-                        @endif>Improvement</option>
+                        @endif>Translation</option>
                         <option value="4"@if ($ticket->type == 4)
                             selected
-                        @endif>Media</option>
+                        @endif>Markup</option>
                         <option value="5"@if ($ticket->type == 5)
                             selected
                         @endif>Other</option>
