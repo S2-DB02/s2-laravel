@@ -59,7 +59,7 @@
                     @foreach($ticket as $items)
                     <tr>
 
-                        <td><a class="navi-link" href="{{url('/ticket/'.$items->id)}}" data-toggle="modal">{{$items->name}}</a></td>
+                        <td><a href="/ticket/{{$items->id}}">{{$items->id}} || {{$items->name}}</a></td>
                         @if($items->type == 1 )
                             <td style="text-align: left">Media</td>
                         @elseif($items->type == 2)

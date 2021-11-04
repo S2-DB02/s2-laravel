@@ -6,6 +6,7 @@ use App\Http\Resources\TicketResource;
 use App\ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreTicket;
 
 class TicketController extends Controller
 {
@@ -69,12 +70,14 @@ class TicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreTicket  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTicket $request)
     {
-        return ticket::create($request->all());
+        $validated = $request->validated();
+
+        return ticket::create($validated);
     }
 
     /**
@@ -86,11 +89,12 @@ class TicketController extends Controller
     public function show(ticket $ticket)
     {
 
+        $user  = DB::table('users')->get();
         if (url()->current() == "http://127.0.0.1:8000/api/ticket/$ticket->id") {
-            // dd(ticket::find($ticket->id));
+            // dd(ticket::find($ticket->id));s
             return new TicketResource($ticket);
         }else {
-            return view('dashboard.ticketDetailH', ['ticket' => $ticket]);
+            return view('dashboard.ticketDetailH', ['ticket' => $ticket, 'users' => $user]);
         }
     }
 
@@ -109,23 +113,23 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreTicket  $request
      * @param  \App\ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ticket $ticket)
+    public function update(StoreTicket $request, ticket $ticket)
     {
-        //
         $newTicket = ticket::find($ticket->id);
         $newTicket->name = $request->name;
         $newTicket->priority = $request->priority;
         $newTicket->status = $request->status;
         $newTicket->type = $request->type;
+        $newTicket->developer = $request->developer;
         $newTicket->remark = $request->remark;
 
         if ($newTicket->save()) {
             return back()->with('success','Success :)');
-        }else {
+        } else {
             return back()->with('error','Something went wrong :(');
         }
     }
