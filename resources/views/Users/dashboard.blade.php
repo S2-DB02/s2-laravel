@@ -22,19 +22,19 @@
                         <form  action="/user/{{$items->id}}" method="POST">
                             @method('PUT') 
                             @csrf    
-                            <td><a href="/user/{{$items->id}}">{{$items->name}}</a></td>
-                            <td><a href="mailto:{{$items->email}}">{{$items->email}}</a></td>
+                            <td>{{$items->name}}</td>
+                            <td><a class="text-muted" href="mailto:{{$items->email}}">{{$items->email}}</a></td>
                             <input type="hidden" class="form-control" name="hidden" value="{{$items->id}}">
                             <td>
                                 <div class="form-group">
-                                  <select class="form-control" name="UserRole">
+                                  <select class="form-control" name="UserRole" onchange="EnableDisable({{$items->id}})">
                                     <option style="text-align: left " @if($items->user_role == 1 ) selected @endif  value="1">Reporter</option>
                                     <option style="text-align: left" @if($items->user_role == 2 )selected @endif value="2" >Developer</option>
                                     <option style="text-align: left" @if($items->user_role == 3 ) selected @endif value="3" >Super-Admin</option>
                                 </select>
                                 </div>
                             </td>
-                            <td><input type="submit" class="btn btn-success" value="Edit"></td>
+                            <td><input type="submit" disabled class="btn btn-success" value="save" id="save{{$items->id}}"></td>
                         </form>
                         <form action="/user/{{$items->id}}" method="post">
                             @method('DELETE')
@@ -55,5 +55,11 @@
     </div>
 </div>
 </div>
-
+<script>
+    function EnableDisable(id)
+    {
+        const button = document.getElementById('save' + id);
+        button.disabled = false;
+    }
+</script>
 @endsection
