@@ -55,7 +55,7 @@
                                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Type</button>   
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">     
                                                  <a class="dropdown-item" href="#">Media</a>     
-                                                 <a class="dropdown-item" href="#"> <i class="fas fa-brush"></i>Layout</a>     
+                                                 <a class="dropdown-item" href="#"> Layout</a>     
                                                  <a class="dropdown-item" href="#">Translation</a>     
                                                  <a class="dropdown-item" href="#">Markup</a>
                                                 <a class="dropdown-item" href="#">Other</a>
@@ -90,15 +90,15 @@
                             <td class="badge badge-danger d-flex justify-content-center">High</td>
                         @endif
                         @if($items->type == 1 )
-                            <td class="text-center">Media</td>
+                            <td class="text-center"><i class="fas fa-hashtag"></i> Media</td>
                         @elseif($items->type == 2)
-                            <td class="text-center">Layout</td>
+                            <td class="text-center"><i class="fas fa-brush"></i> Layout</td>
                         @elseif($items->type == 3)
-                            <td class="text-center">Translation</td>
+                            <td class="text-center"><i class="fas fa-language"></i> Translation</td>
                         @elseif($items->type == 4)
-                            <td class="text-center">Markup</td>
+                            <td class="text-center"><i class="fas fa-paint-brush"></i> Markup</td>
                         @elseif($items->type == 5)
-                            <td class="text-center">Other</td>
+                            <td class="text-center"><i class="far fa-question-circle"></i> Other</td>
                         @endif
                         @if($items->status == 1 )
                             <td class="badge badge-light d-flex justify-content-center">Not Assigned</td>
