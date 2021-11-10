@@ -118,8 +118,21 @@ class TicketController extends Controller
     public function store(StoreTicket $request)
     {
         $validated = $request->validated();
-        ticket::create($validated);
-        return "succes!";
+        if (ticket::create($validated)) {
+            if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+                return back()->with('success', 'Success!');
+            }else {
+                return "success!";
+            }
+            
+        } else {
+            if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+                return back()->with('error', 'Something went wrong!');
+            }else {
+                return "error!";
+            }
+        }
+        
     }
 
     /**
