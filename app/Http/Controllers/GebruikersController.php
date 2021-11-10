@@ -55,7 +55,7 @@ class GebruikersController extends Controller
                 return back()->with('error', 'Somthing went wrong :(');
             }elseif ($newuser && url()->current() == "http://127.0.0.1:8000/api/user") {
                 return "yeyyyy";
-            }else {
+            }elseif($newuser == false && url()->current() == "http://127.0.0.1:8000/api/user") {
                 return "neyyyy";
             }
             
