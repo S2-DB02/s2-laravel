@@ -113,7 +113,9 @@
                             <option value=""> -- Select One --</option>
 
                             @foreach ($users as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                <option value="{{$user->id}}" @if ($ticket->developer != null && $user->id == $ticket->find($ticket->id)->developerUser->id)
+                                    selected
+                                @endif>{{$user->name}}</option>
                             @endforeach
                         </select>
                     </p>
