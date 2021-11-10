@@ -32,8 +32,8 @@
                     <select class="form-control" id="order-sort" onchange="fetchdData(this.value)">
                         <option value="tickets" hidden>Filter...</option>
                         <option value="tickets">Tickets</option>
-                        <option value="PriorityDesc">Priority-Descending</option>
-                        <option value="priorityAsc">Priority-Ascending</option>
+                        <option value="PriorityDesc">Priority-Acending</option>
+                        <option value="priorityAsc">Priority-Descending</option>
                         <option value="status">Status</option>
                     </select>
                 </div>
@@ -54,24 +54,26 @@
                                 <div class="dropdown">   
                                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Type</button>   
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">     
-                                                 <a class="dropdown-item" href="#">Media</a>     
-                                                 <a class="dropdown-item" href="#">Layout</a>     
-                                                 <a class="dropdown-item" href="#">Translation</a>     
-                                                 <a class="dropdown-item" href="#">Markup</a>
-                                                <a class="dropdown-item" href="#">Other</a>
+                                                 <a class="dropdown-item" href="javascript:fetchdData('Media')">Media</a>
+                                                 <a class="dropdown-item" href="javascript:fetchdData('Layout')">Layout</a>
+                                                 <a class="dropdown-item" href="javascript:fetchdData('Translation')">Translation</a>
+                                                 <a class="dropdown-item" href="javascript:fetchdData('Markup')">Markup</a>
+                                                <a class="dropdown-item" href="javascript:fetchdData('Other')">Other</a>
                                             </div> 
-                                        </div> 
+                                        </div>
+                                </div>
                             </th>
                         <th class="text-center">
                         <div class="btn-group">                         
                                 <div class="dropdown">   
-                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Status</button>   
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Status</button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">     
-                                                 <a class="dropdown-item" href="#">Not Assigned</a>     
-                                                 <a class="dropdown-item" href="#">Active</a>     
-                                                 <a class="dropdown-item" href="#">Closed</a>     
+                                                 <a class="dropdown-item" href="javascript:fetchdData('NotAssigned')">Not Assigned</a>
+                                                 <a class="dropdown-item"  href="javascript:fetchdData('Active')">Active</a>
+                                                 <a class="dropdown-item" href="javascript:fetchdData('Closed')">Closed</a>
                                             </div> 
-                                        </div> 
+                                        </div>
+                            </div>
                         </th>
                         <th><button style="border: none;" onclick="fetchdData(this.value)" value="dateCreated">Date Created</button></th>
 
@@ -126,7 +128,7 @@
 <script>
     function fetchdData($value){
         var url = new URL(location);
-
+    alert($value);
         if($value === "priorityAsc"){
         location.replace("ticket?order=priorityasc&page="+ url.searchParams.getAll('page'))
     }
@@ -150,9 +152,22 @@
     }
     if($value === "dateCreated"){
         location.replace("ticket?order=dateCreated&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "Media"){
+        location.replace("ticket?order=Media&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "Layout"){
+        location.replace("ticket?order=Layout&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "Translation"){
+        location.replace("ticket?order=Translation&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "Markup"){
+        location.replace("ticket?order=Markup&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "Other"){
+        location.replace("ticket?order=Other&page="+ url.searchParams.getAll('page'))
     }}
-
-
 
 </script>
 @endsection
