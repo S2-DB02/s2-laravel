@@ -136,7 +136,7 @@
 <script>
     function fetchdData($value){
         var url = new URL(location);
-        if($value === "priorityAsc"){
+    if($value === "priorityAsc"){
         location.replace("ticket?order=priorityasc&page="+ url.searchParams.getAll('page'))
     }
     if($value === "PriorityDesc"){
