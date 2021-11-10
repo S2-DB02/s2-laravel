@@ -34,15 +34,16 @@ class StoreUser extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        if (url()->current() == "http://127.0.0.1:8000/api/user/") 
+
+        if (url()->current() == "http://127.0.0.1:8000/user") 
         {
+            throw new HttpResponseException(back()->withInput()->with('errors',  $validator->errors()));      
+        }else {
             throw new HttpResponseException(response()->json([
                 'success'   => false,
                 'message'   => 'Validation errors',
                 'data'      => $validator->errors()
             ]));
-        }else {
-            throw new HttpResponseException(back()->withInput()->with('errors',  $validator->errors()));      
         }
     }
 }
