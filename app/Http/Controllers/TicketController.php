@@ -110,8 +110,8 @@ class TicketController extends Controller
     public function store(StoreTicket $request)
     {
         $validated = $request->validated();
-
-        return ticket::create($validated);
+        ticket::create($validated);
+        return "succes!";
     }
 
     /**

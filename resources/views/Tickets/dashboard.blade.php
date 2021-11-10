@@ -28,9 +28,9 @@
         <div class="col-lg-8 pb-5">
             <div class="d-flex justify-content-end pb-3">
                 <div class="form-inline">
-                    <label class="text-muted mr-3" for="order-sort">Sort Orders</label>
+                    <label class="text-muted mr-3" for="order-sort">Sort Tickets</label>
                     <select class="form-control" id="order-sort" onchange="fetchdData(this.value)">
-                        <option value="tickets" hidden>Filter...</option>
+                        <option value="tickets" hidden>Order by...</option>
                         <option value="tickets">Tickets</option>
                         <option value="PriorityDesc">Priority-Acending</option>
                         <option value="priorityAsc">Priority-Descending</option>
@@ -47,7 +47,7 @@
                 <table class="table table-hover mb-0">
                     <thead>
                     <tr>
-                        <th>Ticket</th>
+                        <th class="text-center">Ticket</th>
                         <th class="text-center">Priority</th>
                         <th class="text-center">                         
                             <div class="btn-group">                         
@@ -75,7 +75,7 @@
                                         </div>
                             </div>
                         </th>
-                        <th><button style="border: none;" onclick="fetchdData(this.value)" value="dateCreated">Date Created</button></th>
+                        <th class="text-center"><button style="border: none;" onclick="fetchdData(this.value)" value="dateCreated">Date Created</button></th>
 
                     </tr>
                     </thead>
@@ -111,7 +111,7 @@
                         @endif
                         <div></div>
 
-                        <td><span>{{$items->created_at}}</span></td>
+                        <td class="text-center"><span>{{$items->created_at}}</span></td>
 
                     </tr>
                     @endforeach
