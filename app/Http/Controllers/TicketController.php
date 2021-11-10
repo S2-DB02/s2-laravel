@@ -51,6 +51,23 @@ class TicketController extends Controller
             $ticket = ticket::orderBy("created_at", "desc")->paginate(20);
         }
 
+        //TYPE
+        else if ($request->query("order") === "Media"){
+            $ticket = DB::table('tickets')->where("type", "=", 1)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Layout"){
+            $ticket = DB::table('tickets')->where("type", "=", 2)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Translation"){
+            $ticket = DB::table('tickets')->where("type", "=", 3)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Markup"){
+            $ticket = DB::table('tickets')->where("type", "=", 4)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Other"){
+            $ticket = DB::table('tickets')->where("type", "=", 5)->orderBy("priority", "desc")->paginate(20);
+        }
+
         //FILTERS
 
         //ACTIVE
