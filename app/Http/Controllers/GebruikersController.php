@@ -44,44 +44,20 @@ class GebruikersController extends Controller
      */
     public function store(StoreUser $data)
     {
-        // if(!$validator = $data->validate( [
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        // ])){
-        //     dd("Sad");
-        // }
-            if (url()->current() == "http://127.0.0.1:8000/user/") {
-            $data->validate( [
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ]);
-            if(User::create([
-                'name' => $data->name,
-                'email' => $data->email,
-                'password' => Hash::make($data->password),
-            ])){
+        $newuser = User::create([
+            'name' => $data->name,
+            'email' => $data->email,
+            'password' => Hash::make($data->password),
+        ]);
+            if($newuser && url()->current() == "http://127.0.0.1:8000/user"){
                 return back()->with('success', 'User has been added :)');
-            }else {
+            }elseif($newuser == false && url()->current() == "http://127.0.0.1:8000/user") {
                 return back()->with('error', 'Somthing went wrong :(');
-            }
-        }else {
-            // $errors = $validator->errors();
-            // foreach ($validator->all() as $message) {
-            //     //
-            //     dd($message);
-            // }
-            if(User::create([
-                'name' => $data->name,
-                'email' => $data->email,
-                'password' => Hash::make($data->password),
-            ])){
+            }elseif ($newuser && url()->current() == "http://127.0.0.1:8000/api/user") {
                 return "yeyyyy";
             }else {
                 return "neyyyy";
             }
-        }
             
         // }else {
         //     //error pages
