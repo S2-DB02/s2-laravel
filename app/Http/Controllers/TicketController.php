@@ -120,19 +120,20 @@ class TicketController extends Controller
         $validated = $request->validated();
         if (ticket::create($validated)) {
             if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
-                return back()->with('success', 'Success!');
-            }else {
                 return "success!";
+            }else {
+                return back()->with('success', 'Success!');
             }
-            
+
         } else {
             if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
-                return back()->with('error', 'Something went wrong!');
-            }else {
                 return "error!";
+
+            }else {
+                return back()->with('error', 'Something went wrong!');
             }
         }
-        
+
     }
 
     /**
