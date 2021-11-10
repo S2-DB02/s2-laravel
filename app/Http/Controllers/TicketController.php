@@ -19,11 +19,19 @@ class TicketController extends Controller
     {
         //
         $ticket = ticket::paginate(20);
+//        switch ($request->query("order")) {
+//            case "priorityAsc":
+//                $ticket = ticket::orderBy("priority", "desc")->paginate(20);
+//                return view('Tickets.dashboard', ['ticket' => $ticket]);
+//                break;
+//            default:
+//                echo "";
+//        }
 //        if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
 //            // return new TicketResource::collection(ticket::all());
 //            return view('dashboard.dashboard', ['ticket' => $ticket]);
 //        }
-        //PRIORITY DESC
+//        PRIORITY DESC
         if ($request->query("order") === "priorityasc"){
             $ticket = ticket::orderBy("priority", "desc")->paginate(20);
             return view('Tickets.dashboard', ['ticket' => $ticket]);
@@ -42,7 +50,7 @@ class TicketController extends Controller
         }
         //TICKETS
         else if ($request->query("order") === "tickets"){
-            $ticket = ticket::orderBy("date_created", "desc")->paginate(20);
+            $ticket = ticket::orderBy("name", "asc")->paginate(20);
         }
 
 
