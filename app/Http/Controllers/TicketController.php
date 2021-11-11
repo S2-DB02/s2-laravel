@@ -19,11 +19,19 @@ class TicketController extends Controller
     {
         //
         $ticket = ticket::paginate(20);
+//        switch ($request->query("order")) {
+//            case "priorityAsc":
+//                $ticket = ticket::orderBy("priority", "desc")->paginate(20);
+//                return view('Tickets.dashboard', ['ticket' => $ticket]);
+//                break;
+//            default:
+//                echo "";
+//        }
 //        if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
 //            // return new TicketResource::collection(ticket::all());
 //            return view('dashboard.dashboard', ['ticket' => $ticket]);
 //        }
-        //PRIORITY DESC
+//        PRIORITY DESC
         if ($request->query("order") === "priorityasc"){
             $ticket = ticket::orderBy("priority", "desc")->paginate(20);
             return view('Tickets.dashboard', ['ticket' => $ticket]);
@@ -43,8 +51,29 @@ class TicketController extends Controller
         //TICKETS
         else if ($request->query("order") === "tickets"){
             $ticket = ticket::orderBy("name", "asc")->paginate(20);
+        }
 
 
+        //date created
+        else if ($request->query("order") === "dateCreated"){
+            $ticket = ticket::orderBy("created_at", "desc")->paginate(20);
+        }
+
+        //TYPE
+        else if ($request->query("order") === "Media"){
+            $ticket = DB::table('tickets')->where("type", "=", 1)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Layout"){
+            $ticket = DB::table('tickets')->where("type", "=", 2)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Translation"){
+            $ticket = DB::table('tickets')->where("type", "=", 3)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Markup"){
+            $ticket = DB::table('tickets')->where("type", "=", 4)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Other"){
+            $ticket = DB::table('tickets')->where("type", "=", 5)->orderBy("priority", "desc")->paginate(20);
         }
 
         //FILTERS
@@ -89,8 +118,22 @@ class TicketController extends Controller
     public function store(StoreTicket $request)
     {
         $validated = $request->validated();
+        if (ticket::create($validated)) {
+            if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+                return "success!";
+            }else {
+                return back()->with('success', 'Success!');
+            }
 
-        return ticket::create($validated);
+        } else {
+            if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+                return "error!";
+
+            }else {
+                return back()->with('error', 'Something went wrong!');
+            }
+        }
+
     }
 
     /**

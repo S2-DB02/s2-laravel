@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUser;
 use App\User;
 use App\Http\Resources\UserResource;
-use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class GebruikersController extends Controller
 {
@@ -38,17 +39,54 @@ class GebruikersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreUser  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $data)
     {
-        if (RegisterController::validator($request->all())) {
-            RegisterController::create($request->all());
+        // if(!$validator = $data->validate( [
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        // ])){
+        //     dd("Sad");
+        // }
+            if (url()->current() == "http://127.0.0.1:8000/user/") {
+            $data->validate( [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+            if(User::create([
+                'name' => $data->name,
+                'email' => $data->email,
+                'password' => Hash::make($data->password),
+            ])){
+                return back()->with('success', 'User has been added :)');
+            }else {
+                return back()->with('error', 'Somthing went wrong :(');
+            }
         }else {
-            //error pages
-            return false;
+            // $errors = $validator->errors();
+            // foreach ($validator->all() as $message) {
+            //     //
+            //     dd($message);
+            // }
+            if(User::create([
+                'name' => $data->name,
+                'email' => $data->email,
+                'password' => Hash::make($data->password),
+            ])){
+                return "yeyyyy";
+            }else {
+                return "neyyyy";
+            }
         }
+
+        // }else {
+        //     //error pages
+        //     return false;
+        // }
     }
 
     /**
@@ -99,7 +137,7 @@ class GebruikersController extends Controller
         // $user->password = $hased;
         $user->user_role = $request->UserRole;
         $user->save();
-        return GebruikersController::index();
+        return redirect('/user');
     }
 
     /**
@@ -112,6 +150,6 @@ class GebruikersController extends Controller
     {
         $user = User::find($request->id);
         $user->delete();
-        return GebruikersController::index();
+        return redirect('/user');
     }
 }

@@ -18,9 +18,9 @@ use Illuminate\Http\Request;
 */
 Route::get('/ticket/url/{URL}', 'TicketController@ticketurl');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/* Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+}); */
 
 // Route::get('/ticket/url?g={url}', function ($url) {
 //     dd($url); // itm:n#_123445

@@ -18,11 +18,11 @@
 
 Route::get('/', 'TicketController@index');
 
-Route::resource('/ticket',  TicketController::class);
-Route::resource('/user',  GebruikersController::class);
+Route::resource('/ticket',  TicketController::class)->middleware(['auth','Developer']);
 
-Auth::routes();
-
+Auth::routes(['register' => false]);
+Route::resource('/user',  GebruikersController::class)->middleware(['auth','Admin']);
+// ->except(['store'])
 
 Route::get('/home', 'HomeController@index')->name('home');
 

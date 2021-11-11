@@ -5,15 +5,17 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    {{-- <link rel="stylesheet" href="style.css"> --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-    <link href='custom.css' rel='stylesheet' type='text/css'>
+    {{-- <link href='custom.css' rel='stylesheet' type='text/css'> --}}
     <link rel="stylesheet" href="{{ asset('css/teststyles.css') }}">
+    <script src="https://kit.fontawesome.com/19881bd5c3.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -51,15 +53,15 @@
                   @endif
               @else
               {{-- TODO:: User role number change --}}
-                      @if (Auth::user()->user_role() == 3)
-                          
+                      @if (Auth::user()->user_role == 3)
+                      <li class="nav-item">
+                        <a class="nav-link" href="/user">Users dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/create">Add users</a>
+                        </li>
                       @endif
-                    <li class="nav-item">
-                        <a href="/user">Users dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/user/create">Add users</a>
-                    </li>
+
                   <li class="nav-item dropdown">
                       <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                           {{ Auth::user()->name }} <span class="caret"></span>
