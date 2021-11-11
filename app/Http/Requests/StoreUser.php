@@ -26,7 +26,7 @@ class StoreUser extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255|string',
+            'name' => 'required|string|max:255',
             'email' => 'required|string|email:rfc,dns|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed'
         ];
@@ -34,10 +34,16 @@ class StoreUser extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
-        ]));
+
+        if (url()->current() == "http://127.0.0.1:8000/user") 
+        {
+            throw new HttpResponseException(back()->withInput()->with('errors',  $validator->errors()));      
+        }else {
+            throw new HttpResponseException(response()->json([
+                'success'   => false,
+                'message'   => 'Validation errors',
+                'data'      => $validator->errors()
+            ]));
+        }
     }
 }

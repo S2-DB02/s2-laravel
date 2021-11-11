@@ -10,8 +10,8 @@
                 <table class="table table-hover mb-0">
                     <thead>
                     <tr>
-                        <th>Full Name</th>
-                        <th>E-mail</th>
+                        <th>Name</th>
+                        <th>Email</th>
                         <th>Role</th>
 
                     </tr>
