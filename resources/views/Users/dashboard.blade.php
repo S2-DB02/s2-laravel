@@ -34,7 +34,7 @@
                                 </select>
                                 </div>
                             </td>
-                            <td><input type="submit" disabled class="btn btn-success" value="save" id="save{{$items->id}}"></td>
+                            <td><input type="submit" disabled class="btn btn-success" value="Save" id="save{{$items->id}}"></td>
                         </form>
                         <form action="/user/{{$items->id}}" method="post">
                             @method('DELETE')
