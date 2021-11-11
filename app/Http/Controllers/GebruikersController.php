@@ -82,7 +82,7 @@ class GebruikersController extends Controller
                 return "neyyyy";
             }
         }
-            
+
         // }else {
         //     //error pages
         //     return false;
@@ -137,7 +137,7 @@ class GebruikersController extends Controller
         // $user->password = $hased;
         $user->user_role = $request->UserRole;
         $user->save();
-        return GebruikersController::index();
+        return redirect('/user');
     }
 
     /**
