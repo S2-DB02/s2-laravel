@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
         $this->call(TicketsSeeder::class);
+        $this->call(CommentSeeder::class);
 
 
 //        for($i = 0; $i < 1000; $i++) {
