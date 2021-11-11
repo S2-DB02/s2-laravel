@@ -43,4 +43,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(ticket::class, 'madeBy');
     }
+    public function comments()
+    {
+        return $this->hasMany(comment::class, 'userId');
+    }
 }

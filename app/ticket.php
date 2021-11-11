@@ -20,4 +20,8 @@ class ticket extends Model
     {
         return $this->belongsTo(User::class , 'madeBy');
     }
+    public function comments()
+    {
+        return $this->hasMany(comment::class, 'userId');
+    }
 }
