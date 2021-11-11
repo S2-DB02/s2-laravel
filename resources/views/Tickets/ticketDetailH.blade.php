@@ -151,7 +151,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold">Screenshot</h5>
-                    <a href="{{$ticket->URL}}">
+                    <a href="{{urldecode(urldecode($ticket->URL))}}">
                         <img alt="Screenshot Ticket" class="img col-12" src="{{$ticket->photo}}">
                     </a>
                 </div>
