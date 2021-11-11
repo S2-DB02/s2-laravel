@@ -20,6 +20,8 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('ticketId');
 
             $table->timestamps();
+            $table->softDeletes();
+
             $table->foreign('userId')->references('id')->on('users');
             $table->foreign('ticketId')->references('id')->on('tickets');
         });

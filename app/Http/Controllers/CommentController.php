@@ -15,6 +15,9 @@ class CommentController extends Controller
     public function index()
     {
         //
+        $comments = comment::all();
+        //TODO: create views
+        return;
     }
 
     /**
@@ -24,7 +27,8 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        //TODO: create views
+        return view();
     }
 
     /**
@@ -36,6 +40,9 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         //
+        comment::create($request);
+        //TODO: returns views
+        return;
     }
 
     /**
@@ -46,7 +53,8 @@ class CommentController extends Controller
      */
     public function show(comment $comment)
     {
-        //
+        //TODO: views
+        return view('', $comment);
     }
 
     /**
@@ -57,7 +65,8 @@ class CommentController extends Controller
      */
     public function edit(comment $comment)
     {
-        //
+        //TODO: create view
+        return view('', $comment);
     }
 
     /**
@@ -70,6 +79,11 @@ class CommentController extends Controller
     public function update(Request $request, comment $comment)
     {
         //
+        $newComment = comment::find($comment->id);
+        $newComment->comment = $request->comment;
+        $newComment->save();
+        //TODO: check if success then return back with error or success msg
+        return;
     }
 
     /**
@@ -78,8 +92,12 @@ class CommentController extends Controller
      * @param  \App\comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(comment $comment)
+    public function destroy(comment $comments, Request $request )
     {
         //
+        $comment = comment::find($request->id);
+        $comment->delete();
+        //TODO: redirect
+        return;
     }
 }
