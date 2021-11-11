@@ -150,6 +150,6 @@ class GebruikersController extends Controller
     {
         $user = User::find($request->id);
         $user->delete();
-        return GebruikersController::index();
+        return redirect('/user');
     }
 }
