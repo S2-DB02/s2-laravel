@@ -142,7 +142,7 @@
                     <p  class="font-weight-bold">Created at:
                         <a class="font-weight-normal">{{$ticket->created_at}}</a>
                     </p>
-                    <a href="{{$ticket->URL}}" target="_blank" class="btn btn-outline-info btn-sm">Page link</a>
+                    <a href="{{urldecode(urldecode($ticket->URL))}}" target="_blank" class="btn btn-outline-info btn-sm">Page link</a>
 
                 </div>
             </div>
