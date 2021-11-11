@@ -54,19 +54,11 @@
                                 <div class="dropdown">   
                                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Type</button>   
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">     
-<<<<<<< HEAD
-                                                 <a class="dropdown-item" href="#">Media</a>     
-                                                 <a class="dropdown-item" href="#"> Layout</a>     
-                                                 <a class="dropdown-item" href="#">Translation</a>     
-                                                 <a class="dropdown-item" href="#">Markup</a>
-                                                <a class="dropdown-item" href="#">Other</a>
-=======
                                                  <a class="dropdown-item" href="javascript:fetchdData('Media')">Media</a>
                                                  <a class="dropdown-item" href="javascript:fetchdData('Layout')">Layout</a>
                                                  <a class="dropdown-item" href="javascript:fetchdData('Translation')">Translation</a>
                                                  <a class="dropdown-item" href="javascript:fetchdData('Markup')">Markup</a>
                                                 <a class="dropdown-item" href="javascript:fetchdData('Other')">Other</a>
->>>>>>> 4c756f8d9b91f02987e046736672121612ee5c85
                                             </div> 
                                         </div>
                                 </div>
