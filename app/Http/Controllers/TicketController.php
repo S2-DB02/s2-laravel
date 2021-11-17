@@ -6,6 +6,7 @@ use App\Http\Resources\TicketResource;
 use App\ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreTicket;
 
 class TicketController extends Controller
 {
@@ -18,35 +19,76 @@ class TicketController extends Controller
     {
         //
         $ticket = ticket::paginate(20);
+//        switch ($request->query("order")) {
+//            case "priorityAsc":
+//                $ticket = ticket::orderBy("priority", "desc")->paginate(20);
+//                return view('Tickets.dashboard', ['ticket' => $ticket]);
+//                break;
+//            default:
+//                echo "";
+//        }
 //        if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
 //            // return new TicketResource::collection(ticket::all());
 //            return view('dashboard.dashboard', ['ticket' => $ticket]);
 //        }
-
-
-        //PRIORITY DESC
-        if ($request->query("priority", "desc") === "desc"){
+//        PRIORITY DESC
+        if ($request->query("order") === "priorityasc"){
             $ticket = ticket::orderBy("priority", "desc")->paginate(20);
-            return view('dashboard.dashboard', ['ticket' => $ticket]);
+            return view('Tickets.dashboard', ['ticket' => $ticket]);
         }
 
         //PRIORITY ASC
-        else if ($request->query("priority", "asc") === "asc" ){
+        else if ($request->query("order") === "prioritydesc" ){
             $ticket = ticket::orderBy("priority", "asc")->paginate(20);
-            return view('dashboard.dashboard', ['ticket' => $ticket]);
+            return view('Tickets.dashboard', ['ticket' => $ticket]);
         }
 
-        //STATUS
-        else if ($request->query("status", "status") === "status" ) {
+        else if ($request->query("order") === "status" ) {
             $ticket = ticket::orderBy("status", "asc")->paginate(20);
+            //STATUS
 
         }
-
         //TICKETS
-        else if ($request->query("tickets", "asc") === "tickets" ){
+        else if ($request->query("order") === "tickets"){
             $ticket = ticket::orderBy("name", "asc")->paginate(20);
-            return view('dashboard.dashboard', ['ticket' => $ticket]);
         }
+
+
+        //date created
+        else if ($request->query("order") === "dateCreated"){
+            $ticket = ticket::orderBy("created_at", "desc")->paginate(20);
+        }
+
+        //TYPE
+        else if ($request->query("order") === "Media"){
+            $ticket = DB::table('tickets')->where("type", "=", 1)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Layout"){
+            $ticket = DB::table('tickets')->where("type", "=", 2)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Translation"){
+            $ticket = DB::table('tickets')->where("type", "=", 3)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Markup"){
+            $ticket = DB::table('tickets')->where("type", "=", 4)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Other"){
+            $ticket = DB::table('tickets')->where("type", "=", 5)->orderBy("priority", "desc")->paginate(20);
+        }
+
+        //FILTERS
+
+        //ACTIVE
+        else if ($request->query("order") === "NotAssigned"){
+            $ticket = DB::table('tickets')->where("status", "=", 1)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Active"){
+            $ticket = DB::table('tickets')->where("status", "=", 2)->orderBy("priority", "desc")->paginate(20);
+        }
+        else if ($request->query("order") === "Closed"){
+            $ticket = DB::table('tickets')->where("status", "=", 3)->orderBy("priority", "desc")->paginate(20);
+        }
+        return view('Tickets.dashboard', ['ticket' => $ticket]);
 
         //TICKETS NAME ASCENDING
 
@@ -70,12 +112,28 @@ class TicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreTicket  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTicket $request)
     {
-        return ticket::create($request->all());
+        $validated = $request->validated();
+        if (ticket::create($validated)) {
+            if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+                return "success!";
+            }else {
+                return back()->with('success', 'Success!');
+            }
+
+        } else {
+            if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+                return "error!";
+
+            }else {
+                return back()->with('error', 'Something went wrong!');
+            }
+        }
+
     }
 
     /**
@@ -87,11 +145,12 @@ class TicketController extends Controller
     public function show(ticket $ticket)
     {
 
+        $user  = DB::table('users')->get();
         if (url()->current() == "http://127.0.0.1:8000/api/ticket/$ticket->id") {
-            // dd(ticket::find($ticket->id));
+            // dd(ticket::find($ticket->id));s
             return new TicketResource($ticket);
         }else {
-            return view('dashboard.ticketDetailH', ['ticket' => $ticket]);
+            return view('Tickets.ticketDetailH', ['ticket' => $ticket, 'users' => $user]);
         }
     }
 
@@ -110,23 +169,23 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreTicket  $request
      * @param  \App\ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ticket $ticket)
+    public function update(StoreTicket $request, ticket $ticket)
     {
-        //
         $newTicket = ticket::find($ticket->id);
         $newTicket->name = $request->name;
         $newTicket->priority = $request->priority;
         $newTicket->status = $request->status;
         $newTicket->type = $request->type;
+        $newTicket->developer = $request->developer;
         $newTicket->remark = $request->remark;
 
         if ($newTicket->save()) {
             return back()->with('success','Success :)');
-        }else {
+        } else {
             return back()->with('error','Something went wrong :(');
         }
     }

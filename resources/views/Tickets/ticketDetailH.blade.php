@@ -1,7 +1,8 @@
-
-   @extends('layouts.master')
-   @section('title',"{{$ticket->id}} | {{$ticket->name}}")
-   @section('content')
+@extends('layouts.master')
+@section('title')
+    {{ $ticket->id }} | {{ $ticket->name }}
+@endsection
+@section('content')
    @if (session('error'))
     <div class="col-sm-12">
         <div class="alert  alert-danger alert-dismissible fade show" role="alert">
@@ -24,20 +25,31 @@
 <div class="bg bg2"></div>
 <div class="bg bg3"></div>
 <div class="content">
+
+    <!-- In case of validation errors, they appear here -->
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
 <form  action="/ticket/{{$ticket->id}}" method="POST">
     @method('PUT')
     @csrf
 
-    
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 mt-2">
-                <button type="button" class="btn btn-outline-dark">Back</button>
+                <a href="/ticket"><button type="button" class="btn btn-outline-dark">Back</button></a>
             </div>
         <div class="col-md-6 col-xs-12 mt-2">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold">Ticket NR: {{$ticket->id}} 
+                    <h5 class="card-title font-weight-bold">Ticket NR: {{$ticket->id}}
                       <input type="text" class="form-control" name="name" id="name"value="{{$ticket->name}}">
                     </h5>
                     <div class="form-group">
@@ -55,6 +67,7 @@
                       </select>
                     </div>
                     <p class="font-weight-bold"> Status: {{--status--}}
+
                         <div class="form-group">
                           <label for="status">Status</label>
                           <select class="form-control" name="status" id="status">
@@ -71,30 +84,43 @@
                         </div>
                     </p>
                     <div class="form-group">
-                      <label for="type">type</label>
+                      <label for="type">Type</label>
                       <select class="form-control" name="type" id="type">
                         <option value="1"@if ($ticket->type == 1)
                             selected
-                        @endif>Bug</option>
+                        @endif>Media</option>
                         <option value="2"@if ($ticket->type == 2)
                             selected
-                        @endif>Task</option>
+                        @endif>Lay-out</option>
                         <option value="3"@if ($ticket->type == 3)
                             selected
-                        @endif>Improvement</option>
+                        @endif>Translation</option>
                         <option value="4"@if ($ticket->type == 4)
                             selected
-                        @endif>Media</option>
+                        @endif>Markup</option>
                         <option value="5"@if ($ticket->type == 5)
                             selected
                         @endif>Other</option>
                       </select>
                     </div>
-                    <p class="font-weight-bold">Assigned to: 
-                        <a class="font-weight-normal">{{$ticket->find($ticket->id)->developer->name ?? 'Unknown'}}</a>
+                    @if($ticket->developer != null)
+                        <p>Assigned to {{$ticket->find($ticket->id)->developerUser->name}}</p>
+                    @else
+                        <p>Not yet assigned</p>
+                    @endif
+                    <p class="font-weight-bold">Assign to:
+                        <select name="developer" id="department" class="form-control">
+                            <option value=""> -- Select One --</option>
+
+                            @foreach ($users as $user)
+                                <option value="{{$user->id}}" @if ($ticket->developer != null && $user->id == $ticket->find($ticket->id)->developerUser->id)
+                                    selected
+                                @endif>{{$user->name}}</option>
+                            @endforeach
+                        </select>
                     </p>
-            </div> 
-            </div>      
+            </div>
+            </div>
         </div>
         <div class="col-md-6 col-xs-12">
             <div class="card h-100">
@@ -110,14 +136,14 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold">Information</h5>
-                    <p  class="font-weight-bold">Reported by: 
+                    <p  class="font-weight-bold">Reported by:
                         <a class="font-weight-normal" href="mailto:{{$ticket->find($ticket->id)->madeByUser->email}}">{{$ticket->find($ticket->id)->madeByUser->name}}</a>
                     </p>
                     <p  class="font-weight-bold">Created at:
                         <a class="font-weight-normal">{{$ticket->created_at}}</a>
                     </p>
                     <a href="{{$ticket->URL}}" target="_blank" class="btn btn-outline-info btn-sm">Page link</a>
-                    
+
                 </div>
             </div>
         </div>

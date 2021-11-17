@@ -16,11 +16,13 @@
 // Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 // Route::get('/sanderdashboard', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 
-Route::resource('/ticket',  TicketController::class);
-Route::resource('/user',  GebruikersController::class);
+Route::get('/', 'TicketController@index');
 
-Auth::routes();
+Route::resource('/ticket',  TicketController::class)->middleware(['auth','Developer']);
 
+Auth::routes(['register' => false]);
+Route::resource('/user',  GebruikersController::class)->middleware(['auth','Admin']);
+// ->except(['store'])
 
 Route::get('/home', 'HomeController@index')->name('home');
 

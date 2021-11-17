@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Resources\TicketResource;
+use App\Http\Resources\UserResource;
 use App\ticket;
+use App\User;
 use Illuminate\Http\Request;
 
 /*
@@ -16,9 +18,9 @@ use Illuminate\Http\Request;
 */
 Route::get('/ticket/url/{URL}', 'TicketController@ticketurl');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/* Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+}); */
 
 // Route::get('/ticket/url?g={url}', function ($url) {
 //     dd($url); // itm:n#_123445
@@ -33,6 +35,11 @@ Route::get('/ticket/{ticket}', 'TicketController@show');
 // {
 //     dd(ticket::find($ticket));
 //     return TicketResource::collection(ticket::find($ticket));
+// });
+
+Route::get('/user/{user}', 'GebruikersController@show');
+// Route::get('/user', function () {
+//     return new UserResource(User::find(1));
 // });
 
 Route::post('/ticket', 'TicketController@store');
