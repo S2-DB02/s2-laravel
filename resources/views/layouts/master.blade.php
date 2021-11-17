@@ -18,7 +18,7 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
   <div class="container">
@@ -84,11 +84,12 @@
       </div>
   </div>
 </nav>
-<!-- footer -->
 
 @yield('content')
-</body>
-<footer class="bg-light text-center text-lg-start">
+
+<!-- footer -->
+<footer class="bg-light text-center text-lg-start mt-auto">
+
     <!-- Copyright -->
     <div class="text-center p-3" id="date">
       
@@ -98,9 +99,8 @@
         y = n.getFullYear();
         document.getElementById("date").innerHTML = "© BAS Trucks " + y;
     </script>
-    <!-- Copyright -->
+    
   </footer>
-<!-- footer -->
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
