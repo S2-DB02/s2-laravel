@@ -44,3 +44,6 @@ Route::get('/user/{user}', 'GebruikersController@show');
 
 Route::post('/ticket', 'TicketController@store');
 Route::post('/user', 'GebruikersController@store');
+// Route::post('/user/login', 'Auth/LoginController');
+Auth::routes(['register' => false]);
+
