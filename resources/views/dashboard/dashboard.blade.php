@@ -104,16 +104,16 @@
     function fetchdData($value){
         
     if($value === "priorityAsc"){
-        location.replace("ticket?priority=asc")
+        location.append("ticket?priority=asc")
     }
     if($value === "PriorityDesc"){
-        location.replace("ticket?priority=desc")
+        location.append("ticket?priority=desc")
     }
     if($value === "tickets"){
-        location.replace("ticket?tickets=tickets")
+        location.append("ticket?tickets=tickets")
     }
     if($value === "status"){
-        location.replace("ticket?status=status")
+        location.append("ticket?status=status")
     }}
 
 
