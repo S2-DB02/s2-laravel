@@ -26,7 +26,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- Orders Table-->
 <div class="col-lg-8 pb-5">
-    <div class="d-flex justify-content-end pb-3 mt-3">
+    <div class="d-flex justify-content-end pb-3">
         <div class="form-inline">
             <label class="text-muted mr-3" for="order-sort">Sort Tickets</label>
             <select class="form-control" id="order-sort" onchange="fetchdData(this.value)">

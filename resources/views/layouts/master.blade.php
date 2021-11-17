@@ -20,7 +20,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mb-3">
   <div class="container">
     <a class="navbar-brand" href="/"><img class="logo" src="/img/logo.png" width="150" height="17" class="d-inline-block align-top"></a>
 
