@@ -94,7 +94,20 @@ class TicketController extends Controller
         else if ($request->query("order") === "Closed"){
             $ticket = DB::table('tickets')->where("status", "=", 3)->orderBy("priority", "desc")->paginate(20);
         }
+
+        //PRIORITY
+        else if ($request->query("order") === "Low"){
+            $ticket = DB::table('tickets')->where("priority", "=", 1)->paginate(20);
+        }
+        else if ($request->query("order") === "Medium"){
+            $ticket = DB::table('tickets')->where("priority", "=", 2)->paginate(20);
+        }
+        else if ($request->query("order") === "High"){
+            $ticket = DB::table('tickets')->where("priority", "=", 3)->paginate(20);
+        }
         return view('Tickets.dashboard', ['ticket' => $ticket]);
+
+
 
         //TICKETS NAME ASCENDING
 
