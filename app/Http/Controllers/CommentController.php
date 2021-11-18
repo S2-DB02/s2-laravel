@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\comment;
 use Illuminate\Http\Request;
+use Auth;
 
 class CommentController extends Controller
 {
@@ -39,10 +40,15 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        comment::create($request);
+        $id = auth()->user()->id;
+        $urlId = $request->route('id');
+        $newComment = Comment::create([
+            'comment' => $request->commentName,
+            'userId' => $id,
+            'ticketId' => $urlId,
+        ]);
         //TODO: returns views
-        return;
+        return back();
     }
 
     /**
@@ -98,6 +104,6 @@ class CommentController extends Controller
         $comment = comment::find($request->id);
         $comment->delete();
         //TODO: redirect
-        return;
+        return back();
     }
 }

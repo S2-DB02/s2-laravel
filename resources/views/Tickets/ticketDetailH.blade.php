@@ -205,16 +205,27 @@
                         <p>This ticket has no comments yet. Go ahead and add one!</p>
                     @else
                         @foreach ($comments as $item)
-                            <p><span class="font-weight-bold">{{ $item->madeBy->name }}:</span> {{ $item->comment }}<br>{{$item->created_at}}</p>
+                        <p><span class="font-weight-bold">{{ $item->madeBy->name }}:</span><br>{{ $item->comment }}<br>{{$item->created_at}}</p>
+                            <?php
+                                if($item->userId == Auth::user()->id){
+                                    echo('<form action="/comment/Delete/'. $item->id .'" method="post">')
+                                        ?>
+                                        @csrf
+                                        <?php
+                                            echo('<button class="btn btn-danger btn-sm" type="sumbit">Delete</button>
+                                        </form>');
+                                }
+                             ?>
                         @endforeach
                     @endif
                     
-                    <form action="" method="POST">
+                    <form action="/comment/{{$ticket->id}}" method="post">
+                        @csrf
                         <div class="form-group">
                             <label for="new-comment" class="font-weight-bold">Enter new comment</label>
-                            <textarea class="form-control area " name="new-comment" id="new-comment" rows="2"></textarea>
+                            <textarea class="form-control area " name="commentName" id="commentName" rows="2"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-success btn-sm float-right" disabled>Send</button>
+                        <button type="submit" class="btn btn-success btn-sm float-right">Send</button>
                     </form>
                 </div>
             </div>

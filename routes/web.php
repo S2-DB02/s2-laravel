@@ -26,4 +26,5 @@ Route::resource('/user',  GebruikersController::class)->middleware(['auth','Admi
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+Route::post('/comment/{id}', 'CommentController@store');
+Route::post('/comment/Delete/{id}', 'CommentController@destroy');
