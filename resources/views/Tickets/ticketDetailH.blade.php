@@ -237,7 +237,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Delete</button>
+        <form action="/ticket/{{$ticket->id}}" method="post">
+            @method('Delete')
+            @csrf
+            <input type="hidden" name="id" value="{{$ticket->id}}">
+            <td><input type="submit" class="btn btn-danger" value="Delete"></td>
+        </form>
       </div>
     </div>
   </div>

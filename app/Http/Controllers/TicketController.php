@@ -15,7 +15,7 @@ class TicketController extends Controller
 {
     
     use SoftDeletes;
-    protected $table = 'fiets/tickets';
+
     /**
      * Display a listing of the resource.
      *
@@ -226,7 +226,7 @@ class TicketController extends Controller
     {
         $tickets = ticket::find($request->id);
         $tickets->delete();
-        return TicketController::index();
+        return redirect('ticket');
     }
 
     /**
