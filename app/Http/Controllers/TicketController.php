@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Resources\TicketResource;
 use App\ticket;
+use App\comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTicket;
@@ -149,13 +150,17 @@ class TicketController extends Controller
      */
     public function show(ticket $ticket)
     {
-
         $user  = DB::table('users')->get();
+        $comments = comment::where('ticketId', $ticket->id)->get();
+
         if (url()->current() == "http://127.0.0.1:8000/api/ticket/$ticket->id") {
-            // dd(ticket::find($ticket->id));s
             return new TicketResource($ticket);
-        }else {
-            return view('Tickets.ticketDetailH', ['ticket' => $ticket, 'users' => $user]);
+        } else {
+            return view('Tickets.ticketDetailH', [
+            'ticket' => $ticket,
+            'users' => $user,
+            'comments' => $comments
+            ]);
         }
     }
 

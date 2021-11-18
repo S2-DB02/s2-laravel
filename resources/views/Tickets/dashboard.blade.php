@@ -31,7 +31,7 @@
             <label class="text-muted mr-3" for="order-sort">Sort Tickets</label>
             <select class="form-control" id="order-sort" onchange="fetchdData(this.value)">
                 <option value="tickets" hidden>Order by...</option>
-                <option value="tickets">Title</option>
+                <option value="tickets">Title (alphabetically)</option>
                 <option value="PriorityDesc">Priority-Acending</option>
                 <option value="priorityAsc">Priority-Descending</option>
                 <option value="status">Status</option>
