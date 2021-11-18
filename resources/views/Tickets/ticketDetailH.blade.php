@@ -60,11 +60,11 @@
                             <div class="col-md-6 col-xs-12">
                                 
                                 <div class="form-group">
-                                    <label for="name">Title</label>
+                                    <label for="name" class="font-weight-bold">Title</label>
                                     <input type="text" class="form-control" name="name" id="name"value="{{$ticket->name}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="Priority">Priority</label>
+                                    <label for="Priority" class="font-weight-bold">Priority</label>
                                     <select class="form-control" name="priority" id="Priority">
                                         <option value="1" @if ($ticket->priority == 1)
                                             selected
@@ -78,7 +78,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="status">Status</label>
+                                    <label for="status" class="font-weight-bold">Status</label>
                                     <select class="form-control" name="status" id="status">
                                         <option value="1"@if ($ticket->status == 1)
                                             selected
@@ -92,7 +92,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="type">Type</label>
+                                    <label for="type" class="font-weight-bold">Type</label>
                                     <select class="form-control" name="type" id="type">
                                         <option value="1"@if ($ticket->type == 1)
                                             selected
@@ -112,7 +112,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="department">Assign to:</label>
+                                    <label for="department" class="font-weight-bold">Assign to:</label>
                                     <select name="developer" id="department" class="form-control">
                                         <option value=""> -- Select One --</option>
 
@@ -130,7 +130,7 @@
                             <!-- Right column -->
                             <div class="col-md-6 col-xs-12">
                                 <div class="form-group">
-                                    <label for="remark">Description</label>
+                                    <label for="remark" class="font-weight-bold">Description</label>
                                     <textarea class="form-control area " name="remark" id="remark" rows="15">{{$ticket->remark}}</textarea>
                                 </div>
                                 <button type="submit" class="btn btn-success btn-sm float-right mt-auto">Save</button>
