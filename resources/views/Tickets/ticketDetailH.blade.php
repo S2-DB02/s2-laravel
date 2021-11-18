@@ -202,7 +202,9 @@
                         <p>This ticket has no comments yet. Go ahead and add one!</p>
                     @else
                         @foreach ($comments as $item)
-                        <p><span class="font-weight-bold">{{ $item->madeBy->name }}:</span><br>{{ $item->comment }}<br>{{$item->created_at}}</p>
+                        <p><span class="font-weight-bold">{{ $item->madeBy->name }}:</span><br>
+                        {{ $item->comment }}<br>
+                        {{$item->created_at}} ({{$item->created_at->diffForHumans()}})</p>
                             <?php
                                 if($item->userId == Auth::user()->id){
                                     echo('<form action="/comment/Delete/'. $item->id .'" method="post">')
