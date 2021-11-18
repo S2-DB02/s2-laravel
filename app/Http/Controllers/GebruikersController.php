@@ -113,7 +113,7 @@ class GebruikersController extends Controller
         // $user->password = $hased;
         $user->user_role = $request->UserRole;
         $user->save();
-        return GebruikersController::index();
+        return back()->with('success', 'User succesfully updated!');
     }
 
     /**
@@ -126,6 +126,6 @@ class GebruikersController extends Controller
     {
         $user = User::find($request->id);
         $user->delete();
-        return GebruikersController::index();
+        return back()->with('success', 'User succesfully deleted!');
     }
 }
