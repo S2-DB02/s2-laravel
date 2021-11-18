@@ -20,14 +20,14 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('user_role')->default(1);
-            $table->integer('point')->default(0);
+            $table->integer('points')->default(0);
             $table->rememberToken();
-            $table->timestamps();
-            $table->softDeletes();
-            $table->string('api_token', 80)->after('password')
+            $table->string('api_token', 80)
                 ->unique()
                 ->nullable()
                 ->default(null);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
