@@ -105,6 +105,22 @@ class TicketController extends Controller
         else if ($request->query("order") === "High"){
             $ticket = DB::table('tickets')->where("priority", "=", 3)->paginate(20);
         }
+
+        //Title alphabetic
+        else if ($request->query("order") === "AtoZ"){
+            $ticket = ticket::orderBy("name", "asc")->paginate(20);
+        }
+        else if ($request->query("order") === "ZtoA"){
+            $ticket = ticket::orderBy("name", "desc")->paginate(20);
+        }
+
+        //Ticket alphabetic
+        else if ($request->query("order") === "1toMax"){
+            $ticket = ticket::orderBy("id", "asc")->paginate(20);
+        }
+        else if ($request->query("order") === "Maxto1"){
+            $ticket = ticket::orderBy("id", "desc")->paginate(20);
+        }
         return view('Tickets.dashboard', ['ticket' => $ticket]);
 
 

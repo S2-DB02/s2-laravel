@@ -47,8 +47,28 @@
         <table class="table table-hover mb-0">
             <thead>
                 <tr>
-                    <th><button class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ticket</button></th>
-                    <th><button class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Title</button></th>
+                    <th>
+                        <div class="btn-group">                         
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ticket</button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">     
+                                        <a class="dropdown-item" href="javascript:fetchdData('1toMax')">Ascending</a>
+                                        <a class="dropdown-item" href="javascript:fetchdData('Maxto1')">Descending</a>                              
+                                    </div>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="btn-group">                         
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Title</button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">     
+                                        <a class="dropdown-item" href="javascript:fetchdData('AtoZ')">A to Z</a>
+                                        <a class="dropdown-item" href="javascript:fetchdData('ZtoA')">Z to A</a>                              
+                                    </div>
+                            </div>
+                        </div>
+                    </th>
                     <th>
                         <div class="btn-group">                         
                             <div class="dropdown">
@@ -150,8 +170,20 @@
     if($value === "tickets"){
         location.replace("ticket?order=tickets&page="+ url.searchParams.getAll('page'))
     }
-    if($value === "Priority"){
+    if($value === "Ticket"){
         location.replace("ticket?order=Priority&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "1toMax"){
+        location.replace("ticket?order=1toMax&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "Maxto1"){
+        location.replace("ticket?order=Maxto1&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "AtoZ"){
+        location.replace("ticket?order=AtoZ&page="+ url.searchParams.getAll('page'))
+    }
+    if($value === "ZtoA"){
+        location.replace("ticket?order=ZtoA&page="+ url.searchParams.getAll('page'))
     }
     if($value === "Low"){
         location.replace("ticket?order=Low&page="+ url.searchParams.getAll('page'))
