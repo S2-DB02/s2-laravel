@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ticket extends Model
 {
+    use SoftDeletes;
     //
     protected $table = 'tickets';
 
@@ -19,5 +21,9 @@ class ticket extends Model
     public function madeByUser()
     {
         return $this->belongsTo(User::class , 'madeBy');
+    }
+    public function comments()
+    {
+        return $this->hasMany(comment::class, 'userId');
     }
 }

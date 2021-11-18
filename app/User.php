@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'user_role '
+        'name', 'email', 'password', 'user_role ', 'point'
     ];
 
     /**
@@ -42,5 +42,9 @@ class User extends Authenticatable
     public function tickets()
     {
         return $this->hasMany(ticket::class, 'madeBy');
+    }
+    public function comments()
+    {
+        return $this->hasMany(comment::class, 'userId');
     }
 }

@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Resources\TicketResource;
 use App\ticket;
+use App\comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTicket;
 
 class TicketController extends Controller
 {
+    
+    use SoftDeletes;
+
     /**
      * Display a listing of the resource.
      *
@@ -88,7 +94,20 @@ class TicketController extends Controller
         else if ($request->query("order") === "Closed"){
             $ticket = DB::table('tickets')->where("status", "=", 3)->orderBy("priority", "desc")->paginate(20);
         }
+
+        //PRIORITY
+        else if ($request->query("order") === "Low"){
+            $ticket = DB::table('tickets')->where("priority", "=", 1)->paginate(20);
+        }
+        else if ($request->query("order") === "Medium"){
+            $ticket = DB::table('tickets')->where("priority", "=", 2)->paginate(20);
+        }
+        else if ($request->query("order") === "High"){
+            $ticket = DB::table('tickets')->where("priority", "=", 3)->paginate(20);
+        }
         return view('Tickets.dashboard', ['ticket' => $ticket]);
+
+
 
         //TICKETS NAME ASCENDING
 
@@ -144,13 +163,17 @@ class TicketController extends Controller
      */
     public function show(ticket $ticket)
     {
-
         $user  = DB::table('users')->get();
+        $comments = comment::where('ticketId', $ticket->id)->get();
+
         if (url()->current() == "http://127.0.0.1:8000/api/ticket/$ticket->id") {
-            // dd(ticket::find($ticket->id));s
             return new TicketResource($ticket);
-        }else {
-            return view('Tickets.ticketDetailH', ['ticket' => $ticket, 'users' => $user]);
+        } else {
+            return view('Tickets.ticketDetailH', [
+            'ticket' => $ticket,
+            'users' => $user,
+            'comments' => $comments
+            ]);
         }
     }
 
@@ -211,11 +234,14 @@ class TicketController extends Controller
      * @param  \App\ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ticket $ticket)
+
+    public function destroy(ticket $ticket,Request $request)
     {
-        //
-        $ticket::destroy($ticket->id);
+        $tickets = ticket::find($request->id);
+        $tickets->delete();
+        return redirect('ticket');
     }
+
     /**
      * Soort by
      */

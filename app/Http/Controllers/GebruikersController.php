@@ -44,45 +44,21 @@ class GebruikersController extends Controller
      */
     public function store(StoreUser $data)
     {
-        // if(!$validator = $data->validate( [
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        // ])){
-        //     dd("Sad");
-        // }
-            if (url()->current() == "http://127.0.0.1:8000/user/") {
-            $data->validate( [
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ]);
-            if(User::create([
-                'name' => $data->name,
-                'email' => $data->email,
-                'password' => Hash::make($data->password),
-            ])){
+        $newuser = User::create([
+            'name' => $data->name,
+            'email' => $data->email,
+            'password' => Hash::make($data->password),
+        ]);
+            if($newuser && url()->current() == "http://127.0.0.1:8000/user"){
                 return back()->with('success', 'User has been added :)');
-            }else {
+            }elseif($newuser == false && url()->current() == "http://127.0.0.1:8000/user") {
                 return back()->with('error', 'Somthing went wrong :(');
+            }elseif ($newuser && url()->current() == "http://127.0.0.1:8000/api/user") {
+                return view('errors.register-success', ['user' => $newuser]);
+            }elseif($newuser == false && url()->current() == "http://127.0.0.1:8000/api/user") {
+                return view('errors.register-error');
             }
-        }else {
-            // $errors = $validator->errors();
-            // foreach ($validator->all() as $message) {
-            //     //
-            //     dd($message);
-            // }
-            if(User::create([
-                'name' => $data->name,
-                'email' => $data->email,
-                'password' => Hash::make($data->password),
-            ])){
-                return "yeyyyy";
-            }else {
-                return "neyyyy";
-            }
-        }
-
+            
         // }else {
         //     //error pages
         //     return false;
@@ -137,7 +113,7 @@ class GebruikersController extends Controller
         // $user->password = $hased;
         $user->user_role = $request->UserRole;
         $user->save();
-        return redirect('/user');
+        return back()->with('success', 'User succesfully updated!');
     }
 
     /**
@@ -150,6 +126,6 @@ class GebruikersController extends Controller
     {
         $user = User::find($request->id);
         $user->delete();
-        return redirect('/user');
+        return back()->with('success', 'User succesfully deleted!');
     }
 }
