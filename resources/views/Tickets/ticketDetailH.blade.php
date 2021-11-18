@@ -43,12 +43,12 @@
 
     <div class="row">
 
-        <!-- Main card with screenshot -->
+        <!-- Ticket content card -->
         <div class="col-md-12 col-xs-12 mb-3">
             <div class="card">
                 <div class="card-body">
 
-                    <div class="row ml-1 mb-2 align-items-center">
+                    <div class="row m-0 mb-2 align-items-center">
                         <a href="/ticket"><button type="button" class="btn btn-outline-dark fas fa-arrow-left"></button></a>
                         <h5 class="card-title font-weight-bold ml-3 mb-0">Ticket NR: {{$ticket->id}}</h5>
                     </div>
@@ -59,7 +59,7 @@
                         <div class="row">
                             
                             <!-- Left column -->
-                            <div class="col-md-6 col-xs-12">
+                            <div class="d-flex flex-column col-md-6 col-xs-12 justify-content-between">
                                 
                                 <div class="form-group">
                                     <label for="name" class="font-weight-bold">Title</label>
@@ -133,17 +133,20 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="remark" class="font-weight-bold">Description</label>
-                                    <textarea class="form-control area " name="remark" id="remark" rows="15">{{$ticket->remark}}</textarea>
+                                    <textarea class="form-control area" name="remark" id="remark" rows="15">{{$ticket->remark}}</textarea>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-sm float-right mt-auto">Save</button>
                             </div>
+                        </div>
+
+                        <div class="row justify-content-end m-0">
+                            <button type="submit" class="btn btn-success btn-sm">Save</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- Screenshot -->
+        <!-- Screenshot card -->
         <div class="col-md-12 mb-3">
             <a href="{{urldecode(urldecode($ticket->URL))}}">
                 <img src="{{$ticket->photo}}" class="card-img-top" alt="Screenshot of ticket">
