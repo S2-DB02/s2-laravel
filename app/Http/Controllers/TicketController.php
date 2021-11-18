@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Resources\TicketResource;
 use App\ticket;
+use App\comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTicket;
 
 class TicketController extends Controller
 {
+    
+    use SoftDeletes;
+    protected $table = 'fiets/tickets';
     /**
      * Display a listing of the resource.
      *
@@ -144,13 +150,17 @@ class TicketController extends Controller
      */
     public function show(ticket $ticket)
     {
-
         $user  = DB::table('users')->get();
+        $comments = comment::where('ticketId', $ticket->id)->get();
+
         if (url()->current() == "http://127.0.0.1:8000/api/ticket/$ticket->id") {
-            // dd(ticket::find($ticket->id));s
             return new TicketResource($ticket);
-        }else {
-            return view('Tickets.ticketDetailH', ['ticket' => $ticket, 'users' => $user]);
+        } else {
+            return view('Tickets.ticketDetailH', [
+            'ticket' => $ticket,
+            'users' => $user,
+            'comments' => $comments
+            ]);
         }
     }
 
@@ -211,11 +221,14 @@ class TicketController extends Controller
      * @param  \App\ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ticket $ticket)
+
+    public function destroy(ticket $ticket,Request $request)
     {
-        //
-        $ticket::destroy($ticket->id);
+        $tickets = ticket::find($request->id);
+        $tickets->delete();
+        return TicketController::index();
     }
+
     /**
      * Soort by
      */
