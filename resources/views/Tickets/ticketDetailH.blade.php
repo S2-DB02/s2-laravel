@@ -39,17 +39,17 @@
 
 <div class="container">
 
-    <div class="row ml-1 mb-2">
-        <a href="/ticket"><button type="button" class="btn btn-outline-dark">< Back</button></a>
-    </div>
+    
 
     <div class="row">
 
         <!-- Main card with screenshot -->
         <div class="col-md-12 col-xs-12 mb-3">
             <div class="card">
-                <img src="{{$ticket->photo}}" class="card-img-top" alt="...">
                 <div class="card-body">
+                    <div class="row ml-1 mb-2">
+                        <a href="/ticket"><button type="button" class="btn btn-outline-dark fas fa-arrow-left"></button></a>
+                    </div>
                     <h5 class="card-title font-weight-bold">Ticket NR: {{$ticket->id}}</h5>
                     <form action="/ticket/{{$ticket->id}}" method="POST">
                         @method('PUT')
@@ -140,7 +140,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="col-md-12 mb-3">
+            <img src="{{$ticket->photo}}" class="card-img-top" alt="...">
+        </div>
         <!-- Description card -->
         <!-- <div class="col-md-6 col-xs-12 mb-3">
             <div class="card">
