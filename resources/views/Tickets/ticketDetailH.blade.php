@@ -140,21 +140,13 @@
                 </div>
             </div>
         </div>
+
+        <!-- Screenshot -->
         <div class="col-md-12 mb-3">
-            <img src="{{$ticket->photo}}" class="card-img-top" alt="...">
+            <a href="{{urldecode(urldecode($ticket->URL))}}">
+                <img src="{{$ticket->photo}}" class="card-img-top" alt="Screenshot of ticket">
+            </a>
         </div>
-        <!-- Description card -->
-        <!-- <div class="col-md-6 col-xs-12 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="remark" class="font-weight-bold">Description</label>
-                        <textarea class="form-control area " name="remark" id="remark" rows="15">{{$ticket->remark}}</textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success btn-sm float-right">Save</button>
-                </div>
-            </div>
-        </div> -->
 
         <!-- Information card -->
         <div class="col-md-6 col-xs-12 mb-3">
