@@ -47,10 +47,12 @@
         <div class="col-md-12 col-xs-12 mb-3">
             <div class="card">
                 <div class="card-body">
-                    <div class="row ml-1 mb-2">
+
+                    <div class="row ml-1 mb-2 align-items-center">
                         <a href="/ticket"><button type="button" class="btn btn-outline-dark fas fa-arrow-left"></button></a>
+                        <h5 class="card-title font-weight-bold ml-3 mb-0">Ticket NR: {{$ticket->id}}</h5>
                     </div>
-                    <h5 class="card-title font-weight-bold">Ticket NR: {{$ticket->id}}</h5>
+                    
                     <form action="/ticket/{{$ticket->id}}" method="POST">
                         @method('PUT')
                         @csrf
