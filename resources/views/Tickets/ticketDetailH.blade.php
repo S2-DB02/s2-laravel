@@ -203,7 +203,7 @@
                         <p>This ticket has no comments yet. Go ahead and add one!</p>
                     @else
                         @foreach ($comments as $item)
-                            <p>{{ $item->madeBy->name }}: {{ $item->comment }}</p>
+                            <p><span class="font-weight-bold">{{ $item->madeBy->name }}:</span> {{ $item->comment }}<br>{{$item->created_at}}</p>
                         @endforeach
                     @endif
                     
