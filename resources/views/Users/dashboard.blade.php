@@ -1,6 +1,16 @@
 @extends('layouts.master')
 @section('title','Users dashboard')
 @section('content')
+
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show mt-n3">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
 <div class="container">
     
             <div class="d-flex justify-content-center">
@@ -27,11 +37,11 @@
                             <input type="hidden" class="form-control" name="hidden" value="{{$items->id}}">
                             <td>
                                 <div class="form-group">
-                                  <select class="form-control" name="UserRole" onchange="EnableDisable({{$items->id}})">
-                                    <option style="text-align: left " @if($items->user_role == 1 ) selected @endif  value="1">Reporter</option>
-                                    <option style="text-align: left" @if($items->user_role == 2 )selected @endif value="2" >Developer</option>
-                                    <option style="text-align: left" @if($items->user_role == 3 ) selected @endif value="3" >Super-Admin</option>
-                                </select>
+                                    <select class="form-control" name="UserRole" onchange="EnableDisable({{$items->id}})">
+                                        <option style="text-align: left " @if($items->user_role == 1 ) selected @endif  value="1">Reporter</option>
+                                        <option style="text-align: left" @if($items->user_role == 2 )selected @endif value="2" >Developer</option>
+                                        <option style="text-align: left" @if($items->user_role == 3 ) selected @endif value="3" >Super-Admin</option>
+                                    </select>
                                 </div>
                             </td>
                             <td><input type="submit" disabled class="btn btn-success" value="Save" id="save{{$items->id}}"></td>
