@@ -76,12 +76,14 @@ class GebruikersController extends Controller
         //
         // $user = $users::find($users->id);
         // return view('', ['user' => $user]);
+        //$users = User::orderBy('points', 'desc')->limit(10)->get();
 
         if (url()->current() == "http://127.0.0.1:8000/api/user/$users->id") {
             //dd(User::find($users->id));
             //return new UserResource($users);
             return new UserResource(User::find($users->id));
         }
+        //return new UserResource(User::find($users->id));
         //return new UserResource($user);
         //return new UserResource(User::find(1));
     }
@@ -127,5 +129,15 @@ class GebruikersController extends Controller
         $user = User::find($request->id);
         $user->delete();
         return back()->with('success', 'User succesfully deleted!');
+    }
+
+    /**
+     * Gets top 10 users with the most points.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getTopTen()
+    {
+        return UserResource::collection(User::select('name', 'points')->orderBy('points', 'desc')->limit(10)->get());
     }
 }
