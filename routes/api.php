@@ -41,7 +41,7 @@ Route::get('/user/{user}', 'GebruikersController@show');
 // Route::get('/user', function () {
 //     return new UserResource(User::find(1));
 // });
-Route::get('/user/leaderboard', 'GebruikersController@getTopTen');
+Route::get('/leaderboard', 'GebruikersController@getTopTen');
 
 Route::post('/ticket', 'TicketController@store');
 Route::post('/user', 'GebruikersController@store');

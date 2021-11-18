@@ -138,6 +138,6 @@ class GebruikersController extends Controller
      */
     public function getTopTen()
     {
-        return UserResource::collection(User::select('name', 'points')->orderBy('points', 'desc')->limit(10)->get());
+        return User::select('name', 'points')->orderBy('points', 'desc')->limit(10)->get();
     }
 }
