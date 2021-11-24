@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Resources\TicketResource;
 use App\ticket;
 use App\comment;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTicket;
+use phpDocumentor\Reflection\Types\Integer;
 
 class TicketController extends Controller
 {
-    
+
     use SoftDeletes;
 
     /**
@@ -155,6 +157,7 @@ class TicketController extends Controller
         $validated = $request->validated();
         if (ticket::create($validated)) {
             if (url()->current() == config('app.externalconnection')."/api/ticket") {
+                $this->addPoints($request->madeBy, 10);
                 return view('errors.ticket-success');
             }else {
                 return back()->with('success', 'Success!');
@@ -263,5 +266,13 @@ class TicketController extends Controller
      */
     public function sort()
     {
+    }
+    public function addPoints(int $userId, int $totalPoints)
+    {
+        $currentPoints = User::find($userId)->points;
+        $newPoints = $currentPoints + $totalPoints;
+        $affected =  DB::table('users')
+            ->where('id', $userId)
+            ->update(['points' => $newPoints]);
     }
 }
