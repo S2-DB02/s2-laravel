@@ -155,7 +155,7 @@ class TicketController extends Controller
         $validated = $request->validated();
         if (ticket::create($validated)) {
             if (url()->current() == config('app.externalconnection')."/api/ticket") {
-                return "success!";
+                return view('errors.ticket-success');
             }else {
                 return back()->with('success', 'Success!');
             }
