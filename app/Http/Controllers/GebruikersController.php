@@ -9,8 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+
+
+
+
 class GebruikersController extends Controller
 {
+    
 
     /**
      * Display a listing of the resource.
@@ -49,13 +54,13 @@ class GebruikersController extends Controller
             'email' => $data->email,
             'password' => Hash::make($data->password),
         ]);
-            if($newuser && url()->current() == "http://127.0.0.1:8000/user"){
+            if($newuser && url()->current() == config('app.externalconnection')."/user"){
                 return back()->with('success', 'User has been added :)');
-            }elseif($newuser == false && url()->current() == "http://127.0.0.1:8000/user") {
+            }elseif($newuser == false && url()->current() == config('app.externalconnection')."/user") {
                 return back()->with('error', 'Somthing went wrong :(');
-            }elseif ($newuser && url()->current() == "http://127.0.0.1:8000/api/user") {
+            }elseif ($newuser && url()->current() == config('app.externalconnection')."/api/user") {
                 return view('errors.register-success', ['user' => $newuser]);
-            }elseif($newuser == false && url()->current() == "http://127.0.0.1:8000/api/user") {
+            }elseif($newuser == false && url()->current() == config('app.externalconnection')."/api/user") {
                 return view('errors.register-error');
             }
             
@@ -78,7 +83,7 @@ class GebruikersController extends Controller
         // return view('', ['user' => $user]);
         //$users = User::orderBy('points', 'desc')->limit(10)->get();
 
-        if (url()->current() == "http://127.0.0.1:8000/api/user/$users->id") {
+        if (url()->current() == config('app.externalconnection')."/api/user/$users->id") {
             //dd(User::find($users->id));
             //return new UserResource($users);
             return new UserResource(User::find($users->id));

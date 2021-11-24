@@ -33,7 +33,7 @@ class TicketController extends Controller
 //            default:
 //                echo "";
 //        }
-//        if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+//        if (url()->current() == config('app.externalconnection')."/api/ticket") {
 //            // return new TicketResource::collection(ticket::all());
 //            return view('dashboard.dashboard', ['ticket' => $ticket]);
 //        }
@@ -154,14 +154,14 @@ class TicketController extends Controller
     {
         $validated = $request->validated();
         if (ticket::create($validated)) {
-            if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
-                return "success!";
+            if (url()->current() == config('app.externalconnection')."/api/ticket") {
+                return view('errors.ticket-success');
             }else {
                 return back()->with('success', 'Success!');
             }
 
         } else {
-            if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+            if (url()->current() == config('app.externalconnection')."/api/ticket") {
                 return "error!";
 
             }else {
@@ -182,7 +182,7 @@ class TicketController extends Controller
         $user  = DB::table('users')->get();
         $comments = comment::where('ticketId', $ticket->id)->get();
 
-        if (url()->current() == "http://127.0.0.1:8000/api/ticket/$ticket->id") {
+        if (url()->current() == config('app.externalconnection')."/api/ticket/$ticket->id") {
             return new TicketResource($ticket);
         } else {
             return view('Tickets.ticketDetailH', [
