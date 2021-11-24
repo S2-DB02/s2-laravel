@@ -20,6 +20,14 @@
                 <h1 class="text-center">
                     Oh no...</h1>
                 <h2 class="text-center">
+                    @dd($errors)
+                    {{--@foreach($errors->messages as $error)--}}
+
+                        {{--@foreach($error->messages as $yeet)--}}
+                            {{--<p>{{$yeet->email}}</p>--}}
+                        {{--@endforeach--}}
+                    {{--@endforeach--}}
+                        <p>AHHHHHHHHHHHHhh</p>
                     Something went wrong! :(</h2>
                 <div class="error-details">
                     <p class="text-center">You can try again or contact an admin for further support.</p>

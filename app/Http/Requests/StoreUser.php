@@ -17,7 +17,6 @@ class StoreUser extends FormRequest
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,11 +24,12 @@ class StoreUser extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email:rfc,dns|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed'
-        ];
+         static $rules_save = [
+        'name' => ['required','string','max:255'],
+        'email' => ['required','string','email:rfc,dns','max:255','unique:users','regex:/^[A-Za-z0-9.]*@(bastruks|basworld)[.](com)+$/'],
+        'password' => ['required','string','min:8','confirmed']
+         ];
+        return $rules_save;
     }
 
     public function failedValidation(Validator $validator)
@@ -39,11 +39,16 @@ class StoreUser extends FormRequest
         {
             throw new HttpResponseException(back()->withInput()->with('errors',  $validator->errors()));      
         }else {
-            throw new HttpResponseException(response()->json([
-                'success'   => false,
-                'message'   => 'Validation errors',
-                'data'      => $validator->errors()
+            throw new HttpResponseException( response()->view('errors.9000', [
+                'errors' => $validator->errors()
             ]));
+//            throw new HttpResponseException(view('errors.9000')->with('errors',  $validator->errors()));
+//            return abort('9000');
+//            throw new HttpResponseException(response()->json([
+//                'success'   => false,
+//                'message'   => 'Validation errors',
+//                'data'      => $validator->errors()
+//            ]));
         }
     }
 }
