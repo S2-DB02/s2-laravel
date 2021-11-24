@@ -41,12 +41,13 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $id = auth()->user()->id;
-        $urlId = $request->route('id');
+        // $urlId = $request->route('id');
         $newComment = Comment::create([
             'comment' => $request->commentName,
             'userId' => $id,
-            'ticketId' => $urlId,
-        ]);
+            'ticketId' => $request->ticketId,
+        ]); 
+        $newComment->save();
         //TODO: returns views
         return back();
     }
@@ -72,6 +73,7 @@ class CommentController extends Controller
     public function edit(comment $comment)
     {
         //TODO: create view
+        $comment = User::find($comment->id);
         return view('', $comment);
     }
 
@@ -85,11 +87,12 @@ class CommentController extends Controller
     public function update(Request $request, comment $comment)
     {
         //
-        $newComment = comment::find($comment->id);
+        $newComment = comment::find($request->commentid);
         $newComment->comment = $request->comment;
-        $newComment->save();
-        //TODO: check if success then return back with error or success msg
-        return;
+
+        $comment->save();
+        //TODO: views
+        return back();
     }
 
     /**

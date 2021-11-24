@@ -202,24 +202,31 @@
                         <p>This ticket has no comments yet. Go ahead and add one!</p>
                     @else
                         @foreach ($comments as $item)
-                        <p><span class="font-weight-bold">{{ $item->madeBy->name }}:</span><br>
-                        {{ $item->comment }}<br>
+                        <p><span class="font-weight-bold">{{ $item->madeBy->name }}:</span><br><span contenteditable="true">
+                        {{ $item->comment }}</span></br>
                         {{$item->created_at}} ({{$item->created_at->diffForHumans()}})</p>
-                            <?php
-                                if($item->userId == Auth::user()->id){
-                                    echo('<form action="/comment/Delete/'. $item->id .'" method="post">')
-                                        ?>
+                            
+                                @if($item->userId == Auth::user()->id)
+                                   <div><form action="/comment/{{$item->id}}" method="post">
+                                        @method('DELETE')
                                         @csrf
-                                        <?php
-                                            echo('<button class="btn btn-danger btn-sm" type="sumbit">Delete</button>
-                                        </form>');
-                                }
-                             ?>
+                                        <input type="hidden" name="id" value="{{$item->id}}">
+                                        <button class="btn btn-danger btn-sm" type="sumbit">Delete</button>
+                                        </form>
+                                        <form action="/comment/{{$item->id}}" method="post">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" name="commentid" value="{{$item->id}}">
+                                        <button class="btn btn-success btn-sm" type="sumbit">Submit</button>
+                                        </form></div>
+                                @endif
+                           
                         @endforeach
                     @endif
                     
-                    <form action="/comment/{{$ticket->id}}" method="post">
+                    <form action="/comment" method="post">
                         @csrf
+                        <input type="hidden" name="ticketId" value="{{$ticket->id}}">
                         <div class="form-group">
                             <label for="new-comment" class="font-weight-bold">Enter new comment</label>
                             <textarea class="form-control area " name="commentName" id="commentName" rows="2"></textarea>
