@@ -119,6 +119,7 @@ class GebruikersController extends Controller
         // $hased = Hash::make($request->password);
         // $user->password = $hased;
         $user->user_role = $request->UserRole;
+        $user->points = $request->points;
         $user->save();
         return back()->with('success', 'User succesfully updated!');
     }
