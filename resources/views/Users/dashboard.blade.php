@@ -35,7 +35,7 @@
                             @csrf    
                             <td>{{$items->name}}</td>
                             <td><a class="text-muted" href="mailto:{{$items->email}}">{{$items->email}}</a></td>
-                            <td><input required type="number" class="form-control" name="points" value="{{$items->points}}"></td>
+                            <td><input type="number" class="form-control" name="points" value="{{$items->points}}" onchange="EnableDisable({{$items->id}})"></td>
                             <input type="hidden" class="form-control" name="hidden" value="{{$items->id}}">
                             <td>
                                 <div class="form-group">
@@ -46,7 +46,7 @@
                                     </select>
                                 </div>
                             </td>
-                            <td><input type="submit" class="btn btn-success" value="Save" id="save{{$items->id}}"></td>
+                            <td><input disabled type="submit" class="btn btn-success" value="Save" id="save{{$items->id}}"></td>
                         </form>
                         <form action="/user/{{$items->id}}" method="post">
                             @method('DELETE')
