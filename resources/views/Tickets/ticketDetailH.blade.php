@@ -198,10 +198,10 @@
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold">Comments</h5>
                     
-                    @if ($comments->isEmpty())
+                    @if ($ticket->comments->isEmpty())
                         <p>This ticket has no comments yet. Go ahead and add one!</p>
                     @else
-                        @foreach ($comments as $item)
+                        @foreach ($ticket->comments as $item)
                         <p><span class="font-weight-bold">{{ $item->madeBy->name }}:</span><br><span>
                         {{ $item->comment }}</span></br>
                         {{$item->created_at}} ({{$item->created_at->diffForHumans()}})</p>
