@@ -207,19 +207,14 @@
                         {{$item->created_at}} ({{$item->created_at->diffForHumans()}})</p>
                             
                                 @if($item->userId == Auth::user()->id)
-                                   <div><form action="/comment/{{$item->id}}" method="post">
-                                        @method('DELETE')
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{$item->id}}">
-                                        <button class="btn btn-danger btn-sm" type="sumbit">Delete</button>
-                                        </form>
-                                        <form action="/comment/{{$item->id}}" method="post">
-                                        @method('PUT')
-                                        @csrf
-                                        <input type="hidden" name="commentid" value="{{$item->id}}">
-                                        <input name="comment" value="{{ $item->comment }}">
-                                        <button class="btn btn-success btn-sm" type="sumbit">Submit</button>
-                                        </form></div>
+                                   <div>
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteCommentConfirm">
+                                            Delete
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#editPopup">
+                                            Edit
+                                        </button>
+                                    </div>
                                 @endif
                            
                         @endforeach
@@ -242,7 +237,7 @@
 
 </div>
 
-<!-- Delete confirmation box -->
+<!-- Ticket Delete confirmation box -->
 <div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -253,15 +248,66 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>You are about to permanently delete this ticket. Are you certain this is what you would like to do?</p>
+        <p>You are about to delete this ticket. Are you certain this is what you would like to do?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
         <form action="/ticket/{{$ticket->id}}" method="post">
             @method('Delete')
             @csrf
             <input type="hidden" name="id" value="{{$ticket->id}}">
             <td><input type="submit" class="btn btn-danger" value="Delete"></td>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Comment Delete confirmation box -->
+<div class="modal fade" id="deleteCommentConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteCommentConfirmLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteCommentConfirmLabel">Delete Comment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>You are about to permanently delete this comment. Are you certain this is what you would like to do?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <form action="/comment/{{$item->id}}" method="post">
+            @method('DELETE')
+            @csrf
+            <input type="hidden" name="id" value="{{$item->id}}">
+            <button class="btn btn-danger btn-sm" type="sumbit">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Comment edit box -->
+<div class="modal fade" id="editPopup" tabindex="-1" role="dialog" aria-labelledby="editPopupLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPopupLabel">Edit Comment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/comment/{{$item->id}}" method="post">
+            @method('PUT')
+            @csrf
+            <input type="hidden" name="commentid" value="{{$item->id}}">
+            <input name="comment" class="form-control" value="{{ $item->comment }}">
+            <p></p>
+            <button class="btn btn-success btn-sm" type="sumbit">Submit</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
         </form>
       </div>
     </div>
