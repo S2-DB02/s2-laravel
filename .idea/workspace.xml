@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74683ffc-03e2-4628-89b0-bdb96e7a4e9f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/StoreUser.php" afterPath="$PROJECT_DIR$/app/Http/Requests/StoreUser.php" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Tickets/ticketDetailH.blade.php" afterPath="$PROJECT_DIR$/resources/views/Tickets/ticketDetailH.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/errors/register-error.blade.php" afterPath="$PROJECT_DIR$/resources/views/errors/9000.blade.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/errors/9000.blade.php" afterPath="$PROJECT_DIR$/resources/views/errors/9000.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,16 +16,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="2021_09_22_132706_create_tickets_table.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2021_09_22_132706_create_tickets_table.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="19" column="39" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GebruikersController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GebruikersController.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -93,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StoreUser.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StoreUser.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Requests/StoreUser.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="37" column="74" lean-forward="true" selection-start-line="37" selection-start-column="74" selection-end-line="37" selection-end-column="74" />
+            <state relative-caret-position="555">
+              <caret line="37" column="74" lean-forward="false" selection-start-line="37" selection-start-column="74" selection-end-line="37" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -107,7 +93,7 @@
         <entry file="file://$PROJECT_DIR$/resources/views/Tickets/dashboard.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="76" column="108" lean-forward="true" selection-start-line="76" selection-start-column="108" selection-end-line="76" selection-end-column="108" />
+              <caret line="76" column="108" lean-forward="false" selection-start-line="76" selection-start-column="108" selection-end-line="76" selection-end-column="108" />
               <folding>
                 <marker date="1637761486833" expanded="true" signature="862:878" ph="..." />
                 <marker date="1637761486833" expanded="true" signature="889:898" ph="..." />
@@ -137,21 +123,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="9000.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="9000.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/errors/9000.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="22" lean-forward="true" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+            <state relative-caret-position="374">
+              <caret line="22" column="51" lean-forward="false" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
               <folding>
-                <marker date="1637764694827" expanded="true" signature="9:29" ph="..." />
-                <marker date="1637764694827" expanded="true" signature="41:48" ph="..." />
-                <marker date="1637764694827" expanded="true" signature="85:94" ph="..." />
-                <marker date="1637764694827" expanded="true" signature="1019:1025" ph="..." />
-                <marker date="1637764694827" expanded="true" signature="1061:1088" ph="..." />
-                <marker date="1637764694827" expanded="true" signature="1062:1088" ph="..." />
-                <marker date="1637764694827" expanded="true" signature="1132:1157" ph="..." />
-                <marker date="1637764694827" expanded="true" signature="1200:1212" ph="..." />
+                <marker date="1637830633901" expanded="true" signature="9:29" ph="..." />
+                <marker date="1637830633901" expanded="true" signature="41:48" ph="..." />
+                <marker date="1637830633901" expanded="true" signature="85:94" ph="..." />
+                <marker date="1637830633901" expanded="true" signature="1166:1197" ph="..." />
+                <marker date="1637830633901" expanded="true" signature="1187:1197" ph="..." />
+                <marker date="1637830633901" expanded="true" signature="1225:1231" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageBag.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/MessageBag.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-578">
+              <caret line="25" column="13" lean-forward="true" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -302,8 +296,8 @@
         <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
         <option value="$PROJECT_DIR$/resources/views/errors/register-error.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/Tickets/ticketDetailH.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/errors/9000.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Requests/StoreUser.php" />
+        <option value="$PROJECT_DIR$/resources/views/errors/9000.blade.php" />
       </list>
     </option>
   </component>
@@ -578,6 +572,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="SearchEverywhereHistoryKey" value="MESSAGEB&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -624,12 +619,12 @@
       <workItem from="1633597949177" duration="3013000" />
       <workItem from="1634803585194" duration="20140000" />
       <workItem from="1636546090120" duration="4925000" />
-      <workItem from="1637756099865" duration="8037000" />
+      <workItem from="1637756099865" duration="10116000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47877000" />
+    <option name="totallyTimeSpent" value="49956000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -669,7 +664,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/dashboard/dashboard.blade.php" />
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -851,7 +845,7 @@
         <state relative-caret-position="867">
           <caret line="58" column="50" lean-forward="false" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
           <folding>
-            <marker date="1637761486778" expanded="true" signature="8250:8323" ph="{...}" />
+            <marker date="1637764923943" expanded="true" signature="8727:8735" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1130,7 +1124,7 @@
     <entry file="file://$PROJECT_DIR$/resources/views/Tickets/dashboard.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="76" column="108" lean-forward="true" selection-start-line="76" selection-start-column="108" selection-end-line="76" selection-end-column="108" />
+          <caret line="76" column="108" lean-forward="false" selection-start-line="76" selection-start-column="108" selection-end-line="76" selection-end-column="108" />
           <folding>
             <marker date="1637761486833" expanded="true" signature="862:878" ph="..." />
             <marker date="1637761486833" expanded="true" signature="889:898" ph="..." />
@@ -1159,28 +1153,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/errors/9000.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/StoreUser.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="22" lean-forward="true" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
-          <folding>
-            <marker date="1637764694827" expanded="true" signature="9:29" ph="..." />
-            <marker date="1637764694827" expanded="true" signature="41:48" ph="..." />
-            <marker date="1637764694827" expanded="true" signature="85:94" ph="..." />
-            <marker date="1637764694827" expanded="true" signature="1019:1025" ph="..." />
-            <marker date="1637764694827" expanded="true" signature="1061:1088" ph="..." />
-            <marker date="1637764694827" expanded="true" signature="1062:1088" ph="..." />
-            <marker date="1637764694827" expanded="true" signature="1132:1157" ph="..." />
-            <marker date="1637764694827" expanded="true" signature="1200:1212" ph="..." />
-          </folding>
+        <state relative-caret-position="555">
+          <caret line="37" column="74" lean-forward="false" selection-start-line="37" selection-start-column="74" selection-end-line="37" selection-end-column="74" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Requests/StoreUser.php">
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/MessageBag.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="37" column="74" lean-forward="true" selection-start-line="37" selection-start-column="74" selection-end-line="37" selection-end-column="74" />
+        <state relative-caret-position="-578">
+          <caret line="25" column="13" lean-forward="true" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/errors/9000.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="51" lean-forward="false" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
+          <folding>
+            <marker date="1637830633901" expanded="true" signature="9:29" ph="..." />
+            <marker date="1637830633901" expanded="true" signature="41:48" ph="..." />
+            <marker date="1637830633901" expanded="true" signature="85:94" ph="..." />
+            <marker date="1637830633901" expanded="true" signature="1166:1197" ph="..." />
+            <marker date="1637830633901" expanded="true" signature="1187:1197" ph="..." />
+            <marker date="1637830633901" expanded="true" signature="1225:1231" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
