@@ -49,7 +49,7 @@ class CommentController extends Controller
         ]); 
         $newComment->save();
         //TODO: returns views
-        return back();
+        return back()->with('success', 'Comment succesfully added!');;
     }
 
     /**
@@ -90,9 +90,9 @@ class CommentController extends Controller
         $newComment = comment::find($request->commentid);
         $newComment->comment = $request->comment;
 
-        $comment->save();
+        $newComment->save();
         //TODO: views
-        return back();
+        return back()->with('success', 'Comment succesfully updated!');
     }
 
     /**
@@ -107,6 +107,6 @@ class CommentController extends Controller
         $comment = comment::find($request->id);
         $comment->delete();
         //TODO: redirect
-        return back();
+        return back()->with('success', 'Comment succesfully deleted!');
     }
 }

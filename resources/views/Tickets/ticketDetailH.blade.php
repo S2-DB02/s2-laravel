@@ -202,7 +202,7 @@
                         <p>This ticket has no comments yet. Go ahead and add one!</p>
                     @else
                         @foreach ($comments as $item)
-                        <p><span class="font-weight-bold">{{ $item->madeBy->name }}:</span><br><span contenteditable="true">
+                        <p><span class="font-weight-bold">{{ $item->madeBy->name }}:</span><br><span>
                         {{ $item->comment }}</span></br>
                         {{$item->created_at}} ({{$item->created_at->diffForHumans()}})</p>
                             
@@ -217,6 +217,7 @@
                                         @method('PUT')
                                         @csrf
                                         <input type="hidden" name="commentid" value="{{$item->id}}">
+                                        <input name="comment" value="{{ $item->comment }}">
                                         <button class="btn btn-success btn-sm" type="sumbit">Submit</button>
                                         </form></div>
                                 @endif
