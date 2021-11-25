@@ -22,6 +22,9 @@
                 <h2 class="text-center">  Something went wrong! :(</h2>
                 <h2 class="text-center">  Message:  </h2>
                 <h3 class="text-center text-danger">
+                    @foreach($errors->get('password') as $error)
+                        - {{$error}}<br>
+                    @endforeach
                     @foreach($errors->get('email') as $error)
                       - {{$error}}<br>
                     @endforeach
