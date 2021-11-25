@@ -52,7 +52,7 @@
                         <a href="/ticket"><button type="button" class="btn btn-outline-dark fas fa-arrow-left"></button></a>
                         <h5 class="card-title font-weight-bold ml-3 mb-0">Ticket NR: {{$ticket->id}}</h5>
                     </div>
-                    @dd($ticket)
+                    {{-- @dd($ticket) --}}
                     <form action="/ticket/{{$ticket->id}}" method="POST">
                         @method('PUT')
                         @csrf
