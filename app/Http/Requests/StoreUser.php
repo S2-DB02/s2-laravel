@@ -26,7 +26,7 @@ class StoreUser extends FormRequest
     {
          static $rules_save = [
         'name' => ['required','string','max:255'],
-        'email' => ['required','string','email:rfc,dns','max:255','unique:users','regex:/^[A-Za-z0-9.]*@(bastruks|basworld)[.](com)+$/'],
+        'email' => ['required','string','email:rfc,dns','max:255','unique:users','regex:/^[A-Za-z0-9.]*@(bastrucks|basworld)[.](com)+$/'],
         'password' => ['required','string','min:8','confirmed']
          ];
         return $rules_save;
