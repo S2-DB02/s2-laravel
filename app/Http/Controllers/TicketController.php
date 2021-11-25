@@ -184,16 +184,13 @@ class TicketController extends Controller
      */
     public function show(ticket $ticket)
     {
-        $user  = DB::table('users')->get();
-        $comments = comment::where('ticketId', $ticket->id)->get();
-
+        $user  = User::all();
         if (url()->current() == config('app.externalconnection')."/api/ticket/$ticket->id") {
             return new TicketResource($ticket);
         } else {
             return view('Tickets.ticketDetailH', [
             'ticket' => $ticket,
-            'users' => $user,
-            'comments' => $comments
+            'users' => $user
             ]);
         }
     }
