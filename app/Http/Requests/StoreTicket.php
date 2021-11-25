@@ -26,7 +26,7 @@ class StoreTicket extends FormRequest
         return [
             'type' => 'required|numeric|min:1|max:5',
             'name' => 'required|max:255',
-            'photo' => 'nullable|string|max:255',
+            'photo' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
             'remark' => 'required|string',
             'URL' => 'sometimes|required|string',
             'madeBy' => 'sometimes|required|numeric',

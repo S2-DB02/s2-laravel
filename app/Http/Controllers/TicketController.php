@@ -8,6 +8,7 @@ use App\Http\Resources\TicketResource;
 use App\ticket;
 use App\comment;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTicket;
@@ -155,6 +156,7 @@ class TicketController extends Controller
     public function store(StoreTicket $request)
     {
         $validated = $request->validated();
+        Storage::disk('uploads')->putFileAs('/', $request->file('photo'), 'name.png');
         if (ticket::create($validated)) {
             if (url()->current() == config('app.externalconnection')."/api/ticket") {
                 $this->addPoints($request->madeBy, 10);
