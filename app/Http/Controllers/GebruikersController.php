@@ -54,11 +54,11 @@ class GebruikersController extends Controller
             'email' => $data->email,
             'password' => Hash::make($data->password),
         ]);
-            if($newuser && url()->current() == config('app.externalconnection')."/user"){
+            if($newuser == true && url()->current() == config('app.externalconnection')."/user"){
                 return back()->with('success', 'User has been added :)');
             }elseif($newuser == false && url()->current() == config('app.externalconnection')."/user") {
                 return back()->with('error', 'Somthing went wrong :(');
-            }elseif ($newuser && url()->current() == config('app.externalconnection')."/api/user") {
+            }elseif ($newuser == true && url()->current() == config('app.externalconnection')."/api/user") {
                 return view('errors.register-success', ['user' => $newuser]);
             }elseif($newuser == false && url()->current() == config('app.externalconnection')."/api/user") {
                 return view('errors.register-error');
