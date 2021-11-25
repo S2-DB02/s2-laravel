@@ -9,8 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+
+
+
+
 class GebruikersController extends Controller
 {
+    
 
     /**
      * Display a listing of the resource.
@@ -49,13 +54,13 @@ class GebruikersController extends Controller
             'email' => $data->email,
             'password' => Hash::make($data->password),
         ]);
-            if($newuser && url()->current() == "http://127.0.0.1:8000/user"){
+            if($newuser == true && url()->current() == config('app.externalconnection')."/user"){
                 return back()->with('success', 'User has been added :)');
-            }elseif($newuser == false && url()->current() == "http://127.0.0.1:8000/user") {
+            }elseif($newuser == false && url()->current() == config('app.externalconnection')."/user") {
                 return back()->with('error', 'Somthing went wrong :(');
-            }elseif ($newuser && url()->current() == "http://127.0.0.1:8000/api/user") {
+            }elseif ($newuser == true && url()->current() == config('app.externalconnection')."/api/user") {
                 return view('errors.register-success', ['user' => $newuser]);
-            }elseif($newuser == false && url()->current() == "http://127.0.0.1:8000/api/user") {
+            }elseif($newuser == false && url()->current() == config('app.externalconnection')."/api/user") {
                 return view('errors.register-error');
             }
             
@@ -76,12 +81,14 @@ class GebruikersController extends Controller
         //
         // $user = $users::find($users->id);
         // return view('', ['user' => $user]);
+        //$users = User::orderBy('points', 'desc')->limit(10)->get();
 
-        if (url()->current() == "http://127.0.0.1:8000/api/user/$users->id") {
+        if (url()->current() == config('app.externalconnection')."/api/user/$users->id") {
             //dd(User::find($users->id));
             //return new UserResource($users);
             return new UserResource(User::find($users->id));
         }
+        //return new UserResource(User::find($users->id));
         //return new UserResource($user);
         //return new UserResource(User::find(1));
     }
@@ -112,6 +119,7 @@ class GebruikersController extends Controller
         // $hased = Hash::make($request->password);
         // $user->password = $hased;
         $user->user_role = $request->UserRole;
+        $user->points = $request->points;
         $user->save();
         return back()->with('success', 'User succesfully updated!');
     }
@@ -127,5 +135,15 @@ class GebruikersController extends Controller
         $user = User::find($request->id);
         $user->delete();
         return back()->with('success', 'User succesfully deleted!');
+    }
+
+    /**
+     * Gets top 10 users with the most points.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getTopTen()
+    {
+        return User::select('name', 'points')->orderBy('points', 'desc')->limit(10)->get();
     }
 }

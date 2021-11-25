@@ -7,13 +7,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Resources\TicketResource;
 use App\ticket;
 use App\comment;
+use App\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTicket;
+use phpDocumentor\Reflection\Types\Integer;
 
 class TicketController extends Controller
 {
-    
+
     use SoftDeletes;
 
     /**
@@ -33,7 +36,7 @@ class TicketController extends Controller
 //            default:
 //                echo "";
 //        }
-//        if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+//        if (url()->current() == config('app.externalconnection')."/api/ticket") {
 //            // return new TicketResource::collection(ticket::all());
 //            return view('dashboard.dashboard', ['ticket' => $ticket]);
 //        }
@@ -105,6 +108,22 @@ class TicketController extends Controller
         else if ($request->query("order") === "High"){
             $ticket = DB::table('tickets')->where("priority", "=", 3)->paginate(20);
         }
+
+        //Title alphabetic
+        else if ($request->query("order") === "AtoZ"){
+            $ticket = ticket::orderBy("name", "asc")->paginate(20);
+        }
+        else if ($request->query("order") === "ZtoA"){
+            $ticket = ticket::orderBy("name", "desc")->paginate(20);
+        }
+
+        //Ticket alphabetic
+        else if ($request->query("order") === "1toMax"){
+            $ticket = ticket::orderBy("id", "asc")->paginate(20);
+        }
+        else if ($request->query("order") === "Maxto1"){
+            $ticket = ticket::orderBy("id", "desc")->paginate(20);
+        }
         return view('Tickets.dashboard', ['ticket' => $ticket]);
 
 
@@ -137,15 +156,17 @@ class TicketController extends Controller
     public function store(StoreTicket $request)
     {
         $validated = $request->validated();
+        Storage::disk('uploads')->putFileAs('/', $request->file('photo'), 'name.png');
         if (ticket::create($validated)) {
-            if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
-                return "success!";
+            if (url()->current() == config('app.externalconnection')."/api/ticket") {
+                $this->addPoints($request->madeBy, 10);
+                return view('errors.ticket-success');
             }else {
                 return back()->with('success', 'Success!');
             }
 
         } else {
-            if (url()->current() == "http://127.0.0.1:8000/api/ticket") {
+            if (url()->current() == config('app.externalconnection')."/api/ticket") {
                 return "error!";
 
             }else {
@@ -163,16 +184,13 @@ class TicketController extends Controller
      */
     public function show(ticket $ticket)
     {
-        $user  = DB::table('users')->get();
-        $comments = comment::where('ticketId', $ticket->id)->get();
-
-        if (url()->current() == "http://127.0.0.1:8000/api/ticket/$ticket->id") {
+        $user  = User::all();
+        if (url()->current() == config('app.externalconnection')."/api/ticket/$ticket->id") {
             return new TicketResource($ticket);
         } else {
             return view('Tickets.ticketDetailH', [
             'ticket' => $ticket,
-            'users' => $user,
-            'comments' => $comments
+            'users' => $user
             ]);
         }
     }
@@ -247,5 +265,11 @@ class TicketController extends Controller
      */
     public function sort()
     {
+    }
+    public function addPoints(int $userId, int $totalPoints)
+    {
+        $user = User::find($userId);
+        $user->points = $user->points + $totalPoints;
+        $user->save();
     }
 }

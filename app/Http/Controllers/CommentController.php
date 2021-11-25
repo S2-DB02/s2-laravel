@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\comment;
 use Illuminate\Http\Request;
+use Auth;
 
 class CommentController extends Controller
 {
@@ -39,10 +40,16 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        comment::create($request);
+        $id = auth()->user()->id;
+        // $urlId = $request->route('id');
+        $newComment = Comment::create([
+            'comment' => $request->commentName,
+            'userId' => $id,
+            'ticketId' => $request->ticketId,
+        ]); 
+        $newComment->save();
         //TODO: returns views
-        return;
+        return back()->with('success', 'Comment succesfully added!');;
     }
 
     /**
@@ -66,6 +73,7 @@ class CommentController extends Controller
     public function edit(comment $comment)
     {
         //TODO: create view
+        $comment = User::find($comment->id);
         return view('', $comment);
     }
 
@@ -79,11 +87,12 @@ class CommentController extends Controller
     public function update(Request $request, comment $comment)
     {
         //
-        $newComment = comment::find($comment->id);
+        $newComment = comment::find($request->commentid);
         $newComment->comment = $request->comment;
+
         $newComment->save();
-        //TODO: check if success then return back with error or success msg
-        return;
+        //TODO: views
+        return back()->with('success', 'Comment succesfully updated!');
     }
 
     /**
@@ -98,6 +107,6 @@ class CommentController extends Controller
         $comment = comment::find($request->id);
         $comment->delete();
         //TODO: redirect
-        return;
+        return back()->with('success', 'Comment succesfully deleted!');
     }
 }

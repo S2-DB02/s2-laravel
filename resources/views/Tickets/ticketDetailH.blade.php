@@ -39,32 +39,34 @@
 
 <div class="container">
 
-    <div class="row ml-1 mb-2">
-        <a href="/ticket"><button type="button" class="btn btn-outline-dark">< Back</button></a>
-    </div>
+    
 
     <div class="row">
 
-        <!-- Main card with screenshot -->
+        <!-- Ticket content card -->
         <div class="col-md-12 col-xs-12 mb-3">
             <div class="card">
-                <img src="{{$ticket->photo}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold">Ticket NR: {{$ticket->id}}</h5>
+
+                    <div class="row m-0 mb-2 align-comments-center">
+                        <a href="/ticket"><button type="button" class="btn btn-outline-dark fas fa-arrow-left"></button></a>
+                        <h5 class="card-title font-weight-bold ml-3 mb-0">Ticket NR: {{$ticket->id}}</h5>
+                    </div>
+                    {{-- @dd($ticket) --}}
                     <form action="/ticket/{{$ticket->id}}" method="POST">
                         @method('PUT')
                         @csrf
                         <div class="row">
                             
                             <!-- Left column -->
-                            <div class="col-md-6 col-xs-12">
+                            <div class="d-flex flex-column col-md-6 col-xs-12 justify-content-between">
                                 
                                 <div class="form-group">
-                                    <label for="name">Title</label>
+                                    <label for="name" class="font-weight-bold">Title</label>
                                     <input type="text" class="form-control" name="name" id="name"value="{{$ticket->name}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="Priority">Priority</label>
+                                    <label for="Priority" class="font-weight-bold">Priority</label>
                                     <select class="form-control" name="priority" id="Priority">
                                         <option value="1" @if ($ticket->priority == 1)
                                             selected
@@ -78,7 +80,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="status">Status</label>
+                                    <label for="status" class="font-weight-bold">Status</label>
                                     <select class="form-control" name="status" id="status">
                                         <option value="1"@if ($ticket->status == 1)
                                             selected
@@ -92,7 +94,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="type">Type</label>
+                                    <label for="type" class="font-weight-bold">Type</label>
                                     <select class="form-control" name="type" id="type">
                                         <option value="1"@if ($ticket->type == 1)
                                             selected
@@ -112,7 +114,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="department">Assign to:</label>
+                                    <label for="department" class="font-weight-bold">Assign to:</label>
                                     <select name="developer" id="department" class="form-control">
                                         <option value=""> -- Select One --</option>
 
@@ -130,29 +132,26 @@
                             <!-- Right column -->
                             <div class="col-md-6 col-xs-12">
                                 <div class="form-group">
-                                    <label for="remark">Description</label>
-                                    <textarea class="form-control area " name="remark" id="remark" rows="15">{{$ticket->remark}}</textarea>
+                                    <label for="remark" class="font-weight-bold">Description</label>
+                                    <textarea class="form-control area" name="remark" id="remark" rows="15">{{$ticket->remark}}</textarea>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-sm float-right mt-auto">Save</button>
                             </div>
+                        </div>
+
+                        <div class="row justify-content-end m-0">
+                            <button type="submit" class="btn btn-success btn-sm">Save</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- Description card -->
-        <!-- <div class="col-md-6 col-xs-12 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="remark" class="font-weight-bold">Description</label>
-                        <textarea class="form-control area " name="remark" id="remark" rows="15">{{$ticket->remark}}</textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success btn-sm float-right">Save</button>
-                </div>
-            </div>
-        </div> -->
+        <!-- Screenshot card -->
+        <div class="col-md-12 mb-3">
+            <a href="{{urldecode(urldecode($ticket->URL))}}">
+                <img src="{{$ticket->photo}}" class="card-img-top" alt="Screenshot of ticket">
+            </a>
+        </div>
 
         <!-- Information card -->
         <div class="col-md-6 col-xs-12 mb-3">
@@ -199,20 +198,37 @@
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold">Comments</h5>
                     
-                    @if ($comments->isEmpty())
+                    @if ($ticket->comments->isEmpty())
                         <p>This ticket has no comments yet. Go ahead and add one!</p>
                     @else
-                        @foreach ($comments as $item)
-                            <p><span class="font-weight-bold">{{ $item->madeBy->name }}:</span> {{ $item->comment }}<br>{{$item->created_at}}</p>
+                        @foreach ($ticket->comments as $comment)
+                        <p><span class="font-weight-bold">{{ $comment->madeBy->name }}:</span><br><span>
+                        {{ $comment->comment }}</span>
+                        {{$comment->created_at}} ({{$comment->created_at->diffForHumans()}})</p>
+                            
+                                @if($comment->userId == Auth::user()->id)
+                                   <div>
+                                        <button href="#" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteCommentConfirm{{ $comment->id }}">
+                                            Delete
+                                        </button>
+                                        <button href="#" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#editPopup{{ $comment->id }}">
+                                            Edit
+                                        </button>
+                                    </div>
+
+                                @endif
+                           
                         @endforeach
                     @endif
                     
-                    <form action="" method="POST">
+                    <form action="/comment" method="post">
+                        @csrf
+                        <input type="hidden" name="ticketId" value="{{$ticket->id}}">
                         <div class="form-group">
                             <label for="new-comment" class="font-weight-bold">Enter new comment</label>
-                            <textarea class="form-control area " name="new-comment" id="new-comment" rows="2"></textarea>
+                            <textarea class="form-control area " name="commentName" id="commentName" rows="2"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-success btn-sm float-right" disabled>Send</button>
+                        <button type="submit" class="btn btn-success btn-sm float-right">Send</button>
                     </form>
                 </div>
             </div>
@@ -222,7 +238,7 @@
 
 </div>
 
-<!-- Delete confirmation box -->
+<!-- Ticket Delete confirmation box -->
 <div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -233,10 +249,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>You are about to permanently delete this ticket. Are you certain this is what you would like to do?</p>
+        <p>You are about to delete this ticket. Are you certain this is what you would like to do?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
         <form action="/ticket/{{$ticket->id}}" method="post">
             @method('Delete')
             @csrf
@@ -247,4 +263,63 @@
     </div>
   </div>
 </div>
+
+<!-- Comment Delete confirmation box -->
+@if(isset($comment))
+    <div class="modal fade" id="deleteCommentConfirm{{ $comment->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteCommentConfirmLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="deleteCommentConfirmLabel">Delete Comment</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>You are about to permanently delete this comment. Are you certain this is what you would like to do?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+            <form action="/comment/{{$comment->id}}" method="post">
+                @method('DELETE')
+                @csrf
+                <input type="hidden" name="id" value="{{$comment->id}}">
+                <button class="btn btn-danger btn-sm" type="sumbit">Delete</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+
+@endif
+
+<!-- Comment edit box -->
+@if(isset($comment))
+    <div class="modal fade" id="editPopup{{ $comment->id }}" tabindex="-1" role="dialog" aria-labelledby="editPopupLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="editPopupLabel">Edit Comment</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="/comment/{{$comment->id}}" method="post">
+                @method('PUT')
+                @csrf
+
+                <input type="hidden" name="commentid" value="{{$comment->id}}">
+                <input name="comment" class="form-control" value="{{ $comment->comment }}">
+                <p></p>
+                <button class="btn btn-success btn-sm" type="sumbit">Submit</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+
+@endif
+
 @endsection
