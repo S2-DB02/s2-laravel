@@ -271,10 +271,8 @@ class TicketController extends Controller
     }
     public function addPoints(int $userId, int $totalPoints)
     {
-        $currentPoints = User::find($userId)->points;
-        $newPoints = $currentPoints + $totalPoints;
-        $affected =  DB::table('users')
-            ->where('id', $userId)
-            ->update(['points' => $newPoints]);
+        $user = User::find($userId);
+        $user->points = $user->points + $totalPoints;
+        $user->save();
     }
 }
