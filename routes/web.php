@@ -16,8 +16,9 @@
 // Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 // Route::get('/sanderdashboard', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 
-Route::get('/', 'TicketController@index');
+//Route::get('/', 'TicketController@index'); old route to get to ticket dashboard even when not logged in
 
+Route::resource('/',  TicketController::class)->middleware(['auth','Developer']);
 Route::resource('/ticket',  TicketController::class)->middleware(['auth','Developer']);
 
 Auth::routes(['register' => false]);
