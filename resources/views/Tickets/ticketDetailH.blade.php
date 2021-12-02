@@ -203,20 +203,57 @@
                     @else
                         @foreach ($ticket->comments as $comment)
                         <p><span class="font-weight-bold">{{ $comment->madeBy->name }}:</span><br><span>
-                        {{ $comment->comment }}</span>
-                        {{$comment->created_at}} ({{$comment->created_at->diffForHumans()}})</p>
-                            
-                                @if($comment->userId == Auth::user()->id)
-                                   <div>
-                                        <button href="#" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteCommentConfirm{{ $comment->id }}">
+
+                            @if($comment->userId == Auth::user()->id)
+                            <div>
+                                <div>
+                                    <form action="/comment/{{ $comment->id }}" method="post">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" name="commentid" value="{{$comment->id}}">
+                                        <input name="comment" class="form-control" value="{{ $comment->comment }}">
+                                    </form>
+                                </div>
+                                {{$comment->created_at}} ({{$comment->created_at->diffForHumans()}})</p>
+                                <div>
+                                    <form action="/comment/{{ $comment->id }}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{$comment->id}}">
+                                        <button class="btn btn-sm btn-danger" value="Delete">
                                             Delete
                                         </button>
-                                        <button href="#" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#editPopup{{ $comment->id }}">
+                                    </form>
+                                </div>
+                             </div>
+                             
+                             @else 
+                             {{ $comment->comment }}</span>
+                             {{$comment->created_at}} ({{$comment->created_at->diffForHumans()}})</p>
+                             @endif
+                            
+                                {{-- @if($comment->userId == Auth::user()->id)
+                                   <div>
+                                    <form action="/comment/{{ $comment->id }}" method="post">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" name="commentid" value="{{$comment->id}}">
+                                        <input name="comment" class="form-control" value="{{ $comment->comment }}">
+                                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal">
                                             Edit
                                         </button>
-                                    </div>
+                                    </form>
+                                    <form action="/comment/{{ $comment->id }}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{$comment->id}}">
+                                        <button class="btn btn-sm btn-danger" value="Delete"  data-toggle="modal" data-target="#deleteConfirm">
+                                            Delete
+                                        </button>
+                                    </form>
+                                    </div> --}}
 
-                                @endif
+                                {{-- @endif --}}
                            
                         @endforeach
                     @endif
@@ -266,7 +303,7 @@
 
 <!-- Comment Delete confirmation box -->
 @if(isset($comment))
-    <div class="modal fade" id="deleteCommentConfirm{{ $comment->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteCommentConfirmLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteCommentConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteCommentConfirmLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -295,7 +332,7 @@
 
 <!-- Comment edit box -->
 @if(isset($comment))
-    <div class="modal fade" id="editPopup{{ $comment->id }}" tabindex="-1" role="dialog" aria-labelledby="editPopupLabel" aria-hidden="true">
+    <div class="modal fade" id="editPopup" tabindex="-1" role="dialog" aria-labelledby="editPopupLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
