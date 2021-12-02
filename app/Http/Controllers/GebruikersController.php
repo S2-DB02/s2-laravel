@@ -144,6 +144,9 @@ class GebruikersController extends Controller
      */
     public function getTopTen()
     {
-        return User::select('name', 'points')->orderBy('points', 'desc')->limit(10)->get();
+        return User::select('id','name', 'points')->orderBy('points', 'desc')->limit(10)->get();
+    }
+    public function getAllUsers(){
+        return User::select('id','name','points')->get();
     }
 }
