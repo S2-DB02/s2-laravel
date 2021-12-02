@@ -26,20 +26,18 @@
 <div class="bg bg3"></div>
 <div class="content">
 
-    <!-- In case of validation errors, they appear here -->
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+<!-- In case of validation errors, they appear here -->
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <div class="container">
-
-    
 
     <div class="row">
 
@@ -48,7 +46,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <div class="row m-0 mb-2 align-comments-center">
+                    <div class="row m-0 mb-2 align-items-center">
                         <a href="/ticket"><button type="button" class="btn btn-outline-dark fas fa-arrow-left"></button></a>
                         <h5 class="card-title font-weight-bold ml-3 mb-0">Ticket NR: {{$ticket->id}}</h5>
                     </div>
@@ -147,10 +145,14 @@
         </div>
 
         <!-- Screenshot card -->
-        <div class="col-md-12 mb-3">
-            <a href="{{urldecode(urldecode($ticket->URL))}}">
-                <img src="{{$ticket->photo}}" class="card-img-top" alt="Screenshot of ticket">
-            </a>
+        <div class="col-12 mb-3">
+            <div class="card">
+                <div clas="card-body">
+                    <a href="{{urldecode(urldecode($ticket->URL))}}">
+                        <img src="{{$ticket->photo}}" class="card-img-top" alt="Screenshot of ticket">
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Information card -->
@@ -180,62 +182,78 @@
             </div>
         </div>
 
-        <!-- Screenshot card -->
-        <!-- <div class="col-md-6 col-xs-12 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold">Screenshot</h5>
-                    <a href="{{urldecode(urldecode($ticket->URL))}}">
-                        <img alt="Screenshot Ticket" class="img col-12" src="{{$ticket->photo}}">
-                    </a>
-                </div>
-            </div>
-        </div> -->
-
         <!-- Comments card -->
         <div class="col-md-6 col-xs-12 mb-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold">Comments</h5>
-                    
-                    @if ($ticket->comments->isEmpty())
-                        <p>This ticket has no comments yet. Go ahead and add one!</p>
-                    @else
-                        @foreach ($ticket->comments as $comment)
-                        <p><span class="font-weight-bold">{{ $comment->madeBy->name }}:</span><br><span>
-                        {{ $comment->comment }}</span>
-                        {{$comment->created_at}} ({{$comment->created_at->diffForHumans()}})</p>
-                            
-                                @if($comment->userId == Auth::user()->id)
-                                   <div>
-                                        <button href="#" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteCommentConfirm{{ $comment->id }}">
-                                            Delete
-                                        </button>
-                                        <button href="#" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#editPopup{{ $comment->id }}">
-                                            Edit
-                                        </button>
-                                    </div>
 
-                                @endif
-                           
-                        @endforeach
-                    @endif
-                    
-                    <form action="/comment" method="post">
-                        @csrf
-                        <input type="hidden" name="ticketId" value="{{$ticket->id}}">
-                        <div class="form-group">
-                            <label for="new-comment" class="font-weight-bold">Enter new comment</label>
-                            <textarea class="form-control area " name="commentName" id="commentName" rows="2"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-success btn-sm float-right">Send</button>
-                    </form>
+                    <div class="mb-3">
+                        <h5 class="card-title font-weight-bold">New comment</h5>
+                        <form action="/comment" method="post">
+                            @csrf
+                            <input type="hidden" name="ticketId" value="{{$ticket->id}}">
+                            <div class="form-group">
+                                <label hidden for="new-comment" class="font-weight-bold">Enter new comment</label>
+                                <textarea class="form-control area" name="commentName" id="commentName" rows="2" placeholder="Your message"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-sm float-right">Send</button>
+                        </form>
+                    </div>
+
+                    <div>
+                        <h5 class="card-title font-weight-bold">Comments ({{$ticket->comments->count()}})</h5>
+
+                        @if ($ticket->comments->isEmpty())
+                            <p>This ticket has no comments yet. Go ahead and add one!</p>
+                        @else
+                            @foreach ($ticket->comments->sortByDesc('created_at') as $comment)
+                                <div class="ticketdetail-comment">
+                                    <span class="font-weight-bold">{{ $comment->madeBy->name }}:</span>
+                                    <p name="comment" class="ticketdetail-comment-text mb-1" id="commentP{{$comment->id}}">
+                                        {{ $comment->comment }}
+                                    </p>
+                                    <form hidden action="/comment/{{ $comment->id }}" method="post" id="editCommentForm{{$comment->id}}">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" name="commentid" value="{{$comment->id}}">
+                                        <textarea name="comment" class="form-control area">{{ $comment->comment }}</textarea>
+                                    </form>
+                                    <div class="d-flex align-items-center mb-2">
+                                        @if($comment->userId == Auth::user()->id)
+                                            <ul class="list-unstyled list-inline flex-fill mb-0">
+                                                <li class="list-inline-item">
+                                                    <button class="astext" onclick="ToggleCommentEdit({{$comment->id}})" id="editCommentBtn{{$comment->id}}">
+                                                        Edit
+                                                    </button>
+                                                    <button hidden class="astext" form="editCommentForm{{$comment->id}}" id="putCommentBtn{{$comment->id}}">
+                                                        Save
+                                                    </button>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <form action="/comment/{{ $comment->id }}" method="post">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{$comment->id}}">
+                                                        <button class="astext" value="Delete">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        @endif
+                                        <span class="ticketdetail-comment-time flex-fill text-right">
+                                            <i class="fa fa-clock-o"></i>
+                                            {{$comment->created_at}} ({{$comment->created_at->diffForHumans()}})
+                                        </span>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
 
 <!-- Ticket Delete confirmation box -->
@@ -266,7 +284,7 @@
 
 <!-- Comment Delete confirmation box -->
 @if(isset($comment))
-    <div class="modal fade" id="deleteCommentConfirm{{ $comment->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteCommentConfirmLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteCommentConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteCommentConfirmLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -293,33 +311,14 @@
 
 @endif
 
-<!-- Comment edit box -->
-@if(isset($comment))
-    <div class="modal fade" id="editPopup{{ $comment->id }}" tabindex="-1" role="dialog" aria-labelledby="editPopupLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="editPopupLabel">Edit Comment</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form action="/comment/{{$comment->id}}" method="post">
-                @method('PUT')
-                @csrf
+<script>
+function ToggleCommentEdit(id){
+    document.getElementById("commentP" + id).hidden = true;
+    document.getElementById("editCommentForm" + id).hidden = false;
 
-                <input type="hidden" name="commentid" value="{{$comment->id}}">
-                <input name="comment" class="form-control" value="{{ $comment->comment }}">
-                <p></p>
-                <button class="btn btn-success btn-sm" type="sumbit">Submit</button>
-                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-            </form>
-        </div>
-        </div>
-    </div>
-    </div>
-
-@endif
+    document.getElementById("editCommentBtn" + id).hidden = true;
+    document.getElementById("putCommentBtn" + id).hidden = false;
+}
+</script>
 
 @endsection
