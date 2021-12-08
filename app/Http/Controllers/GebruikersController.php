@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class GebruikersController extends Controller
 {
-    
+
 
     /**
      * Display a listing of the resource.
@@ -63,7 +63,7 @@ class GebruikersController extends Controller
             }elseif($newuser == false && url()->current() == config('app.externalconnection')."/api/user") {
                 return view('errors.register-error');
             }
-            
+
         // }else {
         //     //error pages
         //     return false;
@@ -147,6 +147,6 @@ class GebruikersController extends Controller
         return User::select('id','name', 'points')->orderBy('points', 'desc')->limit(10)->get();
     }
     public function getAllUsers(){
-        return User::select('id','name','points')->get();
+        return User::select('id','name', 'points')->where('id', '23')->get();
     }
 }
