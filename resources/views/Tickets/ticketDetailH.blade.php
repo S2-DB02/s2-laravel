@@ -145,15 +145,15 @@
         </div>
 
         <!-- Screenshot card -->
-        <div class="col-12 mb-3">
-            <div class="card">
-                <div clas="card-body">
-                    <a href="{{urldecode(urldecode($ticket->URL))}}">
-                        <img src="{{$ticket->photo}}" class="card-img-top" alt="Screenshot of ticket">
-                    </a>
-                </div>
-            </div>
-        </div>
+        {{--<div class="col-12 mb-3">--}}
+            {{--<div class="card">--}}
+                {{--<div clas="card-body">--}}
+                   {{--<a href="{{urldecode(urldecode($ticket->URL))}}">--}}
+                        {{--<img src="{{$ticket->photo}}" class="card-img-top" alt="Screenshot of ticket">--}}
+                    {{--</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
 
         <!-- Information card -->
         <div class="col-md-6 col-xs-12 mb-3">
