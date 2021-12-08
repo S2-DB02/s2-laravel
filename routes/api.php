@@ -49,5 +49,18 @@ Route::post('/ticket', 'TicketController@store')->middleware('auth:api');
 // Route::post('/user/login', 'Auth/LoginController');
 // Auth::routes();
 
-Route::post('/user', 'GebruikersController@store');
+// Route::post('/user', 'GebruikersController@store');
+
+Route::group(['middleware' => ['cors', 'json.response']], function () {
+
+    // ...
+
+    // public routes
+    Route::post('/login', 'Auth\ApiAuthController@login')->name('login.api');
+    Route::post('/register','Auth\ApiAuthController@register')->name('register.api');
+    Route::post('/logout', 'Auth\ApiAuthController@logout')->name('logout.api');
+
+    // ...
+
+});
 
