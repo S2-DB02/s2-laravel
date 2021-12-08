@@ -59,7 +59,7 @@ class GebruikersController extends Controller
             if($newuser == true && url()->current() == config('app.externalconnection')."/user"){
                 return back()->with('success', 'User has been added :)');
             }elseif($newuser == false && url()->current() == config('app.externalconnection')."/user") {
-                return back()->with('error', 'Somthing went wrong :(');
+                return back()->with('error', 'Something went wrong :(');
             }elseif ($newuser == true && url()->current() == config('app.externalconnection')."/api/user") {
                 dd(Str::random(60));
                 return view('errors.register-success', ['user' => $newuser]);

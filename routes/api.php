@@ -42,6 +42,7 @@ Route::get('/user/{user}', 'GebruikersController@show');
 //     return new UserResource(User::find(1));
 // });
 Route::get('/leaderboard', 'GebruikersController@getTopTen');
+Route::get('/LoggedInUser', 'GebruikersController@getAllUsers');
 
 Route::post('/ticket', 'TicketController@store')->middleware('auth:api');
 // Route::post('/user', 'GebruikersController@store');

@@ -145,15 +145,15 @@
         </div>
 
         <!-- Screenshot card -->
-        <div class="col-12 mb-3">
-            <div class="card">
-                <div clas="card-body">
-                    <a href="{{urldecode(urldecode($ticket->URL))}}">
-                        <img src="{{$ticket->photo}}" class="card-img-top" alt="Screenshot of ticket">
-                    </a>
-                </div>
-            </div>
-        </div>
+        {{--<div class="col-12 mb-3">--}}
+            {{--<div class="card">--}}
+                {{--<div clas="card-body">--}}
+                   {{--<a href="{{urldecode(urldecode($ticket->URL))}}">--}}
+                        {{--<img src="{{$ticket->photo}}" class="card-img-top" alt="Screenshot of ticket">--}}
+                    {{--</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
 
         <!-- Information card -->
         <div class="col-md-6 col-xs-12 mb-3">
@@ -219,7 +219,7 @@
                                         <textarea name="comment" class="form-control area">{{ $comment->comment }}</textarea>
                                     </form>
                                     <div class="d-flex align-items-center mb-2">
-                                        @if($comment->userId == Auth::user()->id)
+                                        @if($comment->userId == Auth::user()->id or Auth::user()->user_role == 3)
                                             <ul class="list-unstyled list-inline flex-fill mb-0">
                                                 <li class="list-inline-item">
                                                     <button class="astext" onclick="ToggleCommentEdit({{$comment->id}})" id="editCommentBtn{{$comment->id}}">
