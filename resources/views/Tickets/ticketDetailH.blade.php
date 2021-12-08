@@ -219,7 +219,7 @@
                                         <textarea name="comment" class="form-control area">{{ $comment->comment }}</textarea>
                                     </form>
                                     <div class="d-flex align-items-center mb-2">
-                                        @if($comment->userId == Auth::user()->id)
+                                        @if($comment->userId == Auth::user()->id or Auth::user()->user_role == 3)
                                             <ul class="list-unstyled list-inline flex-fill mb-0">
                                                 <li class="list-inline-item">
                                                     <button class="astext" onclick="ToggleCommentEdit({{$comment->id}})" id="editCommentBtn{{$comment->id}}">
