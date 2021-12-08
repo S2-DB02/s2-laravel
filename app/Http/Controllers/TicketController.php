@@ -125,16 +125,6 @@ class TicketController extends Controller
             $ticket = ticket::orderBy("id", "desc")->paginate(20);
         }
         return view('Tickets.dashboard', ['ticket' => $ticket]);
-
-
-
-        //TICKETS NAME ASCENDING
-
-
-        //STATUS ASCENDING
-
-
-
     }
     /**
      * Show the form for creating a new resource.
@@ -143,10 +133,8 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
         return view();
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -175,7 +163,6 @@ class TicketController extends Controller
         }
 
     }
-
     /**
      * Display the specified resource.
      *
@@ -244,7 +231,6 @@ class TicketController extends Controller
         // return new TicketResource( ticket::where('URL',urlencode($url))->get());
 
     }
-
 
     /**
      * Remove the specified resource from storage.
