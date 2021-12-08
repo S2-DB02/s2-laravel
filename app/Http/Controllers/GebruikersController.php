@@ -8,6 +8,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 
 
@@ -53,16 +54,43 @@ class GebruikersController extends Controller
             'name' => $data->name,
             'email' => $data->email,
             'password' => Hash::make($data->password),
+            'api_token' => Str::random(60),
         ]);
             if($newuser == true && url()->current() == config('app.externalconnection')."/user"){
                 return back()->with('success', 'User has been added :)');
             }elseif($newuser == false && url()->current() == config('app.externalconnection')."/user") {
                 return back()->with('error', 'Somthing went wrong :(');
             }elseif ($newuser == true && url()->current() == config('app.externalconnection')."/api/user") {
+                dd(Str::random(60));
                 return view('errors.register-success', ['user' => $newuser]);
             }elseif($newuser == false && url()->current() == config('app.externalconnection')."/api/user") {
                 return view('errors.register-error');
             }
+
+        // if (url()->current() == config('app.externalconnection')."/user") {
+        //     $newuser = User::create([
+        //         'name' => $data->name,
+        //         'email' => $data->email,
+        //         'password' => Hash::make($data->password),
+        //     ]);
+        //     if ($newuser == true) {
+        //         return back()->with('success', 'User has been added :)');
+        //     }else {
+        //         return back()->with('error', 'Somthing went wrong :(');
+        //     }
+        // }else {
+        //     $newuser = User::create([
+        //         'name' => $data->name,
+        //         'email' => $data->email,
+        //         'password' => Hash::make($data->password),
+        //         'api_token' => Str::random(60),
+        //     ]);
+        //     if ($newuser == true) {
+        //         return view('errors.register-success', ['user' => $newuser]);
+        //     }else {
+        //         return view('errors.register-error');
+        //     }
+        // }
             
         // }else {
         //     //error pages

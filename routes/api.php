@@ -43,8 +43,10 @@ Route::get('/user/{user}', 'GebruikersController@show');
 // });
 Route::get('/leaderboard', 'GebruikersController@getTopTen');
 
-Route::post('/ticket', 'TicketController@store');
-Route::post('/user', 'GebruikersController@store');
+Route::post('/ticket', 'TicketController@store')->middleware('auth:api');
+// Route::post('/user', 'GebruikersController@store');
 // Route::post('/user/login', 'Auth/LoginController');
-Auth::routes(['register' => false]);
+// Auth::routes();
+
+Route::post('/user', 'GebruikersController@store');
 
