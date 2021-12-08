@@ -25,7 +25,12 @@ Auth::routes(['register' => false]);
 Route::resource('/user',  GebruikersController::class)->middleware(['auth','Admin']);
 // ->except(['store'])
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/credChange/{id}', 'GebruikersController@credChange')->name('credChange');
+Route::post('/credChange/{id}', 'GebruikersController@credUpdate')->name('credUpdate');
+
+
+
+//Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('/comment',  CommentController::class);

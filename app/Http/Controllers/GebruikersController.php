@@ -70,6 +70,43 @@ class GebruikersController extends Controller
         // }
     }
 
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  \App\User  $users
+     *          
+     * @return \Illuminate\Http\Response
+     */
+    public function credChange(User $users)
+    {
+        //
+        
+        $user = User::find($users->id);
+        //dd($user->id);
+        return view('errors.coming-soon', ['user' => $user]);
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\gebruikers  $gebruikers
+     * @return \Illuminate\Http\Response
+     */
+    public function credUpdate(Request $request, User $users)
+    {
+        $user = User::find($request->hidden);
+        $user->name = $request->Name;
+        $user->email = $request->Email;
+        $user->password = $request->Password;
+        $user->save();
+        return back()->with('success', 'User succesfully updated!');
+    }
+
+
+
     /**
      * Display the specified resource.
      *
