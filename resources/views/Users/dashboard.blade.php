@@ -24,13 +24,12 @@
                         <th>Email</th>
                         <th>Points</th>
                         <th>Role</th>
-
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($users as $items)               
                     <tr>
-                        <form  action="/user/{{$items->id}}" method="POST">
+                        <form action="/user/{{$items->id}}" method="POST">
                             @method('PUT') 
                             @csrf    
                             <td>{{$items->name}}</td>
