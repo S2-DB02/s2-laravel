@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 class GebruikersController extends Controller
 {
-    
+
 
     /**
      * Display a listing of the resource.
@@ -67,32 +67,6 @@ class GebruikersController extends Controller
             }elseif($newuser == false && url()->current() == config('app.externalconnection')."/api/user") {
                 return view('errors.register-error');
             }
-
-        // if (url()->current() == config('app.externalconnection')."/user") {
-        //     $newuser = User::create([
-        //         'name' => $data->name,
-        //         'email' => $data->email,
-        //         'password' => Hash::make($data->password),
-        //     ]);
-        //     if ($newuser == true) {
-        //         return back()->with('success', 'User has been added :)');
-        //     }else {
-        //         return back()->with('error', 'Somthing went wrong :(');
-        //     }
-        // }else {
-        //     $newuser = User::create([
-        //         'name' => $data->name,
-        //         'email' => $data->email,
-        //         'password' => Hash::make($data->password),
-        //         'api_token' => Str::random(60),
-        //     ]);
-        //     if ($newuser == true) {
-        //         return view('errors.register-success', ['user' => $newuser]);
-        //     }else {
-        //         return view('errors.register-error');
-        //     }
-        // }
-            
         // }else {
         //     //error pages
         //     return false;
@@ -220,5 +194,10 @@ class GebruikersController extends Controller
         /*$id = 23;
         return User::find($id);*/
         return User::select('id','name', 'points')->where('id', $id)->get();
+    }
+    public function getLoggedInUser(/*int $id*/){
+        /*$id = 23;
+        return User::find($id);*/
+        return User::select('id','name', 'points')->where('id', 23)->get();
     }
 }
