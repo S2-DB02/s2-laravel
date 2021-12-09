@@ -18,11 +18,11 @@
 
 //Route::get('/', 'TicketController@index'); old route to get to ticket dashboard even when not logged in
 
-Route::resource('/',  TicketController::class)->middleware(['auth','Developer']);
-Route::resource('/ticket',  TicketController::class)->middleware(['auth','Developer']);
+Route::resource('/',  TicketController::class)->middleware('Developer');
+Route::resource('/ticket',  TicketController::class)->middleware('Developer');
 
 Auth::routes(['register' => false]);
-Route::resource('/user',  GebruikersController::class)->middleware(['auth','Admin']);
+Route::resource('/user',  GebruikersController::class)->middleware('Admin');
 // ->except(['store'])
 
 Route::get('/credChange/{id}', 'GebruikersController@credChange')->name('credChange');
