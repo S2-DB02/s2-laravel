@@ -144,7 +144,7 @@ class TicketController extends Controller
     public function store(StoreTicket $request)
     {
         $validated = $request->validated();
-        Storage::disk('uploads')->putFileAs('/', $request->file('photo'), 'name.png');
+        //Storage::disk('uploads')->putFileAs('/', $request->file('photo'), 'name.png');
         if (ticket::create($validated)) {
             if (url()->current() == config('app.externalconnection')."/api/ticket") {
                 $this->addPoints($request->madeBy, 10);
