@@ -26,7 +26,7 @@ Route::resource('/user',  GebruikersController::class)->middleware(['auth','Admi
 // ->except(['store'])
 
 Route::get('/credChange/{id}', 'GebruikersController@credChange')->name('credChange');
-Route::post('/credChange/{id}', 'GebruikersController@credUpdate')->name('credUpdate');
+Route::post('/credUpdate/{id}', 'GebruikersController@credUpdate')->name('credUpdate');
 
 
 

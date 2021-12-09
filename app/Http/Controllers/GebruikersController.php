@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -61,7 +62,7 @@ class GebruikersController extends Controller
             }elseif($newuser == false && url()->current() == config('app.externalconnection')."/user") {
                 return back()->with('error', 'Something went wrong :(');
             }elseif ($newuser == true && url()->current() == config('app.externalconnection')."/api/user") {
-                dd(Str::random(60));
+                //dd(Str::random(60));
                 return view('errors.register-success', ['user' => $newuser]);
             }elseif($newuser == false && url()->current() == config('app.externalconnection')."/api/user") {
                 return view('errors.register-error');
@@ -106,13 +107,9 @@ class GebruikersController extends Controller
      *          
      * @return \Illuminate\Http\Response
      */
-    public function credChange(User $users)
+    public function credChange()
     {
-        //
-        
-        $user = User::find($users->id);
-        //dd($user->id);
-        return view('errors.coming-soon', ['user' => $user]);
+        return view('auth.passwords.reset');
     }
 
 
@@ -123,12 +120,20 @@ class GebruikersController extends Controller
      * @param  \App\gebruikers  $gebruikers
      * @return \Illuminate\Http\Response
      */
-    public function credUpdate(Request $request, User $users)
+    public function credUpdate(Request $request)
     {
-        $user = User::find($request->hidden);
-        $user->name = $request->Name;
-        $user->email = $request->Email;
-        $user->password = $request->Password;
+        $validatedData = $request->validate([
+            'name' => 'required','string','max:255',
+            'email' => 'string','email:rfc,dns','max:255','regex:/^[A-Za-z0-9.]*@(bastrucks|basworld)[.](com)+$/',
+            'password' => 'required','string','min:8','confirmed',
+         ]);
+        //dd($validatedData);
+        $user = User::find($request->hiddenid);
+        //dd($validatedData);
+        $user->name = $validatedData["name"];
+        //dd($user);
+        $user->password = Hash::make($validatedData["password"]);
+        //dd($user);
         $user->save();
         return back()->with('success', 'User succesfully updated!');
     }

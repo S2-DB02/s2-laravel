@@ -22,9 +22,8 @@ class ApiAuthController extends Controller
             'api_token' => Str::random(60),
 
         ]);
-        $token = Str::random(60);
-        $response = ['token' => $token];
-        return response($response, 200);
+        return view('errors.register-success', ['user' => $user]);
+
     }
 
     public function login (Request $request) {

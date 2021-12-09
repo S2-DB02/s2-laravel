@@ -51,7 +51,7 @@ Route::post('/ticket', 'TicketController@store')->middleware('auth:api');
 
 // Route::post('/user', 'GebruikersController@store');
 
-Route::group(['middleware' => ['cors', 'json.response']], function () {
+// Route::group(['middleware' => ['cors', 'json.response']], function () {
 
     // ...
 
@@ -62,5 +62,5 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
 
     // ...
 
-});
+// });
 
