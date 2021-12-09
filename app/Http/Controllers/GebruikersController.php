@@ -8,6 +8,8 @@ use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -53,22 +55,64 @@ class GebruikersController extends Controller
             'name' => $data->name,
             'email' => $data->email,
             'password' => Hash::make($data->password),
+            'api_token' => Str::random(60),
         ]);
             if($newuser == true && url()->current() == config('app.externalconnection')."/user"){
                 return back()->with('success', 'User has been added :)');
             }elseif($newuser == false && url()->current() == config('app.externalconnection')."/user") {
-                return back()->with('error', 'Somthing went wrong :(');
+                return back()->with('error', 'Something went wrong :(');
             }elseif ($newuser == true && url()->current() == config('app.externalconnection')."/api/user") {
+                //dd(Str::random(60));
                 return view('errors.register-success', ['user' => $newuser]);
             }elseif($newuser == false && url()->current() == config('app.externalconnection')."/api/user") {
                 return view('errors.register-error');
             }
-
         // }else {
         //     //error pages
         //     return false;
         // }
     }
+
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  \App\User  $users
+     *          
+     * @return \Illuminate\Http\Response
+     */
+    public function credChange()
+    {
+        return view('auth.passwords.reset');
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\gebruikers  $gebruikers
+     * @return \Illuminate\Http\Response
+     */
+    public function credUpdate(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required','string','max:255',
+            'email' => 'string','email:rfc,dns','max:255','regex:/^[A-Za-z0-9.]*@(bastrucks|basworld)[.](com)+$/',
+            'password' => 'required','string','min:8','confirmed',
+         ]);
+        //dd($validatedData);
+        $user = User::find($request->hiddenid);
+        //dd($validatedData);
+        $user->name = $validatedData["name"];
+        //dd($user);
+        $user->password = Hash::make($validatedData["password"]);
+        //dd($user);
+        $user->save();
+        return back()->with('success', 'User succesfully updated!');
+    }
+
+
 
     /**
      * Display the specified resource.
@@ -144,7 +188,12 @@ class GebruikersController extends Controller
      */
     public function getTopTen()
     {
-        return User::select('name', 'points')->orderBy('points', 'desc')->limit(10)->get();
+        return User::select('id','name', 'points')->orderBy('points', 'desc')->limit(10)->get();
+    }
+    public function getLoggedInUser(int $id){
+        /*$id = 23;
+        return User::find($id);*/
+        return User::select('id','name', 'points')->where('id', $id)->get();
     }
     public function getLoggedInUser(/*int $id*/){
         /*$id = 23;

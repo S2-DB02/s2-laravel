@@ -68,15 +68,19 @@
                       </a>
 
                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="{{ route('logout') }}"
-                             onclick="event.preventDefault();
-                                           document.getElementById('logout-form').submit();">
-                              {{ __('Logout') }}
-                          </a>
+                        <a class="dropdown-item" href="/credChange/{{ Auth::user()->id }}">
+                         Change Credentials
+                        </a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
 
+                          
                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                              @csrf
-                          </form>
+                            @csrf
+                        </form>
                       </div>
                   </li>
               @endguest
@@ -89,11 +93,24 @@
 
 <!-- footer -->
 <footer class="bg-light text-center text-lg-start mt-auto">
-
-    <!-- Copyright -->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            
+            </div>
+            <div class="text-center p-3 col" id="date">
+            
+            </div>
+            <div class="text-center p-3 col">
+                <a href="https://github.com/S2-DB02/s2-laravel" target="_blank" style="color: black;">Fork us on Github</a>
+            </div>
+        </div>
+    </div>
+    {{-- <!-- Copyright -->
     <div class="text-center p-3" id="date">
       
     </div>
+    <a href="https://github.com/S2-DB02/s2-laravel" style="color: black;">GitHub</a>Fork us on Github</a> --}}
     <script>
         n =  new Date();
         y = n.getFullYear();

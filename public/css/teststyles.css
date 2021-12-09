@@ -173,3 +173,40 @@ a.list-group-item, .list-group-item-action {
 .badge{
     font-size: 85%!important;
 }
+
+.astext {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    color: #007bff;
+}
+
+.astext:hover {
+    text-decoration: underline;
+}
+
+.ticketdetail-comment li {
+    display: inline-block;
+    font-size: 12px;
+}
+
+.ticketdetail-comment span {
+    display: inline-block;
+}
+
+.ticketdetail-comment-text {
+    font-size: 14px;
+    line-height: 18px;
+    color: #5a5f6b;
+    display: block;
+    background: #f6f6f7;
+    border: 1px solid #edeff2;
+    padding: 15px 20px 20px 20px;
+}
+
+.ticketdetail-comment-time {
+    font-size: 12px;
+    color: #9fa2ac;
+}

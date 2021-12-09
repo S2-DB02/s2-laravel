@@ -42,10 +42,27 @@ Route::get('/user/{user}', 'GebruikersController@show');
 //     return new UserResource(User::find(1));
 // });
 Route::get('/leaderboard', 'GebruikersController@getTopTen');
-Route::get('/LoggedInUser', 'GebruikersController@getLoggedInUser');
 
-Route::post('/ticket', 'TicketController@store');
-Route::post('/user', 'GebruikersController@store');
+Route::get('/LoggedInUser/{id}', 'GebruikersController@getLoggedInUser');
+
+
+Route::post('/ticket', 'TicketController@store')->middleware('auth:api');
+// Route::post('/user', 'GebruikersController@store');
 // Route::post('/user/login', 'Auth/LoginController');
-Auth::routes(['register' => false]);
+// Auth::routes();
+
+// Route::post('/user', 'GebruikersController@store');
+
+// Route::group(['middleware' => ['cors', 'json.response']], function () {
+
+    // ...
+
+    // public routes
+    Route::post('/login', 'Auth\ApiAuthController@login')->name('login.api');
+    Route::post('/register','Auth\ApiAuthController@register')->name('register.api');
+    Route::post('/logout', 'Auth\ApiAuthController@logout')->name('logout.api');
+
+    // ...
+
+// });
 

@@ -20,7 +20,7 @@ class TicketsSeeder extends Seeder
         ticket::make([
             'name' => $faker->word,
             'priority' => $faker->numberBetween(1,3),
-            'photo' => $faker->imageUrl(640, 480, 'cats'),
+            'photo' => "https://i.ibb.co/xzyjbgb/Screenshot-from-2021-12-02-12-12-35.png",
             'remark' => $faker->text,
             'status' => $faker->randomElement($array = array ( 1, 2, 3 )),
             'type' => $faker->randomElement($array = array (1, 2, 3, 4, 5 )),

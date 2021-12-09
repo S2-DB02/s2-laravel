@@ -16,15 +16,21 @@
 // Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 // Route::get('/sanderdashboard', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 
-Route::get('/', 'TicketController@index');
+//Route::get('/', 'TicketController@index'); old route to get to ticket dashboard even when not logged in
 
-Route::resource('/ticket',  TicketController::class)->middleware(['auth','Developer']);
+Route::resource('/',  TicketController::class)->middleware('Developer');
+Route::resource('/ticket',  TicketController::class)->middleware('Developer');
 
 Auth::routes(['register' => false]);
-Route::resource('/user',  GebruikersController::class)->middleware(['auth','Admin']);
+Route::resource('/user',  GebruikersController::class)->middleware('Admin');
 // ->except(['store'])
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/credChange/{id}', 'GebruikersController@credChange')->name('credChange');
+Route::post('/credUpdate/{id}', 'GebruikersController@credUpdate')->name('credUpdate');
+
+
+
+//Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('/comment',  CommentController::class);
