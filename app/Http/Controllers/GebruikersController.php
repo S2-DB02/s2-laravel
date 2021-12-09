@@ -216,7 +216,9 @@ class GebruikersController extends Controller
     {
         return User::select('id','name', 'points')->orderBy('points', 'desc')->limit(10)->get();
     }
-    public function getAllUsers(){
-        return User::select('id','name','points')->get();
+    public function getLoggedInUser(int $id){
+        /*$id = 23;
+        return User::find($id);*/
+        return User::select('id','name', 'points')->where('id', $id)->get();
     }
 }
