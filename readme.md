@@ -20,7 +20,7 @@ This project is developed by S2 students at Fontys University of Applied Science
 
 ## Installation
 
-Head to the wiki for a full installation walkthrough. Below are some instructions for a quick deployment, assuming you open the project for non-production purposes and are already familiar with the DB construction.
+Head to the [wiki](https://github.com/S2-DB02/s2-laravel/wiki/Full-Application-Installation) for a full installation walkthrough. Below are some instructions for a quick deployment, assuming you open the project for non-production purposes and are already familiar with the DB construction.
 ```
 1. Git clone this project
 2. Copy or rename the ".env.example" file and fill in your DB credentials.
@@ -31,9 +31,12 @@ Head to the wiki for a full installation walkthrough. Below are some instruction
 
 ## Screenshots
 
-```
-Will be added in the near future.
-```
+<table><tr>
+<td> <img src="https://imgur.com/CJwnqJt.png" alt="login" style="width: 250px;"/> </td>
+<td> <img src="https://imgur.com/W0yYBCj.png" alt="popup" style="width: 250px;"/> </td>
+<td> <img src="https://imgur.com/wEzmETQ.png" alt="popup" style="width: 250px;"/> </td>
+</tr></table>
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
