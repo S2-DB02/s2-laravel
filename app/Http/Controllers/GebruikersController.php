@@ -186,18 +186,30 @@ class GebruikersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getTopTen()
+    public function getTopTen(int $id)
     {
-        return User::select('id','name', 'points')->orderBy('points', 'desc')->limit(10)->get();
+        $result = User::select('id','name', 'points')->orderBy('points', 'desc')->get()->toArray();
+        $rank = 0;
+        for ($i = 0; $i < count($result); $i++){
+            $result[$i]["rank"] = $i + 1;
+            if ($result[$i]["id"] == $id){
+                $rank = $i + 1;
+            }
+        }
+
+        if ($rank <= 10){
+            return array_slice($result, 0, 10);
+        }
+        else{
+            $topEleven = array_slice($result, 0, 11);
+            $topEleven[10] = $result[$rank - 1];
+            return $topEleven;
+        }
     }
+
     public function getLoggedInUser(int $id){
         /*$id = 23;
         return User::find($id);*/
         return User::select('id','name', 'points')->where('id', $id)->get();
-    }
-    public function getLoggedInUser(/*int $id*/){
-        /*$id = 23;
-        return User::find($id);*/
-        return User::select('id','name', 'points')->where('id', 23)->get();
     }
 }
