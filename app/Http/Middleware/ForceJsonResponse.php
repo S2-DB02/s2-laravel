@@ -15,7 +15,7 @@ class ForceJsonResponse
      */
     public function handle($request, Closure $next)
     {
-        if (url()->current() != "http://localhost:8000/login")
+        if (url()->current() == config('app.externalconnection')."/api/login")
         {
             $request->headers->set('Accept', 'application/json');
             //hrow new HttpResponseException(back()->withInput()->with('errors',  $request));

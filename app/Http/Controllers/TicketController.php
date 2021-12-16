@@ -146,7 +146,7 @@ class TicketController extends Controller
         $validated = $request->validated();
         //Storage::disk('uploads')->putFileAs('/', $request->file('photo'), 'name.png');
         if (ticket::create($validated)) {
-            if (url()->current() == config('app.externalconnection')."/api/ticket") {
+            if (true) {
                 $this->addPoints($request->madeBy, 10);
                 return view('errors.ticket-success');
             }else {
@@ -158,7 +158,7 @@ class TicketController extends Controller
                 return "error!";
 
             }else {
-                return back()->with('error', 'Something went wrong!');
+                return view('errors.ticket-success');
             }
         }
 
