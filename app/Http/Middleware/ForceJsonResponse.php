@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Closure;
 
 class ForceJsonResponse
@@ -15,7 +15,12 @@ class ForceJsonResponse
      */
     public function handle($request, Closure $next)
     {
-        $request->headers->set('Accept', 'application/json');
+        if (url()->current() != "http://localhost:8000/login")
+        {
+            $request->headers->set('Accept', 'application/json');
+            //hrow new HttpResponseException(back()->withInput()->with('errors',  $request));
+        }
         return $next($request);
+
     }
 }

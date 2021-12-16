@@ -35,9 +35,9 @@ class StoreUser extends FormRequest
     public function failedValidation(Validator $validator)
     {
 
-        if (url()->current() == config('app.externalconnection')."/user") 
+        if (url()->current() == "http://localhost:8000/login")
         {
-            throw new HttpResponseException(back()->withInput()->with('errors',  $validator->errors()));      
+            throw new HttpResponseException(back()->withInput()->with('errors',  $validator->errors()));
         }else {
             throw new HttpResponseException( response()->view('errors.9000', [
                 'errors' => $validator->errors()

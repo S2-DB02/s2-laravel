@@ -23,18 +23,10 @@ Route::resource('/ticket',  TicketController::class)->middleware('Developer');
 
 Auth::routes(['register' => false]);
 Route::resource('/user',  GebruikersController::class)->middleware('Admin');
-// ->except(['store'])
 
 Route::get('/credChange/{id}', 'GebruikersController@credChange')->name('credChange');
 Route::post('/credUpdate/{id}', 'GebruikersController@credUpdate')->name('credUpdate');
 
-
-
-//Route::get('/home', 'HomeController@index')->name('home');
-
-
 Route::resource('/comment',  CommentController::class);
 
-// Route::post('/comment/{id}', 'CommentController@store');
-// Route::post('/comment/Delete/{id}', 'CommentController@destroy');
-// Route::post('/comment/Update/{id}', 'CommentController@update');
+
