@@ -220,16 +220,14 @@ class TicketController extends Controller
 
     public function ticketurl($url)
     {
-        // $tickets = ticket::where('name', "sequi")->get();
-        $tickets = ticket::where('URL',urlencode($url))->get();
+        $tickets = ticket::where('URL', urlencode($url))->wherebetween('status', [1,2])->get();
         $ids = [];
+
         foreach ($tickets as $key) {
             array_push($ids, $key->id);
         }
+
         return TicketResource::collection(ticket::find($ids));
-
-        // return new TicketResource( ticket::where('URL',urlencode($url))->get());
-
     }
 
     /**
