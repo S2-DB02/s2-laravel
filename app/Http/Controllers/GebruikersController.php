@@ -57,20 +57,16 @@ class GebruikersController extends Controller
             'password' => Hash::make($data->password),
             'api_token' => Str::random(60),
         ]);
-            if($newuser == true && url()->current() == config('app.externalconnection')."/user"){
-                return back()->with('success', 'User has been added :)');
-            }elseif($newuser == false && url()->current() == config('app.externalconnection')."/user") {
-                return back()->with('error', 'Something went wrong :(');
-            }elseif ($newuser == true && url()->current() == config('app.externalconnection')."/api/user") {
-                //dd(Str::random(60));
-                return view('errors.register-success', ['user' => $newuser]);
-            }elseif($newuser == false && url()->current() == config('app.externalconnection')."/api/user") {
-                return view('errors.register-error');
-            }
-        // }else {
-        //     //error pages
-        //     return false;
-        // }
+
+        if ($newuser == true && url()->current() == config('app.externalconnection')."/api/user") {
+            return view('errors.register-success', ['user' => $newuser]);
+        }elseif($newuser == false && url()->current() == config('app.externalconnection')."/api/user") {
+            return view('errors.register-error');
+        }elseif($newuser == true){
+            return back()->with('success', 'User has been added :)');
+        }else{
+            return back()->with('error', 'Something went wrong :(');
+        }
     }
 
 

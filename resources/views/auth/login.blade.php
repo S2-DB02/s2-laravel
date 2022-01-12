@@ -1,6 +1,18 @@
 @extends('layouts.master')
 
 @section('content')
+
+@if (session('error'))
+    <div class="col-sm-12">
+        <div class="alert  alert-danger alert-dismissible fade show mt-n3" role="alert">
+          {{session('error')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+    </div>
+@endif
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -58,7 +70,7 @@
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link disabled" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif

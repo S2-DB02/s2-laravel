@@ -16,13 +16,16 @@ class DeveloperMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $error_msg = 'Your account must have the role of developer or higher in order to use the back-end.';
+        
         if(auth::check()){
             if ( Auth::user()->user_role == 2 || Auth::user()->user_role == 3 ) {
                 
             return $next($request);
                 
             }else {
-                return redirect()->route('login');
+                Auth::logout();
+                return redirect()->route('login')->with('error', $error_msg);
             }
          }
          else {
