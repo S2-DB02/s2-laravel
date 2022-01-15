@@ -2,48 +2,69 @@ version: "3.7"
 services:
   app:
     build:
-      args:
-        user: silverfs
-        uid: 1000
-      context: ./
+      context: .
       dockerfile: Dockerfile
-    image: bascms
-    container_name: bascms-app
+    image: php_service
+    container_name: app
     restart: unless-stopped
-    working_dir: /var/www/
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
     volumes:
       - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
-      - bascms
-
-  db:
-    image: mysql:5.7
-    container_name: bascms-db
-    restart: unless-stopped
-    environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
-    #volumes:
-      #- ./docker-compose/mysql:/docker-entrypoint-initdb.d
-    networks:
-      - bascms
-
+      - bas-network
   nginx:
     image: nginx:alpine
-    container_name: bascms-nginx
+    container_name: webserver
     restart: unless-stopped
+    tty: true
     ports:
-      - 8000:80
+      - "8080:80"
     volumes:
       - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
-      - bascms
-
+      - bas-network
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 8090:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST= db
+      - PMA_PASSWORD= ${MYSQL_ROOT_PASSWORD}
+  db:
+    image: mysql:latest
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: 'laravel'
+      MYSQL_USER: 'admin'
+      MYSQL_ROOT_PASSWORD: 'Test3211'
+      #SERVICE_TAGS: dev
+      #SERVICE_NAME: mysql
+    env_file:
+      - .env
+    volumes:
+      #- lbdata:/var/lib/mysql/
+      #- ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db-initialization/laravel.sql:/docker-entrypoint-initdb.d/dump.sql
+    networks:
+      - bas-network
+#Docker Networks
 networks:
-  bascms:
+  bas-network:
     driver: bridge
+#Volumes
+volumes:
+  lbdata:
+    driver: local
